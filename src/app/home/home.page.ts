@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+constructor(public storage: Storage) {}
+  async setData(key, value) {
+    const res = await this.storage.set(key, value);
+    console.log(res);
+  }
 }
