@@ -1,16 +1,208 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      Home
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary" >
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Home
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the
-    <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+<ion-content style="--background: url('assets/images/transportbg.jpg') top center/100% 100% no-repeat">
+    <ion-segment [(ngModel)]="dailyroute" color="primary" (ionChange)="segmentChanged($event)"> 
+        <ion-segment-button value="Pickup" checked>
+           Pickup
+        </ion-segment-button>
+        <ion-segment-button value="Drop">
+           Drop
+        </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="dailyroute" >
+        <div *ngSwitchCase="'Pickup'">
+            <ion-grid>
+                <ion-row>
+                    <ion-col size="4" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                           Request Type
+                        </div>
+                        <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #ddd;">
+                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                           Area
+                        </div>
+                        <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #eee;">
+                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                           Shift
+                        </div>
+                        <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+                <ion-row>
+                    <ion-col size="4" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                          Route
+                        </div>
+                         <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #ddd;">
+                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                          Boarding Time
+                        </div>
+                         <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #eee;">
+                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                          Vehicle Model
+                        </div>
+                        <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+                <ion-row>
+                    <ion-col size="4" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                          Vehicle No 
+                        </div>
+                        <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #ddd;">
+                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                          Driver Name
+                        </div>
+                        <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                           Driver Contact
+                        </div>
+                         <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+            </ion-grid>
+        </div>
+        <div *ngSwitchCase="'Drop'">
+              <ion-grid>
+                <ion-row>
+                    <ion-col size="4" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                           Request Type
+                        </div>
+                         <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #ddd;">
+                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                           Area
+                        </div>
+                         <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                           Shift
+                        </div>
+                        <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+                <ion-row>
+                    <ion-col size="4" style="background: #eee;">
+                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                          Route
+                        </div>
+                         <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #ddd;">
+                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                           Drop Order
+                        </div>
+                        <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                          Vehicle Model
+                        </div>
+                        <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+                <ion-row> 
+                    <ion-col size="4" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                           Vehicle No
+                        </div>
+                         <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #ddd;">
+                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                           Driver Name
+                        </div>
+                         <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+                    <ion-col size="4" style="background: #eee;">
+                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                           Driver Contact
+                        </div>
+                         <div text-center style="font-size: 15px;">
+                           Request Type
+                        </div>
+                    </ion-col>
+
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar style="--padding-top:0;--padding-bottom:0;--padding-start:0;--padding-end:0;">
+        <ion-grid style="padding: 0;">
+            <ion-row style="padding: 0;">
+                <ion-col style="padding: 0;">
+                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" routerLink="/Adhocrequest">Adhoc Request</ion-button>
+                </ion-col>
+                <ion-col style="padding: 0;">
+                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" routerLink="/Mytrips">My Trips</ion-button>
+                </ion-col>   
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

@@ -15,3 +15,30 @@
 {
     background: #fff;
 }
+
+.sc-ion-segment-ios-s > ion-segment-button
+{
+    --btn-background:#eee;
+}
+.sc-ion-segment-md-h.ion-color.sc-ion-segment-md-s > .segment-button-checked 
+{
+    background: #6A478D;
+    color:#fff;
+    
+}
+.sc-ion-segment-md-h.ion-color.sc-ion-segment-md-s > ion-segment-button
+{
+    background: #fff;
+}
+.sc-ion-segment-md-h.ion-color.sc-ion-segment-md-s > .segment-button-checked button
+{
+    border-color:#6A478D;
+}
+ion-title
+{
+    padding:0 45px;
+}
+ion-button
+{
+    --height:54px;
+}

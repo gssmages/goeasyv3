@@ -16,9 +16,19 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'Adhoc Request',
+      url: '/Adhocrequest',
+      icon: 'time'
+    },
+      {
+      title: 'My Trips',
+      url: '/Mytrips',
+      icon: 'pin'
+    },
+      {
+      title: 'My Approvals',
+      url: '/Myapprvaldashboard',
+      icon: 'checkbox-outline'
     }
   ];
 
