@@ -9,6 +9,101 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+  <ion-segment [(ngModel)]="tripdetails" color="primary" (ionChange)="segmentChanged($event)"> 
+    <ion-segment-button value="Activetrips" checked>
+      Active Trips
+    </ion-segment-button>
+    <ion-segment-button value="Cancelledtrips">
+      Cancelled Trips
+    </ion-segment-button>
+</ion-segment>
+<div [ngSwitch]="tripdetails" >
+    <div *ngSwitchCase="'Activetrips'">
+      <ion-card>
+          <ion-row>
+            <ion-col size="3" text-center style="color:#fff; background:#6A478D;" >
+              <ion-icon name="car" style="font-size:40px; "></ion-icon>
+              <p style="margin:0;">Regular</p>
+            </ion-col>
+            <ion-col style="padding-left:10px;">
+              <p>Pickup and Drop - 11:00 -20:00</p>
+            </ion-col>   
+            <ion-col size="2" text-right style="padding:0;" >
+              <ion-icon name="close" style="font-size:24px; background:#6A478D; color: #fff;"></ion-icon>
+            </ion-col>        
+          </ion-row>        
+      </ion-card>
+      <ion-card>
+        <ion-row>
+          <ion-col size="3" text-center style="color:#fff; background:#6A478D;" >
+            <ion-icon name="car" style="font-size:40px; "></ion-icon>
+            <p style="margin:0;">Adhoc</p>
+          </ion-col>
+          <ion-col style="padding-left:10px;">
+            <p>10-Dec-2018 to 10-Dec-2018</p>
+            <p>Pickup and Drop - 11:00 -20:00</p>
+          </ion-col>   
+          <ion-col size="2" text-right style="padding:0;" >
+            <ion-icon name="close" style="font-size:24px; background:#6A478D; color: #fff;"></ion-icon>
+          </ion-col>        
+        </ion-row>        
+    </ion-card>
+    <ion-card>
+      <ion-row>
+        <ion-col size="3" text-center style="color:#fff; background:#6A478D;" >
+          <ion-icon name="car" style="font-size:40px; "></ion-icon>
+          <p style="margin:0;">Month end</p>
+        </ion-col>
+        <ion-col style="padding-left:10px;">
+          <p>10-Dec-2018 to 10-Dec-2018</p>
+          <p>Pickup and Drop - 11:00 -20:00</p>
+        </ion-col>   
+        <ion-col size="2" text-right style="padding:0;" >
+          <ion-icon name="close" style="font-size:24px; background:#6A478D; color: #fff;"></ion-icon>
+        </ion-col>        
+      </ion-row>        
+  </ion-card>
+    </div>
+    <div *ngSwitchCase="'Cancelledtrips'">
+      <ion-card>
+        <ion-row>
+          <ion-col size="3" text-center style="color:#fff; background:#6A478D;" >
+            <ion-icon name="car" style="font-size:40px; "></ion-icon>
+            <p style="margin:0;">Regular</p>
+          </ion-col>
+          <ion-col style="padding-left:10px;">
+            <p>Pickup and Drop - 11:00 -20:00</p>
+          </ion-col>   
+          
+        </ion-row>        
+    </ion-card>
+    <ion-card>
+      <ion-row>
+        <ion-col size="3" text-center style="color:#fff; background:#6A478D;" >
+          <ion-icon name="car" style="font-size:40px; "></ion-icon>
+          <p style="margin:0;">Adhoc</p>
+        </ion-col>
+        <ion-col style="padding-left:10px;">
+          <p>10-Dec-2018 to 10-Dec-2018</p>
+          <p>Pickup and Drop - 11:00 -20:00</p>
+        </ion-col>   
+       
+      </ion-row>        
+  </ion-card>
+  <ion-card>
+    <ion-row>
+      <ion-col size="3" text-center style="color:#fff; background:#6A478D;" >
+        <ion-icon name="car" style="font-size:40px; "></ion-icon>
+        <p style="margin:0;">Month end</p>
+      </ion-col>
+      <ion-col style="padding-left:10px;">
+        <p>10-Dec-2018 to 10-Dec-2018</p>
+        <p>Pickup and Drop - 11:00 -20:00</p>
+      </ion-col>   
+        
+    </ion-row>        
+</ion-card>
+    </div>
+</div>
 </ion-content>

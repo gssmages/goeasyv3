@@ -24,10 +24,10 @@
                 <ion-row>
                     <ion-col size="4" style="background: #eee;">
                         <div text-center style="font-weight: bold; font-size: 10px;"  >
-                           Request Type
+                            Request Type
                         </div>
                         <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{pickupdetails?.RequestTypeName}} 
                         </div>
                     </ion-col>
                     <ion-col size="4" style="background: #ddd;">
@@ -35,7 +35,7 @@
                            Area
                         </div>
                         <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{pickupdetails?.Area}} 
                         </div>
                     </ion-col>
                     <ion-col size="4" style="background: #eee;">
@@ -43,7 +43,7 @@
                            Shift
                         </div>
                         <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{pickupdetails?.Shift}} 
                         </div>
                     </ion-col>
 
@@ -54,7 +54,7 @@
                           Route
                         </div>
                          <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{pickupdetails?.RouteNumber}} 
                         </div>
                     </ion-col>
                     <ion-col size="4" style="background: #ddd;">
@@ -62,7 +62,7 @@
                           Boarding Time
                         </div>
                          <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{pickupdetails?.BoardingTime}} 
                         </div>
                     </ion-col>
                     <ion-col size="4" style="background: #eee;">
@@ -70,7 +70,7 @@
                           Vehicle Model
                         </div>
                         <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{pickupdetails?.VehicleTypeName}} 
                         </div>
                     </ion-col>
 
@@ -81,7 +81,7 @@
                           Vehicle No 
                         </div>
                         <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{pickupdetails?.RegNumber}} 
                         </div>
                     </ion-col>
                     <ion-col size="4" style="background: #ddd;">
@@ -89,7 +89,7 @@
                           Driver Name
                         </div>
                         <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{pickupdetails?.DriverName}} 
                         </div>
                     </ion-col>
                     <ion-col size="4" style="background: #eee;">
@@ -97,7 +97,7 @@
                            Driver Contact
                         </div>
                          <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{pickupdetails?.DriverContact}} 
                         </div>
                     </ion-col>
 
@@ -111,25 +111,19 @@
                         <div text-center style="font-weight: bold; font-size: 10px;"  >
                            Request Type
                         </div>
-                         <div text-center style="font-size: 15px;">
-                           Request Type
-                        </div>
+                         <div text-center style="font-size: 15px;">{{ dropdetails?.RequestTypeName}}</div>
                     </ion-col>
                     <ion-col size="4" style="background: #ddd;">
                         <div text-center style="font-weight: bold; font-size: 10px;"  >
                            Area
                         </div>
-                         <div text-center style="font-size: 15px;">
-                           Request Type
-                        </div>
+                         <div text-center style="font-size: 15px;">{{dropdetails?.Area}}</div>
                     </ion-col>
                     <ion-col size="4" style="background: #eee;">
                         <div text-center style="font-weight: bold; font-size: 10px;"  >
                            Shift
                         </div>
-                        <div text-center style="font-size: 15px;">
-                           Request Type
-                        </div>
+                        <div text-center style="font-size: 15px;">{{dropdetails?.Shift}}</div>
                     </ion-col>
 
                 </ion-row>
@@ -139,7 +133,7 @@
                           Route
                         </div>
                          <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{dropdetails?.RouteNumber}}
                         </div>
                     </ion-col>
                     <ion-col size="4" style="background: #ddd;">
@@ -147,7 +141,7 @@
                            Drop Order
                         </div>
                         <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{dropdetails?.DropOrder}}
                         </div>
                     </ion-col>
                     <ion-col size="4" style="background: #eee;">
@@ -155,7 +149,7 @@
                           Vehicle Model
                         </div>
                         <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{dropdetails?.VehicleTypeName}}
                         </div>
                     </ion-col>
 
@@ -166,7 +160,7 @@
                            Vehicle No
                         </div>
                          <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{dropdetails?.RegNumber}}
                         </div>
                     </ion-col>
                     <ion-col size="4" style="background: #ddd;">
@@ -174,7 +168,7 @@
                            Driver Name
                         </div>
                          <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{dropdetails?.DriverName}}
                         </div>
                     </ion-col>
                     <ion-col size="4" style="background: #eee;">
@@ -182,7 +176,7 @@
                            Driver Contact
                         </div>
                          <div text-center style="font-size: 15px;">
-                           Request Type
+                            {{dropdetails?.DriverContact}}
                         </div>
                     </ion-col>
 

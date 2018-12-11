@@ -30,7 +30,11 @@ const routes: Routes = [
     {
         path: 'Myapprvaldashboard',
         loadChildren: './myapprvaldashboard/myapprvaldashboard.module#MyapprvaldashboardPageModule'
-    }
+    },
+  { path: 'activetrips', loadChildren: './activetrips/activetrips.module#ActivetripsPageModule' },
+  { path: 'canceltrips', loadChildren: './canceltrips/canceltrips.module#CanceltripsPageModule' },
+  { path: 'myapproval', loadChildren: './myapproval/myapproval.module#MyapprovalPageModule' },
+  { path: 'myapprovalcip', loadChildren: './myapprovalcip/myapprovalcip.module#MyapprovalcipPageModule' }
 ];
 
 @NgModule({

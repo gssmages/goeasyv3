@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
 import { catchError, tap, map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
+import {formatDate } from '@angular/common';
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json',                          
-      'Access-Control-Allow-Origin': '*' })
+  headers: new HttpHeaders({'Content-Type': 'text/xml'}).set('Accept', 'text/xml')
 };
 
-const apiUrl = "https://jsonplaceholder.typicode.com/todos/1"
-      /*"http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/GetDashboardDetails/?todaysdate=11-23-2018&location=Chennai&employeeID=941364";*//*;*/
+const apiUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/GetDashboardDetails/?";
+/*"assets/myjson.json"; todaysdate=11-23-2018&location=Chennai&employeeID=941364
+"https://jsonplaceholder.typicode.com/todos/1";*/
+
+
 
 interface mydata
     {
@@ -22,10 +25,14 @@ interface mydata
   providedIn: 'root'
 })
 export class RestApiService {
-
-  constructor(private http: HttpClient) { }
+  dbdate='';
+  today= new Date();
+  
+  constructor(private http: HttpClient) {
+    this.dbdate = formatDate(this.today, 'MM-dd-yyyy', 'en-US', '+0530')
+   }
     
- /*   private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse) {
   if (error.error instanceof ErrorEvent) {
     // A client-side or network error occurred. Handle it accordingly.
     console.error('An error occurred:', error.error.message);
@@ -39,14 +46,21 @@ export class RestApiService {
   // return an observable with a user-facing error message
   return throwError('Something bad happened; please try again later.');
 }
-
+ /* 
 private extractData(res: Response) {
   let body = res;
   return body || { };
 }*/
-    getData(): Observable<any>{
-    
-return this.http.get<mydata>(apiUrl)
+  
+
+    getData(userName: string, PageNo: string, SortOn: string): Observable<any>{
+     let params = new HttpParams()
+      .set('todaysdate', this.dbdate)
+      .set('employeeID', '941364')
+      .set('location', 'Chennai');
+return this.http.get<mydata>(apiUrl,{params}).pipe(
+  catchError(this.handleError)
+);
   /*.then(data => {
 
     console.log(data.status);
@@ -60,7 +74,7 @@ return this.http.get<mydata>(apiUrl)
     console.log(error.error); // error message as string
     console.log(error.headers);
 
-  });*/
+  });
    /*return response1;*/
 }
 /* getData(): Observable<any> {

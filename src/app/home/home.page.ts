@@ -7,10 +7,31 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import { RestApiService } from '../rest-api.service';
 import { AlertController } from '@ionic/angular';
+import { Globals } from '../global';
 
-interface mydata
+export interface Dropdetails
     {
-        obj: Object;
+        RequestTypeName: string;
+        DropArea: string;
+        Shift: string;
+        DropOrder: string;
+        RouteNumber: string;
+        VehicleTypeName: string;
+        RegNumber: string;
+        DriverName: string;
+        DriverContact: string;
+    }
+    export  interface Pickupdetails
+    {
+        RequestTypeName: string;
+        Area: string;
+        Shift: string;
+        BoardingTime: string;
+        RouteNumber: string;
+        VehicleTypeName: string;
+        RegNumber: string;
+        DriverName: string;
+        DriverContact: string;
     }
 const apiUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/GetDashboardDetails/?";
 
@@ -28,23 +49,32 @@ export class HomePage{
     const res = await this.storage.set(key, value);
     console.log(res);
   }*/
-    result :any=[];
-    
+    result :any;
+    pickupdetails:any;
+    dropdetails:any;
+    employeedetails:any;
+
    data1: Observable<any>;
+
     constructor(
     private homeservice :RestApiService,
      public loadingController: LoadingController,
      public route: ActivatedRoute,
      public router: Router,
      private http: HttpClient,
-     public alertController: AlertController
+     public alertController: AlertController,
+     public globals: Globals
     ) { }
 
     ngOnInit(){     
-        this.homeservice.getData().subscribe(res => {
+        this.homeservice.getData("asd","asd","asd").subscribe(res => {
             console.log(res);
-            this.result = res;
-            console.log("results are : " + JSON.stringify(this.result))
+            this.pickupdetails = res.results.PickupRequestDetail;
+            this.dropdetails = res.results.DropRequestDetail;
+            this.employeedetails=res.results.DropObject;
+            this.globals.displayname=this.employeedetails.DisplayName;
+            this.globals.businesstitle=this.employeedetails.BusinessTitle;
+            console.log("results are : " + JSON.stringify(this.employeedetails))
         this.presentAlert();
 
         });
@@ -52,7 +82,7 @@ export class HomePage{
     async presentAlert() {
     const alert = await this.alertController.create({
       header: 'Goeasy Alert',
-      message: JSON.stringify(this.result),
+      message: JSON.stringify(this.dropdetails),
       buttons: ['OK']
     });
 

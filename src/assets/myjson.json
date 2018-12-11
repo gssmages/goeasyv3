@@ -1,0 +1,56 @@
+{
+    "DropObject": {
+       "@nil": "true"
+    },
+    "DropRequestDetail": {
+       "@nil": "true"
+    },
+    "EmployeeDetails": {
+       "AdID": "GSSMAGES",
+       "Address": "NO. 6, Panchayat Colony,, Chrompet,, Chennai - 600044.,",
+       "AddressLine01": "NO. 6, Panchayat Colony,",
+       "AddressLine02": "Chrompet,",
+       "AddressLine03": "Chennai - 600044.",
+       "BusinessTitle": "UI Designer - Development Factory",
+       "City": "Chennai",
+       "CostCenter": "6385",
+       "Country": "India",
+       "DOB": null,
+       "DOJ": null,
+       "Department": "IT-Custom Solutions GA Chen",
+       "Disability": null,
+       "DisplayName": "Magesh S",
+       "EmployeeID": "941364",
+       "FirstName": null,
+       "Gender": "Male",
+       "Grade": "24",
+       "JobClassification": null,
+       "JobTitle": null,
+       "LastName": null,
+       "Location": "Chennai",
+       "Manager": "false",
+       "MiddleName": null,
+       "Mobile": "7598665471",
+       "PostalCode": "600044",
+       "Regular": "1",
+       "RelShiftID": "0",
+       "SupervisorAdID": "GSSJGEET",
+       "SupervisorDisplayName": "JamesAnanth G",
+       "SupervisorEmployeeID": "880781",
+       "SupervisorFirstName": null,
+       "SupervisorLastName": null,
+       "SupervisorMiddleName": null,
+       "SupervisoreMail": "jamesananth.g@flex.com",
+       "Vertical": "IT",
+       "VoIP": {
+          "@nil": "true"
+       },
+       "eMail": "mageshbabu.s@flex.com"
+    },
+    "PickupObject": {
+       "@nil": "true"
+    },
+    "PickupRequestDetail": {
+       "@nil": "true"
+    }
+ }
