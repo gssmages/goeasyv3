@@ -71,7 +71,7 @@ export class HomePage{
             console.log(res);
             this.pickupdetails = res.results.PickupRequestDetail;
             this.dropdetails = res.results.DropRequestDetail;
-            this.employeedetails=res.results.DropObject;
+            this.employeedetails=res.results.EmployeeDetails;
             this.globals.displayname=this.employeedetails.DisplayName;
             this.globals.businesstitle=this.employeedetails.BusinessTitle;
             console.log("results are : " + JSON.stringify(this.employeedetails))
