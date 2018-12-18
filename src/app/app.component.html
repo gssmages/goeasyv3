@@ -27,7 +27,7 @@
 
                     </ion-menu-toggle>
                     <ion-menu-toggle auto-hide="false">
-                        <ion-item [routerDirection]="'root'" routerLink="/Login">
+                        <ion-item [routerDirection]="'root'" [routerLink]="['/Login']" (click)=reset()> 
                             <ion-icon slot="start" name="power"></ion-icon>
                             <ion-label>
                                 Logout

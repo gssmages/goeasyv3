@@ -14,7 +14,7 @@ const apiUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/G
 /*"assets/myjson.json"; todaysdate=11-23-2018&location=Chennai&employeeID=941364
 "https://jsonplaceholder.typicode.com/todos/1";*/
 
-
+const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?"
 
 interface mydata
     {
@@ -51,7 +51,16 @@ private extractData(res: Response) {
   let body = res;
   return body || { };
 }*/
-  
+
+getLoginData(username: string, password: string): Observable<any>{
+  let params = new HttpParams()
+   .set('username', username)
+   .set('password', password);
+return this.http.get<mydata>(LoginURL,{params}).pipe(
+catchError(this.handleError)
+);
+
+}
 
     getData(userName: string, PageNo: string, SortOn: string): Observable<any>{
      let params = new HttpParams()
@@ -61,7 +70,9 @@ private extractData(res: Response) {
 return this.http.get<mydata>(apiUrl,{params}).pipe(
   catchError(this.handleError)
 );
-  /*.then(data => {
+  
+}
+/*.then(data => {
 
     console.log(data.status);
     console.log(data.data); // data received by server
@@ -76,7 +87,6 @@ return this.http.get<mydata>(apiUrl,{params}).pipe(
 
   });
    /*return response1;*/
-}
 /* getData(): Observable<any> {
 let response1 = this.http.get(apiUrl+"todaysdate=11-23-2018&location=Chennai&employeeID=941364");
         return response1;*/

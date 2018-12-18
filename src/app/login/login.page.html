@@ -15,11 +15,11 @@
   <ion-card-content>
    <ion-item >
   <ion-label position="floating">Username</ion-label>
-  <ion-input></ion-input>
+  <ion-input  [(ngModel)]="username"></ion-input>
 </ion-item>
       <ion-item>
   <ion-label position="floating">Password</ion-label>
-  <ion-input type="password" ></ion-input>
+  <ion-input type="password"  [(ngModel)]="password"></ion-input>
 </ion-item>
       <ion-button expand="block" (click)="pushPage()">Login</ion-button>
   </ion-card-content>

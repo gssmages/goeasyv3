@@ -11,7 +11,7 @@
 
 <ion-content>
     <ion-item>
-        <ion-label>Request Type <span style="color:red">*</span></ion-label>
+        <ion-label >Request Type <span style="color:red">*</span></ion-label>
         <ion-select placeholder="Select One" [(ngModel)]='reqtype' >
           <ion-select-option [value]="item.id" *ngFor="let item of requesttype">{{item.name}}</ion-select-option>
         </ion-select>
@@ -29,7 +29,7 @@
         <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" min="{{dbdate}}" max="{{maxformatDate}}" value="{{dbdate}}"></ion-datetime>
     </ion-item>
       <ion-item>
-        <ion-label>Request For <span style="color:red">*</span></ion-label>
+        <ion-label position="stacked">Request For <span style="color:red">*</span></ion-label>
         <ion-select placeholder="Select One">
           <ion-select-option value="1">Pickup and Drop</ion-select-option>
           <ion-select-option value="2">Pickup</ion-select-option>
@@ -37,21 +37,21 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label>Timing <span style="color:red">*</span></ion-label>
+        <ion-label position="stacked">Timing <span style="color:red">*</span></ion-label>
         <ion-select placeholder="Select One">
           <ion-select-option value="1">05:30</ion-select-option>
           <ion-select-option value="2">07:00</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label>Area <span style="color:red">*</span></ion-label>
+        <ion-label position="stacked">Area <span style="color:red">*</span></ion-label>
         <ion-select placeholder="Select One">
           <ion-select-option value="1">05:30</ion-select-option>
           <ion-select-option value="2">07:00</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label>Boarding / Drop Point <span style="color:red">*</span></ion-label>
+        <ion-label position="stacked">Boarding / Drop Point <span style="color:red">*</span></ion-label>
         <ion-select placeholder="Select One">
           <ion-select-option value="1">05:30</ion-select-option>
           <ion-select-option value="2">07:00</ion-select-option>
@@ -65,7 +65,7 @@
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label>Please Specify<span style="color:red">*</span></ion-label>
+        <ion-label  position="stacked">Please Specify<span style="color:red">*</span></ion-label>
         <ion-select placeholder="Select One">
             <ion-select-option value="1">Pregnant</ion-select-option>
             <ion-select-option value="2">Undergoing  Medical Treatment</ion-select-option>

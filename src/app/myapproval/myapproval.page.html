@@ -13,35 +13,42 @@
     <ion-grid style="padding: 0;">
         <ion-row style="padding: 0;">
             <ion-col style="padding: 0;">
-                <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;">
+                <ion-button expand="full" color="primary" (click)="selectall()" style="--margin-top:0;--margin-bottom:0;">
                   
                   Select all
                 </ion-button>
             </ion-col>
             <ion-col style="padding: 0;">
-                <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;">
+                <ion-button expand="full" color="primary" (click)="deselectall()" style="--margin-top:0;--margin-bottom:0;">
                     Deselect all</ion-button>
             </ion-col>   
         </ion-row>
     </ion-grid>
     <div>
-        <ion-card (swipeleft)="swipeleftEvent($event)">
-            <ion-row style="padding: 0;"> 
-                <ion-col style="padding: 0;" size="2" text-center ><ion-icon name="calendar" style="font-size:32px;"></ion-icon></ion-col>
+        <p text-center> Either tap or select all to approve and reject</p>
+        <ion-card (click)="cardappr1=!cardappr1" [ngClass]="{'selected': cardappr1 }" id="id1" title="101">
+            <ion-row style="padding: 0;">
+                <ion-col style="padding: 0;" size="2" text-center>
+                    <ion-icon name="calendar" *ngIf="!cardappr1 && status_close" style="font-size:32px;"></ion-icon>
+                    <ion-icon name="checkbox" *ngIf="cardappr1 || status" color="primary" style="font-size:32px;"></ion-icon>
+                </ion-col>
               <ion-col>
-            <div class=" id">ID</div>
+            <div >101</div>
             <div style="font-size: 14px; line-height: 28px; font-weight: normal;">DisplayName</div>
                         <div style="font-size: 12px; line-height: 24px;">RequestTypeName for RequestForName</div>
                         <div style="font-size: 12px;">FromDateString  - ToDateString  at  ShiftTime</div>
                         <div style="font-size: 12px;">BoardingPointName</div>
-                            </ion-col>
+                 </ion-col>
                             </ion-row>
           </ion-card>
-          <ion-card (swiperight)="swiperightEvent($event)">
+          <ion-card (click)="cardappr2=!cardappr3" [ngClass]="{'selected': cardappr2 }" id="id2" title="102" >
               <ion-row style="padding: 0;"> 
-                  <ion-col style="padding: 0;" size="2" text-center ><ion-icon name="calendar" style="font-size:32px;"></ion-icon></ion-col>
+                  <ion-col style="padding: 0;" size="2" text-center >
+                        <ion-icon name="calendar" *ngIf="!cardappr2 && status_close" style="font-size:32px;"></ion-icon>
+                        <ion-icon name="checkbox" *ngIf="cardappr2 ||  status" color="primary" style="font-size:32px;"></ion-icon>
+                </ion-col>
                   <ion-col >
-                <div class=" id">ID</div>
+                <div>102</div>
                 <div style="font-size: 14px; line-height: 28px; font-weight: normal;">DisplayName</div>
                             <div style="font-size: 12px; line-height: 24px;">RequestTypeName for RequestForName</div>
                             <div style="font-size: 12px;">FromDateString  - ToDateString  at  ShiftTime</div>
@@ -49,11 +56,14 @@
                                 </ion-col>
                                 </ion-row>
             </ion-card>
-            <ion-card (click)="tapEvent($event)">
+            <ion-card (click)="cardappr3=!cardappr3" [ngClass]="{'selected': cardappr3 }" id="id3" title="103">
                 <ion-row style="padding: 0;"> 
-                    <ion-col style="padding: 0;" size="2" text-center ><ion-icon name="calendar" style="font-size:32px;"></ion-icon></ion-col>
+                    <ion-col style="padding: 0;" size="2" text-center>
+                            <ion-icon name="calendar" *ngIf="!cardappr3 && status_close" style="font-size:32px;"></ion-icon>
+                            <ion-icon name="checkbox" *ngIf="cardappr3  || status" color="primary" style="font-size:32px;"></ion-icon>
+                    </ion-col>
                     <ion-col >
-                  <div class=" id">ID</div>
+                  <div>103</div>
                   <div style="font-size: 14px; line-height: 28px; font-weight: normal;">DisplayName</div>
                               <div style="font-size: 12px; line-height: 24px;">RequestTypeName for RequestForName</div>
                               <div style="font-size: 12px;">FromDateString  - ToDateString  at  ShiftTime</div>
@@ -69,13 +79,13 @@
         <ion-grid style="padding: 0;">
             <ion-row style="padding: 0;">
                 <ion-col style="padding: 0;">
-                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;">
+                    <ion-button expand="full" color="primary" (click)="reject" style="--margin-top:0;--margin-bottom:0;">
                       <ion-icon name="close" style="font-size:32px;"></ion-icon>
                       Reject
                     </ion-button>
                 </ion-col>
                 <ion-col style="padding: 0;">
-                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;">
+                    <ion-button expand="full" color="primary" (click)="approve" style="--margin-top:0;--margin-bottom:0;">
                         <ion-icon name="checkmark" style="font-size:32px;"></ion-icon>
                         Approve</ion-button>
                 </ion-col>   

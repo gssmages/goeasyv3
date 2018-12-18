@@ -20,7 +20,7 @@
     </ion-segment>
     <div [ngSwitch]="dailyroute" >
         <div *ngSwitchCase="'Pickup'">
-            <ion-grid>
+            <ion-grid *ngIf="pickupshow; else pickupnorecord">
                 <ion-row>
                     <ion-col size="4" style="background: #eee;">
                         <div text-center style="font-weight: bold; font-size: 10px;"  >
@@ -103,9 +103,14 @@
 
                 </ion-row>
             </ion-grid>
+            <ng-template  #pickupnorecord>
+                <ion-row style="background:#eee; padding:5px; border-radius:5px; margin: 5px;">
+                        <ion-col>No Records to display</ion-col>
+                </ion-row>           
+            </ng-template>
         </div>
         <div *ngSwitchCase="'Drop'">
-              <ion-grid>
+              <ion-grid *ngIf="dropshow; else dropnorecord"> 
                 <ion-row>
                     <ion-col size="4" style="background: #eee;">
                         <div text-center style="font-weight: bold; font-size: 10px;"  >
@@ -182,6 +187,11 @@
 
                 </ion-row>
             </ion-grid>
+            <ng-template #dropnorecord>
+                    <ion-row style="background:#eee; padding:5px;border-radius:5px; margin: 5px;">
+                            <ion-col>No Records to display</ion-col>
+                    </ion-row>           
+            </ng-template>
         </div>
     </div>
 </ion-content>

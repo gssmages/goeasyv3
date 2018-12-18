@@ -48,4 +48,13 @@ export class AppComponent {
       this.splashScreen.hide();
     });
   }
+
+  reset()
+  {
+    localStorage.removeItem('empusername');
+    localStorage.removeItem('emppassword');
+    localStorage.removeItem('EmployeeID');
+    localStorage.removeItem('LocationID');
+    localStorage.removeItem('LocationName');
+  }
 }

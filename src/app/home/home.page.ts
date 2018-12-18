@@ -44,7 +44,7 @@ const apiUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/G
 
 
 export class HomePage{
-
+   
     /*  async setData(key, value) {
     const res = await this.storage.set(key, value);
     console.log(res);
@@ -53,9 +53,10 @@ export class HomePage{
     pickupdetails:any;
     dropdetails:any;
     employeedetails:any;
-
+    pickupshow: boolean = false;
+    dropshow: boolean = false;
    data1: Observable<any>;
-
+   private loading: any;
     constructor(
     private homeservice :RestApiService,
      public loadingController: LoadingController,
@@ -67,15 +68,38 @@ export class HomePage{
     ) { }
 
     ngOnInit(){     
+      
+        this.presentLoading();
+
         this.homeservice.getData("asd","asd","asd").subscribe(res => {
             console.log(res);
+            this.loading.dismiss();
             this.pickupdetails = res.results.PickupRequestDetail;
             this.dropdetails = res.results.DropRequestDetail;
             this.employeedetails=res.results.EmployeeDetails;
             this.globals.displayname=this.employeedetails.DisplayName;
             this.globals.businesstitle=this.employeedetails.BusinessTitle;
+            
+            if(this.pickupdetails==null)
+            {
+                console.log(this.pickupdetails)
+                this.pickupshow=false;
+            }
+            else
+            {
+                this.pickupshow=true;
+            }
+            if(this.dropdetails==null)
+            {
+                console.log(this.dropdetails)
+                this.dropshow=false;
+            }
+            else
+            {
+                this.dropshow=true;
+            }
             console.log("results are : " + JSON.stringify(this.employeedetails))
-        this.presentAlert();
+        //this.presentAlert();
 
         });
     }
@@ -88,6 +112,15 @@ export class HomePage{
 
     await alert.present();
   }
+  async presentLoading() {
+    this.loading = await this.loadingController.create({
+      message: 'Loading....',
+    });
+    return await this.loading.present();
+  }
+ 
+
+  
 /*async getData() {
   const loading = await this.loadingController.create({
     message: 'Loading'
