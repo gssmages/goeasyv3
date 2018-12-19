@@ -26,10 +26,10 @@ export class MyapprovalPage implements OnInit {
    
    if(test.classList.contains("selected"))
    {
-    console.log(test.title);
+    console.log(test.getAttribute('title'));
    }
    else{
-    console.log(test.title);
+    console.log(test.getAttribute('title'));
     test.classList.add('selected');
    }
      // "0", "1", "2",
@@ -49,7 +49,7 @@ export class MyapprovalPage implements OnInit {
      if( test.classList.contains("selected"))
      {
       test.classList.remove('selected');
-      console.log(test.title+"----removed");
+      console.log(test.getAttribute('title')+"----removed");
      }
        // "0", "1", "2",
     }
@@ -65,7 +65,7 @@ export class MyapprovalPage implements OnInit {
        
        if(test.classList.contains("selected"))
        {
-        console.log(test.title);
+        console.log(test.getAttribute('title'));
        }
          // "0", "1", "2",
       }

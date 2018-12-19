@@ -14,8 +14,9 @@ const apiUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/G
 /*"assets/myjson.json"; todaysdate=11-23-2018&location=Chennai&employeeID=941364
 "https://jsonplaceholder.typicode.com/todos/1";*/
 
-const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?"
-
+const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?";
+const MytripsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/GetMyTripsDetails?";
+const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/SaveCancelRequests?";
 interface mydata
     {
         obj: Object;
@@ -56,22 +57,43 @@ getLoginData(username: string, password: string): Observable<any>{
   let params = new HttpParams()
    .set('username', username)
    .set('password', password);
-return this.http.get<mydata>(LoginURL,{params}).pipe(
-catchError(this.handleError)
-);
-
+return this.http.get<mydata>(LoginURL,{params}).pipe(catchError(this.handleError));
 }
 
     getData(userName: string, PageNo: string, SortOn: string): Observable<any>{
      let params = new HttpParams()
       .set('todaysdate', this.dbdate)
-      .set('employeeID', '941364')
-      .set('location', 'Chennai');
-return this.http.get<mydata>(apiUrl,{params}).pipe(
-  catchError(this.handleError)
-);
-  
-}
+      .set('employeeID', localStorage.getItem('EmployeeID'))
+      .set('location', localStorage.getItem('LocationName'));
+return this.http.get<mydata>(apiUrl,{params}).pipe(catchError(this.handleError));
+  }
+  getMyTripsData(): Observable<any>{
+    let params = new HttpParams()
+     .set('todaydate', this.dbdate)
+     .set('employeeID', localStorage.getItem('EmployeeID'));
+  return this.http.get<mydata>(MytripsURL,{params}).pipe(catchError(this.handleError));
+  }
+
+  saveCancelTrips(RequestTypeName:string,RequestForName:string,ShiftTimeID:string,
+    CabRequestID:string,FromDateOpnNoShow:string,ToDateOpnNoShow:string,
+    RequestTypeID:string,RequestForID:string,RequestedForName:string,ShiftTimeName:string,
+    locationID:string,employeeID:string,UserTime:string): Observable<any>{
+    let params = new HttpParams()
+     .set('RequestTypeName', RequestTypeName)
+     .set('RequestForName', RequestForName)
+     .set('ShiftTimeID', ShiftTimeID)
+     .set('CabRequestID', CabRequestID)
+     .set('FromDateOpnNoShow', FromDateOpnNoShow)
+     .set('ToDateOpnNoShow', ToDateOpnNoShow)
+     .set('RequestTypeID', RequestTypeID)
+     .set('RequestForID', RequestForID)
+     .set('RequestedForName', RequestedForName)
+     .set('ShiftTimeName', ShiftTimeName)
+     .set('locationID', locationID)
+     .set('employeeID', employeeID)
+     .set('UserTime', UserTime);
+  return this.http.get<mydata>(SaveNoShowURL,{params}).pipe(catchError(this.handleError));
+  }
 /*.then(data => {
 
     console.log(data.status);
