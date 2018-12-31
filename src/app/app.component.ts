@@ -30,6 +30,11 @@ export class AppComponent {
       title: 'My Approvals',
       url: '/Myapprvaldashboard',
       icon: 'checkbox-outline'
+    },
+    {
+      title: 'Feedback',
+      url: '/feedback',
+      icon: 'chatbubbles'
     }
   ];
 

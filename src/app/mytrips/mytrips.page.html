@@ -51,15 +51,15 @@
     </ion-card>--> 
     <ion-card *ngFor="let item of mytrips; let i = index">
       <ion-row>
-        <ion-col size="3" text-center style="color:#fff; background:#6A478D;" >
+        <ion-col size="2" text-center style="color:#fff; background:#6A478D;" >
           <ion-icon name="car" style="font-size:40px; "></ion-icon>
           <p style="margin:0;">{{item.RequestTypeName}}</p>
         </ion-col>
         <ion-col style="padding-left:10px;">
-          <p>{{item.FromDateString}} to {{item.ToDateString}}</p>
+          <p *ngIf="item.FromDateString!=''">{{item.FromDateString}} to {{item.ToDateString}}</p>
           <p>{{item.RequestForName}} - {{item.shiftForGrid}}</p>
         </ion-col>   
-        <ion-col size="2" text-right style="padding:0;" >
+        <ion-col size="1" text-right style="padding:0;" >
           <ion-icon name="close" style="font-size:24px; background:#6A478D; color: #fff;" (click)="canceltrip($event,item)"></ion-icon>
         </ion-col>        
       </ion-row>        
@@ -68,7 +68,7 @@
     <div *ngSwitchCase="'Cancelledtrips'">
         <ion-card *ngFor="let item of cancelledtrips; let i = index">
             <ion-row>
-              <ion-col size="3" text-center style="color:#fff; background:#6A478D;" >
+              <ion-col size="2" text-center style="color:#fff; background:#6A478D;" >
                 <ion-icon name="car" style="font-size:40px; "></ion-icon>
                 <p style="margin:0;">{{item.ReqTypeName}}</p>
               </ion-col>

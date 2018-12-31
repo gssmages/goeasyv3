@@ -20,6 +20,11 @@ export class MytripsPage implements OnInit {
   cancelledtrips:any;
   requestfor:any;
   today= new Date();
+  maxdate= new Date();
+  maxDate=this.maxdate.setMonth(this.maxdate.getMonth()+2);
+  dbdate='';
+  maxformatDate='';
+
   
   locationID:string=localStorage.getItem("LocationID");
   employeeID:string=localStorage.getItem("EmployeeID");
@@ -36,16 +41,18 @@ export class MytripsPage implements OnInit {
   UserTime:string=formatDate(this.today, 'MM-dd-yyyy HH:mm:ss', 'en-US', '+0530');
 
   constructor( 
-    private homeservice :RestApiService,
+    private mytripservice :RestApiService,
     public loadingController: LoadingController,
     public route: ActivatedRoute,
     public router: Router,
-    public alertController: AlertController,
-    private loginservice :RestApiService) { }
+    public alertController: AlertController) { }
 
   ngOnInit() {
+    this.dbdate = formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
+    this.maxformatDate =formatDate(this.maxDate, 'yyyy-MM-dd', 'en-US', '+0530');
+
     this.presentLoading();
-    this.homeservice.getMyTripsData().subscribe(res => {
+    this.mytripservice.getMyTripsData().subscribe(res => {
       this.loading.dismiss();
       console.log(res);
      // console.log("results are : " + JSON.stringify(res))
@@ -60,7 +67,7 @@ export class MytripsPage implements OnInit {
   }
   async canceltrip(event:any,item:any)
   {
-    console.log(item.CabRequestID+"------------"+item.FromDateString);
+    console.log(item.CabRequestID+"------------"+item.FromDate);
     this.RequestTypeName=item.RequestTypeName;
     this.RequestForName=item.RequestForName;
     this.ShiftTimeID=item.ShiftTimeID;
@@ -71,31 +78,101 @@ export class MytripsPage implements OnInit {
     this.RequestForID=item.RequestForID;  
     this.RequestedForName=item.RequestForName;
     this.ShiftTimeName=item.ShiftStartTime+"-"+item.ShiftEndTime;
-    if(this.RequestForName=="Pickup and Drop")
+    if(this.RequestTypeName!="Regular")
     {
-      const alertradio = await this.alertController.create({
-        header: 'Choose REquest for to cancel trip',
-        inputs: [
-          {
-            name: 'radio1',
-            type: 'radio',
-            label: 'Pickup and Drop',
-            value: 'Pickup and Drop_'+this.requestfor[0].RequestForID,
-            checked: true
-          },
-          {
-            name: 'radio2',
-            type: 'radio',
-            label: 'Pickup',
-            value: 'Pickup_'+this.requestfor[1].RequestForID
-          },
-          {
-            name: 'radio3',
-            type: 'radio',
-            label: 'Drop',
-            value: 'Drop_'+this.requestfor[2].RequestForID
-          },
+        if(this.RequestForName=="Pickup and Drop")
+        {
+          this.selectrequestfor();
+        /*  const alertradio = await this.alertController.create({
+            header: 'Choose Request for to cancel trip',
+            inputs: [
+              {
+                name: 'radio1',
+                type: 'radio',
+                label: 'Pickup and Drop',
+                value: 'Pickup and Drop_'+this.requestfor[0].RequestForID,
+                checked: true
+              },
+              {
+                name: 'radio2',
+                type: 'radio',
+                label: 'Pickup',
+                value: 'Pickup_'+this.requestfor[1].RequestForID
+              },
+              {
+                name: 'radio3',
+                type: 'radio',
+                label: 'Drop',
+                value: 'Drop_'+this.requestfor[2].RequestForID
+              },
+              
+            ],
+            buttons: [
+              {
+                text: 'Cancel',
+                role: 'cancel',
+                cssClass: 'secondary',
+                handler: () => {
+                  console.log('Confirm Cancel');
+                }
+              }, {
+                text: 'Ok',
+                handler: data => {
+                  var reqname=data.split('_');
+                  this.RequestForName=reqname[0];
+                  this.RequestForID=reqname[1];
+                  console.log(this.RequestForName+"---"+this.RequestForID)
+                  this.saveTripcancellation(this.RequestForName,this.RequestForID);
+                }
+              }
+            ]
+          });
+      
+          await alertradio.present();*/
           
+        }else{
+
+          const confirm =  await this.alertController.create({
+            header: 'Goeasy Trip Cancellation',
+            message: 'Do you agree to cancel this trip on '+item.FromDateString,
+            buttons: [
+              {
+                text: 'NO',
+                handler: () => {
+                  console.log('No clicked');
+                }
+              },
+              {
+                text: 'YES',
+                handler: () => {
+                  this.saveTripcancellation(this.RequestForName,this.RequestForID);
+                  console.log('yes clicked');
+      
+                }
+              }
+            ]
+          });
+          await confirm.present();
+        }
+    }
+    else
+    {
+      const alertprompt = await this.alertController.create({
+        header: 'Select From Date and To Date to cancel trip',
+        inputs: [
+          // input date with min & max
+          {
+            name: 'fromdate',
+            type: 'date',
+            min: this.dbdate,
+            max: this.maxformatDate
+          },
+          {
+            name: 'todate',
+            type: 'date',
+            min: this.dbdate,
+            max: this.maxformatDate
+          }
         ],
         buttons: [
           {
@@ -108,44 +185,42 @@ export class MytripsPage implements OnInit {
           }, {
             text: 'Ok',
             handler: data => {
-              var reqname=data.split('_');
-              this.RequestForName=reqname[0];
-              this.RequestForID=reqname[1];
-              console.log(this.RequestForName+"---"+this.RequestForID)
-              this.saveTripcancellation(this.RequestForName,this.RequestForID);
-            }
-          }
-        ]
-      });
-  
-      await alertradio.present();
-      
-    }else{
+              
+              console.log('Confirm Ok' + data);
+              if(data.fromdate!="" && data.todate!="")
+              {
+                console.log(JSON.stringify(data));
+                var fromdatearray=(data.fromdate).split('-');
+                var todatearray=(data.todate).split('-');
+                var fromdatestring = new Date(fromdatearray[0],fromdatearray[1]-1,fromdatearray[2]);
+                var todatestring = new Date(todatearray[0],todatearray[1]-1,todatearray[2]);
+                if(fromdatestring<=todatestring)
+                {
+                  alertprompt.message="";
+                  this.FromDateOpnNoShow=(data.fromdate)+"T00:00:00";
+                  this.ToDateOpnNoShow=(data.todate)+"T00:00:00";
+                  console.log(this.FromDateOpnNoShow+"------"+this.ToDateOpnNoShow)
+                  this.selectrequestfor();
+                }
+                else
+                {
+                  alertprompt.message="<span style='color:red'> To Date must be greater than From Date.</span>"; 
+                  return false;
+                }
+              }
+              else
+              {
+                alertprompt.message="<span style='color:red'> Please enter fromdate and todate</span>"; 
+                return false;
+              }
 
-      const confirm =  await this.alertController.create({
-        header: 'Goeasy Trip Cancellation',
-        message: 'Do you agree to cancel this trip on '+item.FromDateString,
-        buttons: [
-          {
-            text: 'NO',
-            handler: () => {
-              console.log('No clicked');
-            }
-          },
-          {
-            text: 'YES',
-            handler: () => {
-              this.saveTripcancellation(this.RequestForName,this.RequestForID);
-              console.log('yes clicked');
-  
             }
           }
         ]
       });
-      await confirm.present();
-    }
-   
   
+      await alertprompt.present();
+    } 
   }
   async presentAlert(alertmessage:string) {
     const alert = await this.alertController.create({
@@ -162,10 +237,59 @@ export class MytripsPage implements OnInit {
     });
     return await this.loading.present();
   }
+  async selectrequestfor() {
+  const alertradio = await this.alertController.create({
+    header: 'Choose Request for to cancel trip',
+    inputs: [
+      {
+        name: 'radio1',
+        type: 'radio',
+        label: 'Pickup and Drop',
+        value: 'Pickup and Drop_'+this.requestfor[0].RequestForID,
+        checked: true
+      },
+      {
+        name: 'radio2',
+        type: 'radio',
+        label: 'Pickup',
+        value: 'Pickup_'+this.requestfor[1].RequestForID
+      },
+      {
+        name: 'radio3',
+        type: 'radio',
+        label: 'Drop',
+        value: 'Drop_'+this.requestfor[2].RequestForID
+      },
+      
+    ],
+    buttons: [
+      {
+        text: 'Cancel',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: () => {
+          console.log('Confirm Cancel');
+        }
+      }, {
+        text: 'Ok',
+        handler: data => {
+          var reqname=data.split('_');
+          this.RequestForName=reqname[0];
+          this.RequestForID=reqname[1];
+          console.log(this.RequestForName+"---"+this.RequestForID)
+          this.saveTripcancellation(this.RequestForName,this.RequestForID);
+        }
+      }
+    ]
+  });
+
+  await alertradio.present();
+}
   saveTripcancellation(requestforname:string, requestforid:string)
   {
+    console.log(this.FromDateOpnNoShow+"------"+this.ToDateOpnNoShow)
      this.presentLoading();
-        this.loginservice.saveCancelTrips(this.RequestTypeName, requestforname,
+        this.mytripservice.saveCancelTrips(this.RequestTypeName, requestforname,
           this.ShiftTimeID, this.CabRequestID,this.FromDateOpnNoShow,this.ToDateOpnNoShow,
           this.RequestTypeID,requestforid,this.RequestedForName,this.ShiftTimeName,
           this.locationID,this.employeeID,this.UserTime).subscribe(res => { 

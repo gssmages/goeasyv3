@@ -5,6 +5,7 @@ import { HTTP } from '@ionic-native/http/ngx';
 import { catchError, tap, map } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 import {formatDate } from '@angular/common';
+import { Globals } from './global';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'text/xml'}).set('Accept', 'text/xml')
@@ -17,6 +18,15 @@ const apiUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/G
 const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?";
 const MytripsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/GetMyTripsDetails?";
 const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/SaveCancelRequests?";
+const MyApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CabApprovalApi/ReadPendingRequests/?";
+const SaveMyApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/cabapprovalapi/ApprovePendingRequests?";
+const AdhocRequestURL="http://gssnte811.asia.ad.flextronics.com:4042/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
+const SaveAdhocRequestURL="http://gssnte811.asia.ad.flextronics.com:4042/api/AdhocCabRequestApi/SaveCabOperationDetails?";
+const FeedbackURL="http://gssnte811.asia.ad.flextronics.com:4042/api/FeedbackApi/GetMobileQuestions?";
+const SaveFeedbackURL="http://gssnte811.asia.ad.flextronics.com:4042/api/FeedbackApi/SaveMobileFeedback?";
+const MyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
+const SaveMyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/SaveApproveRejectData/?";
+
 interface mydata
     {
         obj: Object;
@@ -29,7 +39,7 @@ export class RestApiService {
   dbdate='';
   today= new Date();
   
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,public globals: Globals) {
     this.dbdate = formatDate(this.today, 'MM-dd-yyyy', 'en-US', '+0530')
    }
     
@@ -60,11 +70,11 @@ getLoginData(username: string, password: string): Observable<any>{
 return this.http.get<mydata>(LoginURL,{params}).pipe(catchError(this.handleError));
 }
 
-    getData(userName: string, PageNo: string, SortOn: string): Observable<any>{
+    getDashboardData(): Observable<any>{
      let params = new HttpParams()
       .set('todaysdate', this.dbdate)
-      .set('employeeID', localStorage.getItem('EmployeeID'))
-      .set('location', localStorage.getItem('LocationName'));
+      .set('employeeID',localStorage.getItem('EmployeeID'))
+      .set('location', localStorage.getItem('LocationName'));//localStorage.getItem('EmployeeID') '930730'
 return this.http.get<mydata>(apiUrl,{params}).pipe(catchError(this.handleError));
   }
   getMyTripsData(): Observable<any>{
@@ -93,6 +103,95 @@ return this.http.get<mydata>(apiUrl,{params}).pipe(catchError(this.handleError))
      .set('employeeID', employeeID)
      .set('UserTime', UserTime);
   return this.http.get<mydata>(SaveNoShowURL,{params}).pipe(catchError(this.handleError));
+  }
+
+  getMyApprovalData(): Observable<any>{
+    let params = new HttpParams()
+     .set('status', '1')
+     .set('loggedUser','880781');//'880781'localStorage.getItem('EmployeeID')
+  return this.http.get<mydata>(MyApprovalURL,{params}).pipe(catchError(this.handleError));
+  }
+  saveMyApproval(cabRequestID:string,remarks:string,status:string,approver:string): Observable<any>{
+    let params = new HttpParams()
+     .set('cabRequestID', cabRequestID)
+     .set('remarks', remarks)
+     .set('status', status)
+     .set('approver', approver);
+  return this.http.get<mydata>(SaveMyApprovalURL,{params}).pipe(catchError(this.handleError));
+  }
+  getMyApprovalCIPData(): Observable<any>{
+    let params = new HttpParams()
+     .set('viewId', '2')
+     .set('employeeID','880781')
+     .set('locationName',localStorage.getItem('LocationName'))
+     .set('employeeName',localStorage.getItem('displayname'));//'880781'localStorage.getItem('EmployeeID')
+  return this.http.get<mydata>(MyApprovalCIPURL,{params}).pipe(catchError(this.handleError));
+  }
+  saveMyApprovalCIP(cabRequestID:string,remarks:string,status:string,approver:string): Observable<any>{
+    let params = new HttpParams()
+     .set('SpecialCabRequestID', cabRequestID)
+     .set('Remarks', remarks)
+     .set('StatusID', status)
+     .set('RequestForEmployeeName', '')
+     .set('FromDate', '')
+     .set('ToDate', '')
+     .set('NoOfPersons', '')
+     .set('VerticalName', '')
+     .set('StatusName', '')
+     .set('ApproverMailID', '')
+     .set('userMailID', '')
+     .set('ApprovedBy', approver);
+  return this.http.get<mydata>(SaveMyApprovalCIPURL,{params}).pipe(catchError(this.handleError));
+  }
+  getAdhocrequestData(): Observable<any>{
+    let params = new HttpParams()
+     .set('employeeID', localStorage.getItem('EmployeeID'))
+     .set('locationID',localStorage.getItem('LocationID'));//'880781'localStorage.getItem('EmployeeID')
+  return this.http.get<mydata>(AdhocRequestURL,{params}).pipe(catchError(this.handleError));
+  }
+  saveAdhocrequest(RequestTypeID:string,RequestTypeName:string,RequestForID:string,
+    RequestForName:string,SpecialNeed:string,FromDate:string,ToDate:string,Shift:string,
+    ShiftTimeName:string,AreaID:string,AreaName:string,BoardingPointID:string,BoardingPointName:string,
+    SpecialNeedReason:string,Reason:string,UserTime:string,CommonDate:string): Observable<any>{
+    let params = new HttpParams()
+     .set('LocationID', localStorage.getItem('LocationID'))
+     .set('EmployeeID',  localStorage.getItem('EmployeeID'))
+     .set('RequestTypeID', RequestTypeID)
+     .set('RequestTypeName', RequestTypeName)
+     .set('RequestForID', RequestForID)
+     .set('RequestForName', RequestForName)
+     .set('FromDate', FromDate)
+     .set('ToDate', ToDate)
+     .set('CommonDate', CommonDate)
+     .set('UserTime', UserTime)
+     .set('Shift', Shift)
+     .set('ShiftTimeName', ShiftTimeName)
+     .set('AreaID', AreaID)
+     .set('AreaName', AreaName)
+     .set('BoardingPointID', BoardingPointID)
+     .set('BoardingPointName', BoardingPointName)
+     .set('SpecialNeed', SpecialNeed)
+     .set('SpecialNeedReason', SpecialNeedReason)
+     .set('Reason', Reason)
+     .set('StatusID', '1')
+     .set('IsActive', '1')
+     .set('EmployeeName', localStorage.getItem('displayname'))
+     .set('CreatedBy',  localStorage.getItem('EmployeeID'));
+  return this.http.get<mydata>(SaveAdhocRequestURL,{params}).pipe(catchError(this.handleError));
+  }
+  getFeedbackData(): Observable<any>{
+    let params = new HttpParams()
+     .set('employeeLocID', localStorage.getItem('LocationID'));
+  return this.http.get<mydata>(FeedbackURL,{params}).pipe(catchError(this.handleError));
+  }
+  saveFeedback(questionID:string,comments:string,date:string,reqFor:string): Observable<any>{
+    let params = new HttpParams()
+     .set('employeeID', localStorage.getItem('EmployeeID'))
+     .set('questionID', questionID)
+     .set('comments', comments)
+     .set('date', date)
+     .set('reqFor', reqFor);
+  return this.http.get<mydata>(SaveFeedbackURL,{params}).pipe(catchError(this.handleError));
   }
 /*.then(data => {
 

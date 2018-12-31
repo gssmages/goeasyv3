@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary" >
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+          Feedback
+      </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-label>Travel Date <span style="color:red">*</span></ion-label>
+        <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY"  [(ngModel)]="traveldate" [min]="minformatDate" [max]="dbdate"> </ion-datetime>
+    </ion-item>
+  <ion-item>
+    <ion-label position="stacked">Feedback For <span style="color:red">*</span></ion-label>
+    <ion-select placeholder="Select One" [(ngModel)]="feedbackfor">
+      <ion-select-option [value]="item.RequestForID" *ngFor="let item of requestforlist">{{item.RequestForName}}</ion-select-option>
+<!--       <ion-select-option value="2">Pickup</ion-select-option>
+      <ion-select-option value="3">Drop</ion-select-option>--> 
+    </ion-select>
+  </ion-item>
+  <ion-item>
+      <ion-label position="stacked">Category<span style="color:red">*</span></ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="category">
+        <ion-select-option [value]="item.F_ID" *ngFor="let item of questionlist">{{item.F_Question}}</ion-select-option>
+  <!--       <ion-select-option value="2">Pickup</ion-select-option>
+        <ion-select-option value="3">Drop</ion-select-option>--> 
+      </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Comments<span style="color:red">*</span></ion-label>
+             <ion-input [(ngModel)]="comments"></ion-input>
+      </ion-item>
+</ion-content>
+<ion-footer>
+    <ion-toolbar style="--padding-top:0;--padding-bottom:0;--padding-start:0;--padding-end:0;">
+        <ion-grid style="padding: 0;">
+            <ion-row style="padding: 0;">
+                <ion-col style="padding: 0;">
+                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" (click)="reset()">Reset</ion-button>
+                </ion-col>
+                <ion-col style="padding: 0;">
+                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" (click)="validateRequest()">Submit Request</ion-button>
+                </ion-col>   
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-footer>

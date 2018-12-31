@@ -71,13 +71,14 @@ export class HomePage{
       
         this.presentLoading();
 
-        this.homeservice.getData("asd","asd","asd").subscribe(res => {
+        this.homeservice.getDashboardData().subscribe(res => {
             console.log(res);
             this.loading.dismiss();
             this.pickupdetails = res.results.PickupRequestDetail;
             this.dropdetails = res.results.DropRequestDetail;
             this.employeedetails=res.results.EmployeeDetails;
             this.globals.displayname=this.employeedetails.DisplayName;
+            localStorage.setItem("displayname",this.employeedetails.DisplayName);
             this.globals.businesstitle=this.employeedetails.BusinessTitle;
             
             if(this.pickupdetails==null)

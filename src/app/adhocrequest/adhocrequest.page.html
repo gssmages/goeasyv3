@@ -12,68 +12,66 @@
 <ion-content>
     <ion-item>
         <ion-label >Request Type <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]='reqtype' >
-          <ion-select-option [value]="item.id" *ngFor="let item of requesttype">{{item.name}}</ion-select-option>
+        <ion-select placeholder="Select One" [(ngModel)]='requesttype'  (ionChange)="checkType($event)">
+          <ion-select-option [value]="item.RequestTypeID" *ngFor="let item of requesttypelist">{{item.RequestTypeName}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="showdate">
         <ion-label>Date <span style="color:red">*</span></ion-label>
-        <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" min="{{dbdate}}" max="{{maxformatDate}}" value="{{dbdate}}"></ion-datetime>
+        <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" [(ngModel)]="dbdate"  [min]="dbdate" [max]="maxformatDate"></ion-datetime>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="showFromTodate">
         <ion-label>From Date <span style="color:red">*</span></ion-label>
-        <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" min="{{dbdate}}" max="{{maxformatDate}}" value="{{dbdate}}"> </ion-datetime>
+        <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY"  [(ngModel)]="fromdate" [min]="dbdate" [max]="maxformatDate"> </ion-datetime>
     </ion-item>
-    <ion-item>
+    <ion-item *ngIf="showFromTodate">
         <ion-label>To Date <span style="color:red">*</span></ion-label>
-        <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" min="{{dbdate}}" max="{{maxformatDate}}" value="{{dbdate}}"></ion-datetime>
+        <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" [(ngModel)]="todate" [min]="dbdate" [max]="maxformatDate"></ion-datetime>
     </ion-item>
       <ion-item>
         <ion-label position="stacked">Request For <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One">
-          <ion-select-option value="1">Pickup and Drop</ion-select-option>
-          <ion-select-option value="2">Pickup</ion-select-option>
-          <ion-select-option value="3">Drop</ion-select-option>
+        <ion-select placeholder="Select One" [(ngModel)]="requestfor" (ionChange)="getrequestfor($event)">
+          <ion-select-option [value]="item.RequestForID" *ngFor="let item of requestforlist">{{item.RequestForName}}</ion-select-option>
+  <!--       <ion-select-option value="2">Pickup</ion-select-option>
+          <ion-select-option value="3">Drop</ion-select-option>--> 
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Timing <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One">
-          <ion-select-option value="1">05:30</ion-select-option>
-          <ion-select-option value="2">07:00</ion-select-option>
+        <ion-select placeholder="Select One" [(ngModel)]="shifttime" (ionChange)="getshifttime($event.target.value)">
+            <ion-select-option [value]="item.TimeID" *ngFor="let item of shifttimelist">{{item.railwayTimeStart}} - {{item.railwayTimeEnd}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Area <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One">
-          <ion-select-option value="1">05:30</ion-select-option>
-          <ion-select-option value="2">07:00</ion-select-option>
+        <ion-select placeholder="Select One" [(ngModel)]="area" (ionChange)="changeArea($event)">
+            <ion-select-option [value]="item.RelAreaID" *ngFor="let item of areadetailslist">{{item.AreaName}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Boarding / Drop Point <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One">
-          <ion-select-option value="1">05:30</ion-select-option>
-          <ion-select-option value="2">07:00</ion-select-option>
+        <ion-select placeholder="Select One" [(ngModel)]="boardingpoint" (ionChange)="getboardingname($event)">
+            <ion-select-option [value]="item.BoardingPoint" *ngFor="let item of boardinglisttemp">{{item.BoardingPointName}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label>Special Need  <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One">
-          <ion-select-option value="1">05:30</ion-select-option>
-          <ion-select-option value="2">07:00</ion-select-option>
+        <ion-select placeholder="Select One" [(ngModel)]="specialneed" (ionChange)=checkNeed($event.target.value)>
+          <ion-select-option value="1">YES</ion-select-option>
+          <ion-select-option value="2" selected>No</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item>
+      <ion-item *ngIf="showPleasespecify">
         <ion-label  position="stacked">Please Specify<span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One">
-            <ion-select-option value="1">Pregnant</ion-select-option>
-            <ion-select-option value="2">Undergoing  Medical Treatment</ion-select-option>
+        <ion-select placeholder="Select One" [(ngModel)]="pleasespecify" >
+            <ion-select-option value="Pregnant">Pregnant</ion-select-option>
+            <ion-select-option value="Undergoing  Medical Treatment">Undergoing  Medical Treatment</ion-select-option>
+            <ion-select-option value="Physically Challenged">Physically Challenged </ion-select-option>
           </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Reason For Adhoc<span style="color:red">*</span></ion-label>
-  <ion-input></ion-input>
+             <ion-input [(ngModel)]="resonforadhoc"></ion-input>
       </ion-item>
 </ion-content>
 <ion-footer>
@@ -84,7 +82,7 @@
                     <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" (click)="reset()">Reset</ion-button>
                 </ion-col>
                 <ion-col style="padding: 0;">
-                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" (click)="submitRequest()">Submit Request</ion-button>
+                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" (click)="validateRequest()">Submit Request</ion-button>
                 </ion-col>   
             </ion-row>
         </ion-grid>
