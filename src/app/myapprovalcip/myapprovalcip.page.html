@@ -35,10 +35,13 @@
                        <ion-icon name="checkbox" *ngIf="selectthis[i]" color="primary" style="font-size:32px;"></ion-icon>
                    </ion-col>
                  <ion-col>
-               <div style="font-size: 14px;  font-weight: bold;">{{item.EmployeeDetails.DisplayName}}</div>
-                           <div style="font-size: 12px; line-height: 20px;">{{item.RequestTypeName}} for {{item.RequestForName}}</div>
-                           <div style="font-size: 12px; line-height: 20px;">{{item.FromDateString}}  - {{item.ToDateString}} at  {{item.ShiftTime}}</div>
-                           <div style="font-size: 12px; line-height: 20px;">{{item.BoardingPointName}}</div>
+               <div style="font-size: 14px;  font-weight: bold;"><b>Request For : </b>{{item.RequestForName}}</div>
+                           <div style="font-size: 12px; line-height: 20px;"><b>Request By : </b>{{item.CreatedByName}}</div>
+                           <div style="font-size: 12px; line-height: 20px;"><b>Type of Duty : </b>{{item.DutyType}}</div>
+                           <div style="font-size: 12px; line-height: 20px;"><b>Travel Date : </b>{{item.FromDate}} to {{item.ToDate}}</div>
+                           <div style="font-size: 12px; line-height: 20px;"><b>Pick-up : </b>{{item.PickupAddress}}</div>
+                           <div style="font-size: 12px; line-height: 20px;"><b>Drop : </b>{{item.DropAddress}}</div>
+                           <div style="font-size: 12px; line-height: 20px;"><b>No. of Person(s) : </b>{{item.NumberOfPerson}}</div>
                     </ion-col>
                                </ion-row>
              </ion-card>

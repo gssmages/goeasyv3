@@ -35,10 +35,11 @@ export class AdhocrequestPage implements OnInit {
   fromdate:any;
   todate:any;
   requestfor:any;
-  requestforname:any;
+  requestforname:any='';
   shifttime:any;
   shifttimename:any;
-  area:any;
+  area_relarea:any;
+  areaid:any;
   areaname:any;
   boardingpoint:any;
   boardingpointname:any;
@@ -109,6 +110,7 @@ export class AdhocrequestPage implements OnInit {
   getrequestfor(selectedval:any)
   {
     this.requestforname=selectedval.detail.text;
+    this.shifttime="";
   }
   getshifttime(selectedval:any)
   {
@@ -126,15 +128,20 @@ export class AdhocrequestPage implements OnInit {
   {
     this.boardingpointname=selectedval.detail.text;
     console.log(this.boardingpointname)
+    this.boardingpoint=selectedval.detail.value;
   }
   changeArea(selectedval:any)
   {
     this.areaname=selectedval.detail.text;
+    this.boardinglisttemp=[];
+    this.boardingpoint='';
     console.log(selectedval)
-    console.log(this.area)
-    
+    console.log(this.area_relarea)
+    var areaarray=(this.area_relarea).split("_");
+    this.areaid=areaarray[0];
+    var relareaid=areaarray[1];
     for (let i = 0; i < this.boardingpointlist.length; i++) {
-      if(this.boardingpointlist[i].Area == selectedval.detail.value)
+      if(this.boardingpointlist[i].Area == relareaid)
       {
         console.log(this.boardingpointlist[i])
         this.boardinglisttemp.push(this.boardingpointlist[i]);
@@ -142,14 +149,42 @@ export class AdhocrequestPage implements OnInit {
     }
     console.log(this.boardinglisttemp)
   }
+  validatearea()
+  {
+    console.log(this.areaname)
+    if(this.areaname=="")
+    {
+      console.log(this.areaname)
+      this.boardinglisttemp=[];
+    }
+  }
   reset()
   {
     console.log("click the reset button")
+    this.requesttype="";
+    this.requesttypename="";
+    this.requestfor="";
+    this.requestforname="";
+    this.specialneed="2";
+    this.fromdate=formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
+    this.todate=formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
+    this.shifttime="";
+    this.shifttimename="";
+    this.areaid="";
+    this.area_relarea="";
+    this.areaname="";
+    this.boardingpoint="";
+    this.boardinglisttemp=[];
+    this.boardingpointname="";
+    this.pleasespecify="";
+    this.resonforadhoc="";
+    this.dbdate=formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');;
   }
   validateRequest()
   {
     console.log("click the Submit button")
-    if(this.requesttype && this.requestfor && this.shifttime && this.area && this.boardingpoint)
+    console.log(this.requesttype +"--"+ this.requestfor+"--"+  this.shifttime +"--"+  this.area_relarea+"--"+  this.boardingpoint)
+    if(this.requesttype && this.requestfor && this.shifttime && this.area_relarea && this.boardingpoint)
     {
         console.log("validate success")
         if(this.requesttype=="4")
@@ -226,18 +261,19 @@ export class AdhocrequestPage implements OnInit {
     console.log(this.dbdate+"--"+this.fromdate+"---"+this.todate)
     this.presentLoading();
         this.adhocservice.saveAdhocrequest(this.requesttype,this.requesttypename,this.requestfor,this.requestforname,
-          this.specialneed,this.fromdate,this.todate,this.shifttime,this.shifttimename,this.area,this.areaname,
+          this.specialneed,this.fromdate,this.todate,this.shifttime,this.shifttimename,this.areaid,this.areaname,
           this.boardingpoint,this.boardingpointname,this.pleasespecify,this.resonforadhoc,this.usertime,this.dbdate).subscribe(res => { 
            console.log("results are : " + JSON.stringify(res.results))
             this.loading.dismiss();
             this.presentAlert(res.results);
+            this.reset();
         }, err => {            
             console.log(err);
             this.loading.dismiss();
             this.presentAlert(err);           
         });
   }
-  
+ 
   async presentAlert(alertmessage:string) {
     const alert = await this.alertController.create({
       header: 'Goeasy Alert',

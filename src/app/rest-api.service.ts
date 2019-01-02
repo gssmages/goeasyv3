@@ -122,7 +122,7 @@ return this.http.get<mydata>(apiUrl,{params}).pipe(catchError(this.handleError))
   getMyApprovalCIPData(): Observable<any>{
     let params = new HttpParams()
      .set('viewId', '2')
-     .set('employeeID','880781')
+     .set('employeeID',localStorage.getItem('EmployeeID'))
      .set('locationName',localStorage.getItem('LocationName'))
      .set('employeeName',localStorage.getItem('displayname'));//'880781'localStorage.getItem('EmployeeID')
   return this.http.get<mydata>(MyApprovalCIPURL,{params}).pipe(catchError(this.handleError));

@@ -193,11 +193,11 @@ export class MyapprovalcipPage implements OnInit {
   saveApprovals(status:string, cabrequestid:string, approver:string,remarks:string)
   {
      this.presentLoading();
-        this.approvalservice.saveMyApproval(cabrequestid, remarks,status,approver).subscribe(res => { 
+        this.approvalservice.saveMyApprovalCIP(cabrequestid, remarks,status,approver).subscribe(res => { 
             console.log("results are : " + JSON.stringify(res.results))
             this.loading.dismiss();
             this.presentAlert(res.results);  
-             window.location.reload();
+            window.location.reload();
         }, err => {            
             console.log(err);
             this.loading.dismiss();

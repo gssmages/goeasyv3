@@ -39,18 +39,22 @@
       <ion-item>
         <ion-label position="stacked">Timing <span style="color:red">*</span></ion-label>
         <ion-select placeholder="Select One" [(ngModel)]="shifttime" (ionChange)="getshifttime($event.target.value)">
-            <ion-select-option [value]="item.TimeID" *ngFor="let item of shifttimelist">{{item.railwayTimeStart}} - {{item.railwayTimeEnd}}</ion-select-option>
+            <ion-select-option [value]="item.TimeID" *ngFor="let item of shifttimelist">
+                <span *ngIf="(requestforname == 'Pickup and Drop') || (requestforname == 'Pickup') || (requestforname == '')">{{item.railwayTimeStart}}</span>
+                <span *ngIf="(requestforname == 'Pickup and Drop')||  (requestforname == '')"> - </span>
+                <span *ngIf="(requestforname == 'Pickup and Drop') || (requestforname == 'Drop') ||  (requestforname == '')">{{item.railwayTimeEnd}}</span> 
+            </ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Area <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="area" (ionChange)="changeArea($event)">
-            <ion-select-option [value]="item.RelAreaID" *ngFor="let item of areadetailslist">{{item.AreaName}}</ion-select-option>
+        <ion-select placeholder="Select One" [(ngModel)]="area_relarea" (ionChange)="changeArea($event)">
+            <ion-select-option [value]="item.AreaID+'_'+item.RelAreaID" *ngFor="let item of areadetailslist">{{item.AreaName}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Boarding / Drop Point <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="boardingpoint" (ionChange)="getboardingname($event)">
+        <ion-select placeholder="Select One" [(ngModel)]="boardingpoint" (ionChange)="getboardingname($event)" (click)="validatearea()">
             <ion-select-option [value]="item.BoardingPoint" *ngFor="let item of boardinglisttemp">{{item.BoardingPointName}}</ion-select-option>
         </ion-select>
       </ion-item>
