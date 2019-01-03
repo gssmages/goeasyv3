@@ -24,7 +24,10 @@ export class MytripsPage implements OnInit {
   maxDate=this.maxdate.setMonth(this.maxdate.getMonth()+2);
   dbdate='';
   maxformatDate='';
-
+  nocancelrecord:boolean=false;
+  showallcancel:boolean=false;
+  norecordmytrip:boolean=false;
+  showallmytrip:boolean=false;
   
   locationID:string=localStorage.getItem("LocationID");
   employeeID:string=localStorage.getItem("EmployeeID");
@@ -59,6 +62,26 @@ export class MytripsPage implements OnInit {
       this.mytrips=res.results.CancelTransportDetails;
       this.cancelledtrips=res.results.CancelMyTripDetails;
       this.requestfor=res.results.RequestForDetails;
+      if(this.mytrips==null)
+      {
+        this.norecordmytrip=true;
+        this.showallmytrip=false;
+      }
+      else
+      {
+        this.norecordmytrip=false;
+        this.showallmytrip=true;
+      }
+      if(this.cancelledtrips==null)
+      {
+        this.nocancelrecord=true;
+        this.showallcancel=false;
+      }
+      else
+      {
+        this.nocancelrecord=false;
+        this.showallcancel=true;
+      }
     }, err => {            
       console.log(err);
       this.loading.dismiss();

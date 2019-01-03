@@ -49,7 +49,13 @@
           </ion-col>        
         </ion-row>        
     </ion-card>--> 
-    <ion-card *ngFor="let item of mytrips; let i = index">
+    <ion-card *ngIf="norecordmytrip">
+        <ion-row style="padding:5px; margin: 5px;">
+            <ion-col>No Records to display</ion-col>
+    </ion-row>        
+      </ion-card>
+      <div *ngIf="showallmytrip">
+    <ion-card *ngFor="let item of mytrips; let i = index" >
       <ion-row>
         <ion-col size="2" text-center style="color:#fff; background:#6A478D;" >
           <ion-icon name="car" style="font-size:40px; "></ion-icon>
@@ -64,9 +70,16 @@
         </ion-col>        
       </ion-row>        
   </ion-card>
+</div>
     </div>
     <div *ngSwitchCase="'Cancelledtrips'">
-        <ion-card *ngFor="let item of cancelledtrips; let i = index">
+        <ion-card *ngIf="nocancelrecord">
+            <ion-row style="padding:5px; margin: 5px;">
+                <ion-col>No Records to display</ion-col>
+        </ion-row>        
+        </ion-card>
+        <div *ngIf="showallcancel">
+        <ion-card *ngFor="let item of cancelledtrips; let i = index" >
             <ion-row>
               <ion-col size="2" text-center style="color:#fff; background:#6A478D;" >
                 <ion-icon name="car" style="font-size:40px; "></ion-icon>
@@ -78,6 +91,7 @@
               </ion-col>                  
             </ion-row>        
         </ion-card>
+      </div>
    <!--  <ion-card>
         <ion-row>
           <ion-col size="3" text-center style="color:#fff; background:#6A478D;" >
