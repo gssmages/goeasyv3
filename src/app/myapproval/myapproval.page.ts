@@ -80,7 +80,9 @@ export class MyapprovalPage implements OnInit {
     } 
     submitrequest(approvetype:string) {
       this.selectedrequest=[];
-      if(this.selectthis.length!=0)
+      console.log(this.selectthis);
+      console.log(this.selectedrequest);
+      if(this.myapprovallist.length!=0)
       {      
         for (let i = 0; i < this.myapprovallist.length; i++) {
           if(this.selectthis[i]==true)
@@ -89,23 +91,31 @@ export class MyapprovalPage implements OnInit {
               console.log(this.selectthis[i]);
             }        
         }
-        if(approvetype=="approve")
-        {
-          console.log(approvetype);
-          console.log(this.selectedrequest);
-          this.showPrompt("approve");
-        }
-        else
-        {
-          console.log(approvetype);
-          console.log(this.selectedrequest);
-          this.showPrompt("reject");
-        }       
+        if(this.selectedrequest.length!=0)
+        {       
+            if(approvetype=="approve")
+            {
+              console.log(approvetype);
+              console.log(this.selectedrequest);
+              this.showPrompt("approve");
+            }
+            else
+            {
+              console.log(approvetype);
+              console.log(this.selectedrequest);
+              this.showPrompt("reject");
+            }   
+       }  
+       else
+       {
+         console.log("please select the request to Approve/Reject");
+         this.presentAlert("Please select the request to Approve/Reject");   
+       }  
       }
       else
       {
-        console.log("please select the request to Approve/Reject");
-        this.presentAlert("Please select the request to Approve/Reject");   
+        console.log("No request to select");
+        this.presentAlert("No request to select");   
       }
       //console.log(this.selectedrequest);
       }  

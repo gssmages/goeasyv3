@@ -11,11 +11,16 @@ const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'text/xml'}).set('Accept', 'text/xml')
 };
 
-const apiUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/GetDashboardDetails/?";
+//const apiUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/GetDashboardDetails/?";
 /*"assets/myjson.json"; todaysdate=11-23-2018&location=Chennai&employeeID=941364
 "https://jsonplaceholder.typicode.com/todos/1";*/
 
+const SITserver="http://gssnte811.asia.ad.flextronics.com:4042/";
+const testserver="https://testmobile.flextronics.com/goeasyapi";
+
+/****   Goeasy SIT Server ***********
 const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?";
+const DashboardUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/GetDashboardDetails/?";
 const MytripsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/GetMyTripsDetails?";
 const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/SaveCancelRequests?";
 const MyApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CabApprovalApi/ReadPendingRequests/?";
@@ -25,7 +30,21 @@ const SaveAdhocRequestURL="http://gssnte811.asia.ad.flextronics.com:4042/api/Adh
 const FeedbackURL="http://gssnte811.asia.ad.flextronics.com:4042/api/FeedbackApi/GetMobileQuestions?";
 const SaveFeedbackURL="http://gssnte811.asia.ad.flextronics.com:4042/api/FeedbackApi/SaveMobileFeedback?";
 const MyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
-const SaveMyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/SaveApproveRejectData/?";
+const SaveMyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/SaveApproveRejectData/?";*/
+
+/****   Goeasy Testing Server --f5 enabled URL https://testmobile.flextronics.com/goeasyapi/   *****/
+const LoginURL=testserver+"/api/login/CheckLoginDetailEncryption?";
+const DashboardUrl = testserver+"/api/DashBoardApi/GetDashboardDetails/?";
+const MytripsURL=testserver+"/api/MyTripsApi/GetMyTripsDetails?";
+const SaveNoShowURL=testserver+"/api/CancelTransportRequestApi/SaveCancelRequests?";
+const MyApprovalURL=testserver+"/api/CabApprovalApi/ReadPendingRequests/?";
+const SaveMyApprovalURL=testserver+"/api/cabapprovalapi/ApprovePendingRequests?";
+const AdhocRequestURL=testserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
+const SaveAdhocRequestURL=testserver+"/api/AdhocCabRequestApi/SaveCabOperationDetails?";
+const FeedbackURL=testserver+"/api/FeedbackApi/GetMobileQuestions?";
+const SaveFeedbackURL=testserver+"/api/FeedbackApi/SaveMobileFeedback?";
+const MyApprovalCIPURL=testserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
+const SaveMyApprovalCIPURL=testserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";
 
 interface mydata
     {
@@ -75,7 +94,7 @@ return this.http.get<mydata>(LoginURL,{params}).pipe(catchError(this.handleError
       .set('todaysdate', this.dbdate)
       .set('employeeID',localStorage.getItem('EmployeeID'))
       .set('location', localStorage.getItem('LocationName'));//localStorage.getItem('EmployeeID') '930730'
-return this.http.get<mydata>(apiUrl,{params}).pipe(catchError(this.handleError));
+return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleError));
   }
   getMyTripsData(): Observable<any>{
     let params = new HttpParams()
