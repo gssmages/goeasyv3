@@ -8,7 +8,6 @@ import { forkJoin } from 'rxjs';
 import { RestApiService } from '../rest-api.service';
 import { AlertController } from '@ionic/angular';
 import { Globals } from '../global';
-
 export interface Dropdetails
     {
         RequestTypeName: string;
@@ -65,12 +64,11 @@ export class HomePage{
      private http: HttpClient,
      public alertController: AlertController,
      public globals: Globals
-    ) { }
+     ) { }
 
     ngOnInit(){     
       
         this.presentLoading();
-
         this.homeservice.getDashboardData().subscribe(res => {
             console.log(res);
             this.loading.dismiss();
@@ -103,6 +101,7 @@ export class HomePage{
         //this.presentAlert();
 
         });
+      
     }
     async presentAlert() {
     const alert = await this.alertController.create({

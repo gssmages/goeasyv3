@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
+import { Events } from '@ionic/angular';
 
 @Component({
     selector: 'app-login',
@@ -18,10 +19,15 @@ export class LoginPage implements OnInit {
     sss_password:string="";
     uservalid:any;
     private loading: any;
+
+    public appPages : Array<any> = []; 
+
+
     constructor( private loginservice :RestApiService,
         private router: Router,
         public alertController: AlertController,
-        public loadingController: LoadingController
+        public loadingController: LoadingController,
+        public events: Events
         ){      
     }
     ngOnInit(){ 
@@ -46,9 +52,12 @@ export class LoginPage implements OnInit {
             this.presentAlert("Please enter username and password");
         }    
     }
+    
 
     loginuser(user:string, pass:string)
     {
+     
+       
         this.presentLoading();
         console.log(user+"----from SSO----"+pass)
         this.loginservice.getLoginData(user, pass).subscribe(res => { 
@@ -64,11 +73,58 @@ export class LoginPage implements OnInit {
                 localStorage.setItem('LocationID', res.results.LocationID);
                 localStorage.setItem('LocationName',res.results.LocationName);
                 this.router.navigate(['/home']);
+
+
+                /*******menu update ************************** */
+                if(localStorage.getItem('LocationName') =="Chennai" || localStorage.getItem('LocationName')=="Pune"){
+                    this.appPages=[
+                      {
+                        title: 'Home',
+                        url: '/home',
+                        icon: 'home'
+                      },
+                      {
+                        title: 'Adhoc Request',
+                        url: '/Adhocrequest',
+                        icon: 'time'
+                      },
+                        {
+                        title: 'My Trips',
+                        url: '/Mytrips',
+                        icon: 'pin'
+                      },
+                        {
+                        title: 'My Approvals',
+                        url: '/Myapprvaldashboard',
+                        icon: 'checkbox-outline'
+                      },
+                      {
+                        title: 'Feedback',
+                        url: '/feedback',
+                        icon: 'chatbubbles'
+                      }
+                    ];
+                  }
+                  else{
+                    this.appPages=[
+                  {
+                    title: 'Home',
+                    url: '/home',
+                    icon: 'home'
+                  },    
+                    {
+                    title: 'My Approvals',
+                    url: '/Myapprvaldashboard',
+                    icon: 'checkbox-outline'
+                  }
+                ];
+              }
+              this.events.publish('user:login', this.appPages);
             }
             else
             {
                 this.loading.dismiss();
-                this.presentAlert("Invalid Username/Password");
+                this.presentAlert(res.results);
                 this.router.navigate(['/Login']);
             }
             
