@@ -54,6 +54,7 @@ export class HomePage{
     employeedetails:any;
     pickupshow: boolean = false;
     dropshow: boolean = false;
+    showfooter:boolean=false;
    data1: Observable<any>;
    private loading: any;
     constructor(
@@ -101,6 +102,14 @@ export class HomePage{
         //this.presentAlert();
 
         });
+
+        if(localStorage.getItem('LocationName') =="Chennai" || localStorage.getItem('LocationName')=="Pune"){
+            this.showfooter=true;
+        }
+        else
+        {
+            this.showfooter=false;
+        }
       
     }
     async presentAlert() {

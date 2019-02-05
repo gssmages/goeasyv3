@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { Globals } from './global';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
@@ -23,7 +24,8 @@ import { Globals } from './global';
         StatusBar,
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        Globals
+        Globals,
+        AppVersion        
     ],
     bootstrap: [AppComponent]
 })

@@ -4,7 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
 import { Events } from '@ionic/angular';
-
+import { AppVersion } from '@ionic-native/app-version/ngx';
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
     sss_password:string="";
     uservalid:any;
     private loading: any;
-
+    protected app_version: any;
     public appPages : Array<any> = []; 
 
 
@@ -27,8 +27,14 @@ export class LoginPage implements OnInit {
         private router: Router,
         public alertController: AlertController,
         public loadingController: LoadingController,
-        public events: Events
+        public events: Events,
+        private appVersion: AppVersion
         ){      
+          this.appVersion.getVersionNumber().then(value => {
+            this.app_version = value;      
+          }).catch(err => {
+            console.log(err)
+          });
     }
     ngOnInit(){ 
         this.reset(); 

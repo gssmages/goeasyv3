@@ -6,11 +6,14 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Globals } from './global';
 import { Events } from '@ionic/angular';
 import 'hammerjs';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
+
+  protected app_version: any;
 
 public appPages : Array<any> = []; 
   constructor(
@@ -18,10 +21,16 @@ public appPages : Array<any> = [];
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public globals: Globals,
-    public events: Events
+    public events: Events,
+    private appVersion: AppVersion
   ) {
     this.initializeApp();
-
+  
+    this.appVersion.getVersionNumber().then(value => {
+      this.app_version = value;      
+    }).catch(err => {
+      console.log(err)
+    });
     this.events.subscribe('user:login', (user) => { this.appPages = user; });
     if(localStorage.getItem('LocationName') =="Chennai" || localStorage.getItem('LocationName')=="Pune"){
       this.appPages=[
@@ -73,6 +82,7 @@ public appPages : Array<any> = [];
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+    
     });
   }
 
