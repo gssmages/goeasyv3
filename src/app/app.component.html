@@ -1,21 +1,23 @@
 <ion-app>
     <ion-split-pane>
         <ion-menu>
-            <ion-header style="height: 70px;">
-                <ion-toolbar color="primary"  style="height: 70px;">
-                    <ion-title style="padding: 0; text-align: left; height: 70px;position: relative;">
-                        <ion-row>
-                            <ion-col size="2" > 
-                                <ion-icon name="contact" style="font-size: 32px;"></ion-icon>
-                            </ion-col>
-                            <ion-col size="10" > {{globals.displayname}}
-                                <div style="font-size: 10px;">{{globals.businesstitle}}</div>
-                            </ion-col>
-                        </ion-row>
+            <ion-header >
+                <ion-toolbar color="primary"  >
+                    <ion-title>
+                        Menu
                     </ion-title>
                 </ion-toolbar>
             </ion-header>
             <ion-content>
+                    <ion-row  color="primary">
+                            <ion-col size="2"  style="background-color:#6A478D; color:#fff;" >
+                                <ion-icon name="contact" style="font-size: 32px;"></ion-icon>
+                            </ion-col>
+                            <ion-col size="10" style="background-color:#6A478D; color:#fff;"> 
+                                {{globals.displayname}}
+                                <div style="font-size: 10px;">{{globals.businesstitle}}</div>
+                            </ion-col>
+                        </ion-row>
                 <ion-list>
                     <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
                         <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" >
@@ -40,7 +42,7 @@
                     <ion-grid style="padding: 0;">
                         <ion-row style="padding: 0;">
                             <ion-col   style="padding: 0;" text-center>
-                                Ver - {{ app_version }}
+                                Ver - 1.0.0
                             </ion-col>
                         </ion-row>
                     </ion-grid>
