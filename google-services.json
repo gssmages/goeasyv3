@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "402413307533",
+    "firebase_url": "https://goeasyflex.firebaseio.com",
+    "project_id": "goeasyflex",
+    "storage_bucket": "goeasyflex.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402413307533:android:d02765677c439d94",
+        "android_client_info": {
+          "package_name": "com.flex.goeasy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "402413307533-q8hns57j6uhb0m9vnq5k8kicmk2nmrji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDku2m0DGNolLGaC4u8iefax-knaSaOa3c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

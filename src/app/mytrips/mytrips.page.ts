@@ -42,7 +42,7 @@ export class MytripsPage implements OnInit {
   RequestedForName:any;
   ShiftTimeName:any;
   UserTime:string=formatDate(this.today, 'MM-dd-yyyy HH:mm:ss', 'en-US', '+0530');
-
+  tripdetails:any;
   constructor( 
     private mytripservice :RestApiService,
     public loadingController: LoadingController,

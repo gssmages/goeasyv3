@@ -25,7 +25,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         Globals,
-        AppVersion        
+        AppVersion    
     ],
     bootstrap: [AppComponent]
 })

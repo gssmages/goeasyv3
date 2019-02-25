@@ -57,6 +57,7 @@ export class HomePage{
     showfooter:boolean=false;
    data1: Observable<any>;
    private loading: any;
+   dailyroute:any;
     constructor(
     private homeservice :RestApiService,
      public loadingController: LoadingController,

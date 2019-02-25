@@ -77,8 +77,8 @@ public appPages : Array<any> = [];
 }
 
   }
-
-  initializeApp() {
+  
+   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
