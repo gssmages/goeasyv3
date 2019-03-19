@@ -188,13 +188,15 @@ export class MytripsPage implements OnInit {
             name: 'fromdate',
             type: 'date',
             min: this.dbdate,
-            max: this.maxformatDate
+            max: this.maxformatDate,
+            value:this.dbdate
           },
           {
             name: 'todate',
             type: 'date',
             min: this.dbdate,
-            max: this.maxformatDate
+            max: this.maxformatDate,
+            value:this.dbdate
           }
         ],
         buttons: [
