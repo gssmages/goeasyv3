@@ -18,6 +18,7 @@ const httpOptions = {
 const SITserver="http://gssnte811.asia.ad.flextronics.com:4042/";
 const testserver="https://testmobile.flextronics.com/goeasyapi";
 const prodserver="http://sacnt2315.americas.ad.flextronics.com/goeasyapi";
+const CIPProdserver="http://hkdnt955.asia.ad.flextronics.com:94";
 
 /****   Goeasy SIT Server ***********
 const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?";
@@ -44,8 +45,8 @@ const AdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestVal
 const SaveAdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/SaveCabOperationDetails?";
 const FeedbackURL=prodserver+"/api/FeedbackApi/GetMobileQuestions?";
 const SaveFeedbackURL=prodserver+"/api/FeedbackApi/SaveMobileFeedback?";
-const MyApprovalCIPURL=prodserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
-const SaveMyApprovalCIPURL=prodserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";
+const MyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
+const SaveMyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";
 
 interface mydata
     {
