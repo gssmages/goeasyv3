@@ -17,7 +17,7 @@ const httpOptions = {
 
 const SITserver="http://gssnte811.asia.ad.flextronics.com:4042/";
 const testserver="https://testmobile.flextronics.com/goeasyapi";
-const prodserver="http://sacnt2315.americas.ad.flextronics.com/goeasyapi/";
+const prodserver="http://sacnt2315.americas.ad.flextronics.com/goeasyapi";
 
 /****   Goeasy SIT Server ***********
 const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?";
@@ -34,18 +34,18 @@ const MyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/Specia
 const SaveMyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/SaveApproveRejectData/?";*/
 
 /****   Goeasy Testing Server --f5 enabled URL https://testmobile.flextronics.com/goeasyapi/   *****/
-const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
-const DashboardUrl = prodserver+"/api/DashBoardApi/GetDashboardDetails/?";
-const MytripsURL=prodserver+"/api/MyTripsApi/GetMyTripsDetails?";
-const SaveNoShowURL=prodserver+"/api/CancelTransportRequestApi/SaveCancelRequests?";
-const MyApprovalURL=prodserver+"/api/CabApprovalApi/ReadPendingRequests/?";
-const SaveMyApprovalURL=prodserver+"/api/cabapprovalapi/ApprovePendingRequests?";
-const AdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
-const SaveAdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/SaveCabOperationDetails?";
-const FeedbackURL=prodserver+"/api/FeedbackApi/GetMobileQuestions?";
-const SaveFeedbackURL=prodserver+"/api/FeedbackApi/SaveMobileFeedback?";
-const MyApprovalCIPURL=prodserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
-const SaveMyApprovalCIPURL=prodserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";
+const LoginURL=testserver+"/api/login/CheckLoginDetailEncryption?";
+const DashboardUrl = testserver+"/api/DashBoardApi/GetDashboardDetails/?";
+const MytripsURL=testserver+"/api/MyTripsApi/GetMyTripsDetails?";
+const SaveNoShowURL=testserver+"/api/CancelTransportRequestApi/SaveCancelRequests?";
+const MyApprovalURL=testserver+"/api/CabApprovalApi/ReadPendingRequests/?";
+const SaveMyApprovalURL=testserver+"/api/cabapprovalapi/ApprovePendingRequests?";
+const AdhocRequestURL=testserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
+const SaveAdhocRequestURL=testserver+"/api/AdhocCabRequestApi/SaveCabOperationDetails?";
+const FeedbackURL=testserver+"/api/FeedbackApi/GetMobileQuestions?";
+const SaveFeedbackURL=testserver+"/api/FeedbackApi/SaveMobileFeedback?";
+const MyApprovalCIPURL=testserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
+const SaveMyApprovalCIPURL=testserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";
 
 interface mydata
     {
