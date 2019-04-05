@@ -5,6 +5,7 @@ import { LoadingController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
 import { Events } from '@ionic/angular';
 import { AppVersion } from '@ionic-native/app-version/ngx';
+import { MenuController } from '@ionic/angular';
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
@@ -28,7 +29,8 @@ export class LoginPage implements OnInit {
         public alertController: AlertController,
         public loadingController: LoadingController,
         public events: Events,
-        private appVersion: AppVersion
+        private appVersion: AppVersion,
+        public menu: MenuController
         ){      
           this.appVersion.getVersionNumber().then(value => {
             this.app_version = value;      
@@ -46,6 +48,14 @@ export class LoginPage implements OnInit {
             this.sss_password=localStorage.getItem('emppassword')
             this.loginuser(this.sso_username,this.sss_password);
         }
+        
+    }
+    ionViewWillEnter() {
+      this.menu.enable(false);
+     }
+     ionViewDidLeave() {
+      // enable the root left menu when leaving the tutorial page
+      this.menu.enable(true);
     }
     pushPage(){        
         console.log(this.username +"--------"+this.password)
