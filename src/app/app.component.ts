@@ -8,6 +8,8 @@ import { Events } from '@ionic/angular';
 import 'hammerjs';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { CodePush, InstallMode, SyncStatus } from '@ionic-native/code-push/ngx';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -24,7 +26,8 @@ public appPages : Array<any> = [];
     public globals: Globals,
     public events: Events,
     private appVersion: AppVersion,
-    private codePush: CodePush
+    private codePush: CodePush,
+    private ga: GoogleAnalytics
   ) {
     this.initializeApp();
   
@@ -85,6 +88,8 @@ public appPages : Array<any> = [];
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.checkCodePush(); //Use the plugin always after platform.ready()
+      this.ga.startTrackerWithId('UA-63736036-2')
+      .then(() => {}).catch(e => alert('Error starting GoogleAnalytics == '+ e));
     });
   }
   checkCodePush() {

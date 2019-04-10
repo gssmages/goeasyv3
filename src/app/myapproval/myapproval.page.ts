@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { empty } from 'rxjs';
 import { Router } from '@angular/router';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-myapproval',
@@ -24,9 +25,12 @@ export class MyapprovalPage implements OnInit {
     private approvalservice :RestApiService,
     public loadingController: LoadingController,
     public alertController: AlertController,
-    private router: Router) { }
+    private router: Router,
+    private ga: GoogleAnalytics) { }
 
   ngOnInit() {
+    this.ga.trackView('My Approvals Page').then(() => {}).catch(e => console.log(e));
+
     this.presentLoading();
     this.approvalservice.getMyApprovalData().subscribe(res => {
       this.loading.dismiss();

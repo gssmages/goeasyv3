@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-adhocrequest',
@@ -50,11 +51,14 @@ export class AdhocrequestPage implements OnInit {
     private adhocservice :RestApiService,
     private router: Router,
     public alertController: AlertController,
-    public loadingController: LoadingController) { 
+    public loadingController: LoadingController,
+    private ga: GoogleAnalytics) { 
     
   }
   
   ngOnInit() {
+    this.ga.trackView('Adhoc Request Page').then(() => {}).catch(e => console.log(e));
+
     this.usertime = formatDate(this.today, 'MM-dd-yyyy HH:mm:ss', 'en-US', '+0530');
     this.dbdate = formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
     this.maxformatDate =formatDate(this.maxDate, 'yyyy-MM-dd', 'en-US', '+0530');

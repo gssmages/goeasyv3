@@ -8,6 +8,7 @@ import { forkJoin } from 'rxjs';
 import { RestApiService } from '../rest-api.service';
 import { AlertController } from '@ionic/angular';
 import { Globals } from '../global';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 export interface Dropdetails
     {
         RequestTypeName: string;
@@ -65,11 +66,12 @@ export class HomePage{
      public router: Router,
      private http: HttpClient,
      public alertController: AlertController,
-     public globals: Globals
+     public globals: Globals,
+     private ga: GoogleAnalytics
      ) { }
 
     ngOnInit(){     
-      
+      this.ga.trackView('Home Page').then(() => {}).catch(e => console.log(e));
         this.presentLoading();
         this.homeservice.getDashboardData().subscribe(res => {
             console.log(res);
@@ -79,6 +81,8 @@ export class HomePage{
             this.employeedetails=res.results.EmployeeDetails;
             this.globals.displayname=this.employeedetails.DisplayName;
             localStorage.setItem("displayname",this.employeedetails.DisplayName);
+            this.ga.setUserId(localStorage.getItem('displayname'))
+            console.log(localStorage.getItem('displayname'))
             this.globals.businesstitle=this.employeedetails.BusinessTitle;
             
             if(this.pickupdetails==null)

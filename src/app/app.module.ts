@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { Globals } from './global';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { CodePush } from '@ionic-native/code-push/ngx';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
@@ -26,8 +28,9 @@ import { CodePush } from '@ionic-native/code-push/ngx';
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         Globals,
-        AppVersion ,      
-        CodePush
+        AppVersion,      
+        CodePush,
+        GoogleAnalytics
     ],
     bootstrap: [AppComponent]
 })

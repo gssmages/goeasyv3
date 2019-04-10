@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-myapprvaldashboard',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyapprvaldashboardPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private ga: GoogleAnalytics
+  ) { }
 
   ngOnInit() {
+    this.ga.trackView('My Approval Dashboard Page').then(() => {}).catch(e => console.log(e));
   }
 
 }

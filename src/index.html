@@ -15,7 +15,27 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <!-- Google Tag Manager ->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5XDQ8MQ');</script>
+  -- End Google Tag Manager -->
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-63736036-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push({'userId' : localStorage.getItem("displayname")});}
+    gtag('js', new Date());
 
+    gtag('config', 'UA-63736036-2', {
+  'user_id': localStorage.getItem("displayname")
+});
+    //ga('set', 'userId', localStorage.getItem("displayname"));
+    gtag('set', {'user_id': localStorage.getItem("displayname")}); // Set the user ID using signed-in user_id.
+    console.log(localStorage.getItem("displayname"))
+  </script>
 </head>
 <body>
   <app-root></app-root>

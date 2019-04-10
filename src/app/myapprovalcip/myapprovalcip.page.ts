@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RestApiService } from '../rest-api.service';
 import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-myapprovalcip',
@@ -21,10 +22,13 @@ export class MyapprovalcipPage implements OnInit {
   constructor(
     private approvalservice :RestApiService,
     public loadingController: LoadingController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private ga: GoogleAnalytics
   ) { }
 
   ngOnInit() {
+    this.ga.trackView('My Approvals CIP Page').then(() => {}).catch(e => console.log(e));
+
     this.presentLoading();
     this.approvalservice.getMyApprovalCIPData().subscribe(res => {
       this.loading.dismiss();

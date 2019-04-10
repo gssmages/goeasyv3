@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, throwError } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import {formatDate } from '@angular/common';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-mytrips',
@@ -48,9 +49,12 @@ export class MytripsPage implements OnInit {
     public loadingController: LoadingController,
     public route: ActivatedRoute,
     public router: Router,
-    public alertController: AlertController) { }
+    public alertController: AlertController,
+    private ga: GoogleAnalytics) { }
 
   ngOnInit() {
+    this.ga.trackView('My Trips Page').then(() => {}).catch(e => console.log(e));
+
     this.dbdate = formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
     this.maxformatDate =formatDate(this.maxDate, 'yyyy-MM-dd', 'en-US', '+0530');
 

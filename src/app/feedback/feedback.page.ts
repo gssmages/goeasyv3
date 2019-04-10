@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
 import {formatDate } from '@angular/common';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 
 @Component({
   selector: 'app-feedback',
@@ -28,10 +29,12 @@ export class FeedbackPage implements OnInit {
   constructor(
     private feedbackservice :RestApiService,
     public loadingController: LoadingController,
-    public alertController: AlertController) { }
+    public alertController: AlertController,
+    private ga: GoogleAnalytics) { }
 
   ngOnInit() {
-    
+    this.ga.trackView('Feedback Page').then(() => {}).catch(e => console.log(e));
+
     this.dbdate = formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
     this.minformatDate =formatDate(this.minDate, 'yyyy-MM-dd', 'en-US', '+0530');
 

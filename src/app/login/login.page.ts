@@ -6,6 +6,7 @@ import { RestApiService } from '../rest-api.service';
 import { Events } from '@ionic/angular';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { MenuController } from '@ionic/angular';
+import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
@@ -30,7 +31,8 @@ export class LoginPage implements OnInit {
         public loadingController: LoadingController,
         public events: Events,
         private appVersion: AppVersion,
-        public menu: MenuController
+        public menu: MenuController,
+        private ga: GoogleAnalytics
         ){      
           this.appVersion.getVersionNumber().then(value => {
             this.app_version = value;      
@@ -39,6 +41,8 @@ export class LoginPage implements OnInit {
           });
     }
     ngOnInit(){ 
+        this.ga.trackView('Login Page').then(() => {}).catch(e => console.log(e));
+    
         this.reset(); 
        
         if(localStorage.getItem('empusername')!=null)
