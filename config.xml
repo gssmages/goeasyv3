@@ -21,7 +21,7 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="orientation" value="portrait" />
     <platform name="android">
-        <preference name="CodePushDeploymentKey" value="o7GVNA7bfVPHoG0kabELEDPNFbwb14128d38-686a-46f0-9316-1b729c7c3c68" />
+        <preference name="CodePushDeploymentKey" value="eAyy6mo9XBTJm97bzL4N4vWvLPv014128d38-686a-46f0-9316-1b729c7c3c68" />
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -43,7 +43,7 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
-        <preference name="CodePushDeploymentKey" value="cUP_D3dQT-FTE9DWqhI0a1W1kqzh14128d38-686a-46f0-9316-1b729c7c3c68" />
+        <preference name="CodePushDeploymentKey" value="viWm3B7zlHobn84ZyA7PjSdM0HFF14128d38-686a-46f0-9316-1b729c7c3c68" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
