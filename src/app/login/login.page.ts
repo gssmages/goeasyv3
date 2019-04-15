@@ -47,9 +47,9 @@ export class LoginPage implements OnInit {
        
         if(localStorage.getItem('empusername')!=null)
         {
-            console.log(localStorage.getItem('empusername')+"----from SSO----"+localStorage.getItem('emppassword'))   
+            console.log(localStorage.getItem('empusername')+"----from SSO----"+localStorage.getItem('empsecurecode'))   
             this.sso_username=localStorage.getItem('empusername')
-            this.sss_password=localStorage.getItem('emppassword')
+            this.sss_password=localStorage.getItem('empsecurecode')
             this.loginuser(this.sso_username,this.sss_password);
         }
         
@@ -88,7 +88,7 @@ export class LoginPage implements OnInit {
             {
                 this.loading.dismiss();
                 localStorage.setItem('empusername', user);
-                localStorage.setItem('emppassword', pass);
+                localStorage.setItem('empsecurecode', pass);
                 localStorage.setItem('EmployeeID', res.results.EmployeeID);
                 localStorage.setItem('LocationID', res.results.LocationID);
                 localStorage.setItem('LocationName',res.results.LocationName);
