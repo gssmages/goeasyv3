@@ -88,7 +88,7 @@ public appPages : Array<any> = [];
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.checkCodePush(); //Use the plugin always after platform.ready()
-      this.ga.startTrackerWithId('UA-63736036-2')
+      this.ga.startTrackerWithId('UA-51333248-11') //UA-51333248-11 is bala google id //UA-63736036-2 is magesh google id 
       .then(() => {}).catch(e => alert('Error starting GoogleAnalytics == '+ e));
     });
   }
