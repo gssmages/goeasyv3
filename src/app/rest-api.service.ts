@@ -19,7 +19,9 @@ const SITserver="http://gssnte811.asia.ad.flextronics.com:4042/";
 const testserver="https://testmobile.flextronics.com/goeasyapi";
 //const prodserver="http://sacnt2315.americas.ad.flextronics.com/goeasyapi";
 const prodserver="https://mobileservice.flex.com/goeasyapi";
-const CIPProdserver="http://hkdnt955.asia.ad.flextronics.com:94";
+//const CIPProdserver="http://hkdnt955.asia.ad.flextronics.com:94"; 
+const CIPProdserver="https://mobileservice.flex.com/goeasyapi_cip";
+
 
 /****   Goeasy SIT Server ***********
 const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?";

@@ -21,87 +21,116 @@
     <div [ngSwitch]="dailyroute" >
         <div *ngSwitchCase="'Pickup'">
             <ion-grid *ngIf="pickupshow; else pickupnorecord">
+                <ion-card>
                 <ion-row>
-                    <ion-col size="4" style="background: #eee;">
-                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #eee;">
+                        <div  text-center style="font-weight: bold; font-size: 10px;  line-height: 20px;"  >
                             Request Type
-                        </div>
-                        <div text-center style="font-size: 15px;">
-                            {{pickupdetails?.RequestTypeName}} 
-                        </div>
+                        </div>                      
                     </ion-col>
-                    <ion-col size="4" style="background: #ddd;">
-                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #eee;">                          
+                            <div  text-center style="font-size: 15px;">
+                                {{pickupdetails?.RequestTypeName}} 
+                            </div>
+                        </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="6" style="background: #ddd;">
+                         <div text-center style="font-weight: bold; font-size: 10px;  line-height: 20px;"  >
                            Area
-                        </div>
-                        <div text-center style="font-size: 15px;">
-                            {{pickupdetails?.Area}} 
-                        </div>
+                        </div>                      
                     </ion-col>
-                    <ion-col size="4" style="background: #eee;">
-                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #ddd;">                         
+                           <div text-center style="font-size: 15px;">
+                               {{pickupdetails?.Area}} 
+                           </div>
+                       </ion-col>
+                    </ion-row>
+                    <ion-row>
+                    <ion-col size="6" style="background: #eee;">
+                         <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                            Shift
-                        </div>
-                        <div text-center style="font-size: 15px;">
-                            {{pickupdetails?.Shift}} 
-                        </div>
+                        </div>                       
                     </ion-col>
-
-                </ion-row>
-                <ion-row>
-                    <ion-col size="4" style="background: #eee;">
-                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #eee;">                         
+                           <div text-center style="font-size: 15px;">
+                               {{pickupdetails?.Shift}} 
+                           </div>
+                       </ion-col>
+                    </ion-row>
+                    <ion-row>
+                    <ion-col size="6" style="background: #ddd;">
+                        <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                           Route
-                        </div>
-                         <div text-center style="font-size: 15px;">
-                            {{pickupdetails?.RouteNumber}} 
-                        </div>
+                        </div>                       
                     </ion-col>
-                    <ion-col size="4" style="background: #ddd;">
-                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #ddd;">                           
+                             <div text-center style="font-size: 15px;">
+                                {{pickupdetails?.RouteNumber}} 
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                    <ion-col size="6" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                           Boarding Time
-                        </div>
-                         <div text-center style="font-size: 15px;">
-                            {{pickupdetails?.BoardingTime}} 
-                        </div>
+                        </div>                       
                     </ion-col>
-                    <ion-col size="4" style="background: #eee;">
-                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #eee;">                           
+                             <div text-center style="font-size: 15px;">
+                                {{pickupdetails?.BoardingTime}} 
+                            </div>
+                        </ion-col>
+                      </ion-row>
+                    <ion-row>
+                    <ion-col size="6" style="background: #ddd;">
+                         <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                           Vehicle Model
-                        </div>
-                        <div text-center style="font-size: 15px;">
-                            {{pickupdetails?.VehicleTypeName}} 
-                        </div>
-                    </ion-col>
-
-                </ion-row>
-                <ion-row>
-                    <ion-col size="4" style="background: #eee;">
-                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                        </div>                       
+                    </ion-col> 
+                    <ion-col size="6" style="background: #ddd;">                           
+                           <div text-center style="font-size: 15px;">
+                               {{pickupdetails?.VehicleTypeName}} 
+                           </div>
+                       </ion-col>   
+                    </ion-row>
+                    <ion-row>               
+                    <ion-col size="6" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                           Vehicle No 
-                        </div>
-                        <div text-center style="font-size: 15px;">
-                            {{pickupdetails?.RegNumber}} 
-                        </div>
+                        </div>                        
                     </ion-col>
-                    <ion-col size="4" style="background: #ddd;">
-                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #eee;">                         
+                            <div text-center style="font-size: 15px;">
+                                {{pickupdetails?.RegNumber}} 
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row> 
+                    <ion-col size="6" style="background: #ddd;">
+                         <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                           Driver Name
-                        </div>
-                        <div text-center style="font-size: 15px;">
-                            {{pickupdetails?.DriverName}} 
-                        </div>
+                        </div>                        
                     </ion-col>
-                    <ion-col size="4" style="background: #eee;">
-                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #ddd;">                         
+                           <div text-center style="font-size: 15px;">
+                               {{pickupdetails?.DriverName}} 
+                           </div>
+                       </ion-col>
+                    </ion-row>
+                    <ion-row>   
+                    <ion-col size="6" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                            Driver Contact
-                        </div>
-                         <div text-center style="font-size: 15px;">
-                            {{pickupdetails?.DriverContact}} 
-                        </div>
+                        </div>                       
                     </ion-col>
-
+                    <ion-col size="6" style="background: #eee;">                         
+                             <div text-center style="font-size: 15px;">
+                                    <a href="tel:{{pickupdetails?.DriverContact}}"> {{pickupdetails?.DriverContact}} </a>
+                            </div>
+                        </ion-col>  
                 </ion-row>
+            </ion-card>
             </ion-grid>
             <ng-template  #pickupnorecord>
                 <ion-row style="background:#eee; padding:5px; border-radius:5px; margin: 5px;">
@@ -111,81 +140,111 @@
         </div>
         <div *ngSwitchCase="'Drop'">
               <ion-grid *ngIf="dropshow; else dropnorecord"> 
+                    <ion-card>
                 <ion-row>
-                    <ion-col size="4" style="background: #eee;">
-                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                            Request Type
-                        </div>
-                         <div text-center style="font-size: 15px;">{{ dropdetails?.RequestTypeName}}</div>
+                        </div>                        
                     </ion-col>
-                    <ion-col size="4" style="background: #ddd;">
-                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #eee;">                           
+                             <div text-center style="font-size: 15px;">{{ dropdetails?.RequestTypeName}}</div>
+                        </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="6" style="background: #ddd;">
+                        <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                            Area
                         </div>
-                         <div text-center style="font-size: 15px;">{{dropdetails?.Area}}</div>
+                         
                     </ion-col>
-                    <ion-col size="4" style="background: #eee;">
-                        <div text-center style="font-weight: bold; font-size: 10px;"  >
-                           Shift
-                        </div>
-                        <div text-center style="font-size: 15px;">{{dropdetails?.Shift}}</div>
-                    </ion-col>
-
+                    <ion-col size="6" style="background: #ddd;">                           
+                             <div text-center style="font-size: 15px;">{{dropdetails?.Area}}</div>
+                        </ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col size="4" style="background: #eee;">
-                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
+                           Shift
+                        </div>                        
+                    </ion-col>
+                    <ion-col size="6" style="background: #eee;">                           
+                            <div text-center style="font-size: 15px;">{{dropdetails?.Shift}}</div>
+                        </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="6" style="background: #ddd;">
+                         <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                           Route
-                        </div>
-                         <div text-center style="font-size: 15px;">
-                            {{dropdetails?.RouteNumber}}
-                        </div>
+                        </div>                        
                     </ion-col>
-                    <ion-col size="4" style="background: #ddd;">
-                         <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #ddd;">                          
+                            <div text-center style="font-size: 15px;">
+                               {{dropdetails?.RouteNumber}}
+                           </div>
+                       </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="6" style="background: #eee;">
+                         <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                            Drop Order
-                        </div>
-                        <div text-center style="font-size: 15px;">
-                            {{dropdetails?.DropOrder}}
-                        </div>
+                        </div>                      
                     </ion-col>
-                    <ion-col size="4" style="background: #eee;">
-                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #eee;">                          
+                           <div text-center style="font-size: 15px;">
+                               {{dropdetails?.DropOrder}}
+                           </div>
+                       </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="6" style="background: #ddd;">
+                        <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                           Vehicle Model
-                        </div>
-                        <div text-center style="font-size: 15px;">
-                            {{dropdetails?.VehicleTypeName}}
-                        </div>
+                        </div>                       
                     </ion-col>
-
+                    <ion-col size="6" style="background: #ddd;">                           
+                            <div text-center style="font-size: 15px;">
+                                {{dropdetails?.VehicleTypeName}}
+                            </div>
+                        </ion-col>
                 </ion-row>
                 <ion-row> 
-                    <ion-col size="4" style="background: #eee;">
-                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #eee;">
+                        <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                            Vehicle No
-                        </div>
-                         <div text-center style="font-size: 15px;">
-                            {{dropdetails?.RegNumber}}
-                        </div>
+                        </div>                        
                     </ion-col>
-                    <ion-col size="4" style="background: #ddd;">
-                        <div text-center style="font-weight: bold; font-size: 10px;"  >
+                    <ion-col size="6" style="background: #eee;">                          
+                             <div text-center style="font-size: 15px;">
+                                {{dropdetails?.RegNumber}}
+                            </div>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row> 
+                    <ion-col size="6" style="background: #ddd;">
+                        <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
                            Driver Name
-                        </div>
-                         <div text-center style="font-size: 15px;">
-                            {{dropdetails?.DriverName}}
-                        </div>
+                        </div>                       
                     </ion-col>
-                    <ion-col size="4" style="background: #eee;">
-                         <div text-center style="font-weight: bold; font-size: 10px;"  >
-                           Driver Contact
-                        </div>
-                         <div text-center style="font-size: 15px;">
-                            {{dropdetails?.DriverContact}}
-                        </div>
-                    </ion-col>
-
+                    <ion-col size="6" style="background: #ddd;">                           
+                             <div text-center style="font-size: 15px;">
+                                {{dropdetails?.DriverName}}
+                            </div>
+                        </ion-col>
                 </ion-row>
+                <ion-row> 
+                    <ion-col size="6" style="background: #eee;">
+                         <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
+                           Driver Contact
+                        </div>                       
+                    </ion-col>
+                    <ion-col size="6" style="background: #eee;">                          
+                            <div text-center style="font-size: 15px;">
+                                   <a href="tel:{{dropdetails?.DriverContact}}"> {{dropdetails?.DriverContact}}</a>
+                           </div>
+                       </ion-col>
+                </ion-row>
+                </ion-card>
             </ion-grid>
             <ng-template #dropnorecord>
                     <ion-row style="background:#eee; padding:5px;border-radius:5px; margin: 5px;">

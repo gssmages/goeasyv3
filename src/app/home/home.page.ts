@@ -119,7 +119,7 @@ export class HomePage{
     }
     async presentAlert() {
     const alert = await this.alertController.create({
-      header: 'Goeasy Alert',
+      header: 'GoEasy Alert',
       message: JSON.stringify(this.dropdetails),
       buttons: ['OK']
     });

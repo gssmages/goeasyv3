@@ -93,8 +93,7 @@ public appPages : Array<any> = [];
     });
   }
   checkCodePush() {
-    
-    this.codePush.sync({
+        this.codePush.sync({
     updateDialog: {
      appendReleaseDescription: true,
       descriptionPrefix: "\n\nChange log:\n"   

@@ -160,7 +160,7 @@ export class MytripsPage implements OnInit {
         }else{
 
           const confirm =  await this.alertController.create({
-            header: 'Goeasy Trip Cancellation',
+            header: 'GoEasy Trip Cancellation',
             message: 'Do you agree to cancel this trip on '+item.FromDateString,
             buttons: [
               {
@@ -253,7 +253,7 @@ export class MytripsPage implements OnInit {
   }
   async presentAlert(alertmessage:string) {
     const alert = await this.alertController.create({
-      header: 'Goeasy Alert',
+      header: 'GoEasy Alert',
       message: alertmessage,
       buttons: ['OK']
     });
