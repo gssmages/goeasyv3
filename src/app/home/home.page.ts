@@ -80,10 +80,18 @@ export class HomePage{
             this.dropdetails = res.results.DropRequestDetail;
             this.employeedetails=res.results.EmployeeDetails;
             this.globals.displayname=this.employeedetails.DisplayName;
-            localStorage.setItem("displayname",this.employeedetails.DisplayName);
-            this.ga.setUserId(localStorage.getItem('displayname'))
-            console.log(localStorage.getItem('displayname'))
             this.globals.businesstitle=this.employeedetails.BusinessTitle;
+            localStorage.setItem("displayname",this.employeedetails.DisplayName);
+            localStorage.setItem("EmployeeMailID",this.employeedetails.eMail);
+            localStorage.setItem("Postalcode",this.employeedetails.PostalCode);
+            localStorage.setItem("Grade",this.employeedetails.Grade);
+            localStorage.setItem("Regular",this.employeedetails.Regular);
+            localStorage.setItem("SupervisorID",this.employeedetails.SupervisorEmployeeID);
+            localStorage.setItem("SupervisorName",this.employeedetails.SupervisorDisplayName);
+            localStorage.setItem("SupervisorMailID",this.employeedetails.SupervisoreMail);
+            //for Google Analytics username need to be set 
+            this.ga.setUserId(localStorage.getItem('displayname'))
+            console.log(localStorage.getItem('displayname'))           
             
             if(this.pickupdetails==null)
             {

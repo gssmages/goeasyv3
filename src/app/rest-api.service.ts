@@ -23,33 +23,33 @@ const prodserver="https://mobileservice.flex.com/goeasyapi";
 const CIPProdserver="https://mobileservice.flex.com/goeasyapi_cip";
 
 
-/****   Goeasy SIT Server ***********
-const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?";
+/****   Goeasy SIT Server ***********/
+/* const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?";
 const DashboardUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/GetDashboardDetails/?";
 const MytripsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/GetMyTripsDetails?";
-const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/SaveCancelRequests?";
+const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/SaveCancelRequests?"; 
 const MyApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CabApprovalApi/ReadPendingRequests/?";
 const SaveMyApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/cabapprovalapi/ApprovePendingRequests?";
 const AdhocRequestURL="http://gssnte811.asia.ad.flextronics.com:4042/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
-const SaveAdhocRequestURL="http://gssnte811.asia.ad.flextronics.com:4042/api/AdhocCabRequestApi/SaveCabOperationDetails?";
+const SaveAdhocRequestURL="http://gssnte811.asia.ad.flextronics.com:4042/api/AdhocCabRequestApi/SaveCabRequest?"; 
 const FeedbackURL="http://gssnte811.asia.ad.flextronics.com:4042/api/FeedbackApi/GetMobileQuestions?";
 const SaveFeedbackURL="http://gssnte811.asia.ad.flextronics.com:4042/api/FeedbackApi/SaveMobileFeedback?";
 const MyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
-const SaveMyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/SaveApproveRejectData/?";*/
+const SaveMyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/SaveApproveRejectData/?"; */
 
-/****   Goeasy Testing Server --f5 enabled URL https://testmobile.flextronics.com/goeasyapi/   *****/
+/****   Goeasy Testing Server --f5 enabled URL https://testmobile.flextronics.com/goeasyapi/   ***/
 const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
 const DashboardUrl = prodserver+"/api/DashBoardApi/GetDashboardDetails/?";
 const MytripsURL=prodserver+"/api/MyTripsApi/GetMyTripsDetails?";
-const SaveNoShowURL=prodserver+"/api/CancelTransportRequestApi/SaveCancelRequests?";
+const SaveNoShowURL=prodserver+"/api/CancelTransportRequestApi/SaveCancelRequests?"; 
 const MyApprovalURL=prodserver+"/api/CabApprovalApi/ReadPendingRequests/?";
 const SaveMyApprovalURL=prodserver+"/api/cabapprovalapi/ApprovePendingRequests?";
 const AdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
-const SaveAdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/SaveCabOperationDetails?";
+const SaveAdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/SaveCabRequest?"; 
 const FeedbackURL=prodserver+"/api/FeedbackApi/GetMobileQuestions?";
 const SaveFeedbackURL=prodserver+"/api/FeedbackApi/SaveMobileFeedback?";
 const MyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
-const SaveMyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";
+const SaveMyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?"; 
 
 interface mydata
     {
@@ -176,6 +176,36 @@ return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleE
   saveAdhocrequest(RequestTypeID:string,RequestTypeName:string,RequestForID:string,
     RequestForName:string,SpecialNeed:string,FromDate:string,ToDate:string,Shift:string,
     ShiftTimeName:string,AreaID:string,AreaName:string,BoardingPointID:string,BoardingPointName:string,
+    SpecialNeedReason:string,Reason:string,UserTime:string,CommonDate:string,OverWrite:string): Observable<any>{
+    let params = new HttpParams()
+     .set('Location', localStorage.getItem('LocationName'))
+     .set('EmployeeID',  localStorage.getItem('EmployeeID'))
+     .set('ReportingTo', localStorage.getItem('SupervisorID'))
+     .set('PostalCode', localStorage.getItem('Postalcode'))
+     .set('RequestType', RequestTypeName)
+     .set('FromDate', FromDate)
+     .set('ToDate', ToDate)
+     .set('RequestFor', RequestForName)
+     .set('RelShiftID', Shift)
+     .set('Shift', ShiftTimeName)
+     .set('Area', AreaName)
+     .set('BoardDrop', BoardingPointName)
+     .set('SpecialNeed', SpecialNeed)
+     .set('SpecialNeedReason', SpecialNeedReason)
+     .set('AdhocRemarks', Reason)
+     .set('OverWrite',OverWrite)
+     .set('LoggedInEmployeeName', localStorage.getItem('displayname'))     
+     .set('UserTime', UserTime)
+     .set('Grade', localStorage.getItem('Grade'))
+     .set('Regular',  localStorage.getItem('Regular'))
+     .set('EmployeeeMail', localStorage.getItem('EmployeeMailID'))
+     .set('ManagerName',  localStorage.getItem('SupervisorName'))
+     .set('ManagereMail', localStorage.getItem('SupervisorMailID'));
+  return this.http.get<mydata>(SaveAdhocRequestURL,{params}).pipe(catchError(this.handleError));
+  }
+  /* saveAdhocrequest(RequestTypeID:string,RequestTypeName:string,RequestForID:string,
+    RequestForName:string,SpecialNeed:string,FromDate:string,ToDate:string,Shift:string,
+    ShiftTimeName:string,AreaID:string,AreaName:string,BoardingPointID:string,BoardingPointName:string,
     SpecialNeedReason:string,Reason:string,UserTime:string,CommonDate:string): Observable<any>{
     let params = new HttpParams()
      .set('LocationID', localStorage.getItem('LocationID'))
@@ -202,7 +232,7 @@ return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleE
      .set('EmployeeName', localStorage.getItem('displayname'))
      .set('CreatedBy',  localStorage.getItem('EmployeeID'));
   return this.http.get<mydata>(SaveAdhocRequestURL,{params}).pipe(catchError(this.handleError));
-  }
+  } */
   getFeedbackData(): Observable<any>{
     let params = new HttpParams()
      .set('employeeLocID', localStorage.getItem('LocationID'));

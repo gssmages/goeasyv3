@@ -16,15 +16,15 @@
           <ion-select-option [value]="item.RequestTypeID" *ngFor="let item of requesttypelist">{{item.RequestTypeName}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-item *ngIf="showdate">
+    <!--  <ion-item *ngIf="showdate">
         <ion-label>Date <span style="color:red">*</span></ion-label>
         <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" [(ngModel)]="dbdate"  [min]="dbdate" [max]="maxformatDate"></ion-datetime>
-    </ion-item>
-    <ion-item *ngIf="showFromTodate">
+    </ion-item>-->
+    <ion-item >
         <ion-label>From Date <span style="color:red">*</span></ion-label>
         <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY"  [(ngModel)]="fromdate" [min]="dbdate" [max]="maxformatDate"> </ion-datetime>
     </ion-item>
-    <ion-item *ngIf="showFromTodate">
+    <ion-item>
         <ion-label>To Date <span style="color:red">*</span></ion-label>
         <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" [(ngModel)]="todate" [min]="dbdate" [max]="maxformatDate"></ion-datetime>
     </ion-item>
@@ -62,7 +62,7 @@
         <ion-label>Special Need  <span style="color:red">*</span></ion-label>
         <ion-select placeholder="Select One" [(ngModel)]="specialneed" (ionChange)=checkNeed($event.target.value)>
           <ion-select-option value="1">YES</ion-select-option>
-          <ion-select-option value="2" selected>No</ion-select-option>
+          <ion-select-option value="0" selected>No</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item *ngIf="showPleasespecify">

@@ -28,8 +28,8 @@ export class AdhocrequestPage implements OnInit {
   private loading: any;
 
   showPleasespecify:boolean=false;
-  showFromTodate:boolean=false;
-  showdate:boolean=true;
+/*   showFromTodate:boolean=false;
+  showdate:boolean=true; */
   specialneed:any;
   requesttype:any; 
   requesttypename:any;  
@@ -46,6 +46,8 @@ export class AdhocrequestPage implements OnInit {
   boardingpointname:any;
   pleasespecify:any='';
   resonforadhoc:any='';
+  reason:any='';
+  overwrite:any="null";
 
   constructor(
     private adhocservice :RestApiService,
@@ -93,23 +95,18 @@ export class AdhocrequestPage implements OnInit {
     if(selectedval=="1")
       this.showPleasespecify=true;
     else
+    {
       this.showPleasespecify=false;
+      this.pleasespecify="";
+    }
+     
   }
   checkType(selectedval:any)
   {
     this.requesttypename=selectedval.detail.text;
-    console.log(selectedval.detail.text)
-    if(this.requesttypename=="Month end")
-    {
-      this.showFromTodate=true;
-      this.showdate=false;
-    }
-    else
-    {
-      this.showFromTodate=false;
-      this.showdate=true;
-    }
-      
+    console.log(selectedval.detail.text +"-"+ this.requesttype)
+    /* if(this.requesttypename=="Month end")    {      this.showFromTodate=true;       this.showdate=false;    }
+    else    {      this.showFromTodate=false;      this.showdate=true;    } */      
   }
   getrequestfor(selectedval:any)
   {
@@ -169,7 +166,7 @@ export class AdhocrequestPage implements OnInit {
     this.requesttypename="";
     this.requestfor="";
     this.requestforname="";
-    this.specialneed="2";
+    this.specialneed="0";
     this.fromdate=formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
     this.todate=formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
     this.shifttime="";
@@ -182,18 +179,21 @@ export class AdhocrequestPage implements OnInit {
     this.boardingpointname="";
     this.pleasespecify="";
     this.resonforadhoc="";
-    this.dbdate=formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');;
+    this.dbdate=formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
+    this.overwrite="null";
+    this.reason="";
+    console.log("Reset succesfully")
   }
   validateRequest()
   {
     console.log("click the Submit button")
-    console.log(this.requesttype +"--"+ this.requestfor+"--"+  this.shifttime +"--"+  this.area_relarea+"--"+  this.boardingpoint)
+    //console.log(this.requesttype +"--"+ this.requestfor+"--"+  this.shifttime +"--"+  this.area_relarea+"--"+  this.boardingpoint)
     if(this.requesttype && this.requestfor && this.shifttime && this.area_relarea && this.boardingpoint)
     {
         console.log("validate success")
-        if(this.requesttype=="4")
-        {
-          console.log(this.requesttype)
+        /* if(this.requesttype=="4")
+        { console.log(this.requesttype) */
+         
           if(this.fromdate && this.todate)
           {
             console.log(this.fromdate +" ---- " +this.todate)
@@ -223,9 +223,9 @@ export class AdhocrequestPage implements OnInit {
           }
           else
           {
-            this.presentAlert('Please choose Fromdate and ToDate.');
+            this.presentAlert('Please choose From Date and To Date.');
           }
-        }
+       /*  }
         else
         {
           if(this.dbdate)
@@ -248,7 +248,7 @@ export class AdhocrequestPage implements OnInit {
           {
             this.presentAlert("Please select date.")
           }
-        }
+        } */
     }
     else
     {
@@ -257,20 +257,40 @@ export class AdhocrequestPage implements OnInit {
   }
   submitRequest()
   {
+   if(this.resonforadhoc=='')
+    this.reason="null";
+    else
+    this.reason=this.resonforadhoc;
     console.log("submit request")
   //  var currentDate=formatDate(new Date(this.dbdate), 'MM-dd-yyyy', 'en-US', '+0530');
     //var fromDate=formatDate(new Date(this.fromdate), 'MM-dd-yyyy', 'en-US', '+0530');
    // var toDate=formatDate(new Date(this.todate), 'MM-dd-yyyy', 'en-US', '+0530');
    
-    console.log(this.dbdate+"--"+this.fromdate+"---"+this.todate)
+    console.log(this.overwrite+"--"+this.fromdate+"---"+this.todate)
     this.presentLoading();
         this.adhocservice.saveAdhocrequest(this.requesttype,this.requesttypename,this.requestfor,this.requestforname,
           this.specialneed,this.fromdate,this.todate,this.shifttime,this.shifttimename,this.areaid,this.areaname,
-          this.boardingpoint,this.boardingpointname,this.pleasespecify,this.resonforadhoc,this.usertime,this.dbdate).subscribe(res => { 
+          this.boardingpoint,this.boardingpointname,this.pleasespecify,this.reason,this.usertime,this.dbdate,this.overwrite).subscribe(res => { 
            console.log("results are : " + JSON.stringify(res.results))
             this.loading.dismiss();
-            this.presentAlert(res.results);
-            this.reset();
+            if(res.results.ErrorCode=='0')
+            {
+              this.reset();
+              this.presentAlert(res.results.ErrorDesc);               
+            }
+            else if(res.results.ErrorCode=='16')
+            {
+              console.log(res.results.ErrorCode+"--"+res.results.ErrorDesc)
+              this.showAdhocconfirm(res.results.ErrorDesc);
+            }
+            else if(res.results.ErrorCode=='15'){
+              console.log(res.results.ErrorCode+"--"+res.results.ErrorDesc)
+              this.showOverwriteconfirm(res.results.ErrorDesc);
+            }
+            else{
+              this.presentAlert(res.results.ErrorDesc);
+            }
+            
         }, err => {            
             console.log(err);
             this.loading.dismiss();
@@ -293,6 +313,61 @@ export class AdhocrequestPage implements OnInit {
     });
     return await this.loading.present();
   }
+  async showAdhocconfirm(promptmessage:string) {
+  const confirm =  await this.alertController.create({
+    header: 'GoEasy Confirmation',
+    message: promptmessage,
+    buttons: [
+      {
+        text: 'No',
+        handler: () => {
+          console.log('No clicked');
+          this.overwrite="null";
+          console.log(this.overwrite);
+        }
+      },
+      {
+        text: 'Yes',
+        cssClass: 'alertconfirmation',
+        handler: () => {
+          console.log('yes clicked');
+          this.overwrite="1";
+          console.log(this.overwrite);
+          this.submitRequest();
+        }
+      }
+    ]
+  });
+  await confirm.present();
+}
+async showOverwriteconfirm(promptmessage:string) {
+  const confirm =  await this.alertController.create({
+    header: 'GoEasy Confirmation',
+    message: promptmessage,
+    buttons: [
+      {
+        text: 'Keep Both Request',
+        cssClass: 'alertconfirmation',
+        handler: () => {
+          console.log('No clicked');
+          this.overwrite="0";
+          console.log(this.overwrite);
+          this.submitRequest();
+        }
+      },
+      {
+        text: 'Overwrite',
+        handler: () => {
+          console.log('yes clicked');
+          this.overwrite="1";
+          console.log(this.overwrite);
+          this.submitRequest();
+        }
+      }
+    ]
+  });
+  await confirm.present();
+}
 
 
 }

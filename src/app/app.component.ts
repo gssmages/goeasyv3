@@ -130,10 +130,17 @@ public appPages : Array<any> = [];
   reset()
   {
     localStorage.removeItem('empusername');
-    localStorage.removeItem('emppassword');
+    localStorage.removeItem('empsecurecode');
     localStorage.removeItem('EmployeeID');
     localStorage.removeItem('LocationID');
     localStorage.removeItem('LocationName');
     localStorage.removeItem('displayname');
+    localStorage.removeItem('EmployeeMailID');
+    localStorage.removeItem('Postalcode');
+    localStorage.removeItem('Grade');
+    localStorage.removeItem('Regular');
+    localStorage.removeItem('SupervisorID');
+    localStorage.removeItem('SupervisorName');
+    localStorage.removeItem('SupervisorMailID');
   }
 }

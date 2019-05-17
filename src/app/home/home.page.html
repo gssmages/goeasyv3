@@ -10,6 +10,21 @@
 </ion-header>
 
 <ion-content style="--background: url('assets/images/transportbg.jpg') top center/100% 100% no-repeat">
+   <!--  <ion-card class="cardbg" style="color:#000;"> 
+    <ion-row>
+        <ion-col size="6">
+             <div  style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
+               No Show count this Month
+            </div>                      
+        </ion-col>
+        <ion-col size="6">                          
+               <div  text-right style="font-size: 16px;">
+                   {{dropdetails?.DropOrder}}
+               </div>
+           </ion-col>
+    </ion-row>
+    </ion-card> -->
+    <ion-card style="color:#000;"> 
     <ion-segment [(ngModel)]="dailyroute" color="primary" (ionChange)="segmentChanged($event)"> 
         <ion-segment-button value="Pickup" checked>
            Pickup
@@ -20,8 +35,8 @@
     </ion-segment>
     <div [ngSwitch]="dailyroute" >
         <div *ngSwitchCase="'Pickup'">
-            <ion-grid *ngIf="pickupshow; else pickupnorecord">
-                <ion-card>
+            <ion-grid *ngIf="pickupshow; else pickupnorecord" style="padding:0">
+               
                 <ion-row>
                     <ion-col size="6" style="background: #eee;">
                         <div  text-center style="font-weight: bold; font-size: 10px;  line-height: 20px;"  >
@@ -130,7 +145,7 @@
                             </div>
                         </ion-col>  
                 </ion-row>
-            </ion-card>
+            
             </ion-grid>
             <ng-template  #pickupnorecord>
                 <ion-row style="background:#eee; padding:5px; border-radius:5px; margin: 5px;">
@@ -139,8 +154,8 @@
             </ng-template>
         </div>
         <div *ngSwitchCase="'Drop'">
-              <ion-grid *ngIf="dropshow; else dropnorecord"> 
-                    <ion-card>
+              <ion-grid *ngIf="dropshow; else dropnorecord" style="padding:0"> 
+                   
                 <ion-row>
                     <ion-col size="6" style="background: #eee;">
                         <div text-center style="font-weight: bold; font-size: 10px;line-height: 20px;"  >
@@ -244,7 +259,6 @@
                            </div>
                        </ion-col>
                 </ion-row>
-                </ion-card>
             </ion-grid>
             <ng-template #dropnorecord>
                     <ion-row style="background:#eee; padding:5px;border-radius:5px; margin: 5px;">
@@ -253,6 +267,7 @@
             </ng-template>
         </div>
     </div>
+</ion-card>
 </ion-content>
 <ion-footer *ngIf="showfooter">
     <ion-toolbar style="--padding-top:0;--padding-bottom:0;--padding-start:0;--padding-end:0;">

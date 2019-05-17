@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
        
         if(localStorage.getItem('empusername')!=null)
         {
-            console.log(localStorage.getItem('empusername')+"----from SSO----"+localStorage.getItem('empsecurecode'))   
+           // console.log(localStorage.getItem('empusername')+"----from SSO----"+localStorage.getItem('empsecurecode'))   
             this.sso_username=localStorage.getItem('empusername')
             this.sss_password=localStorage.getItem('empsecurecode')
             this.loginuser(this.sso_username,this.sss_password);
@@ -62,10 +62,10 @@ export class LoginPage implements OnInit {
       this.menu.enable(true);
     }
     pushPage(){        
-        console.log(this.username +"--------"+this.password)
+       // console.log(this.username +"--------"+this.password)
         if(this.username!='' && this.password!='')
         {
-            console.log(this.username +"--------"+this.password)
+           // console.log(this.username +"--------"+this.password)
             this.loginuser(this.username,this.password);            
         }
         else{
@@ -79,7 +79,7 @@ export class LoginPage implements OnInit {
      
        
         this.presentLoading();
-        console.log(user+"----from SSO----"+pass)
+        //console.log(user+"----from SSO----"+pass)
         this.loginservice.getLoginData(user, pass).subscribe(res => { 
             
             console.log("results are : " + JSON.stringify(res))
