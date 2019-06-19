@@ -35,7 +35,8 @@ const routes: Routes = [
   { path: 'canceltrips', loadChildren: './canceltrips/canceltrips.module#CanceltripsPageModule' },
   { path: 'myapproval', loadChildren: './myapproval/myapproval.module#MyapprovalPageModule' },
   { path: 'myapprovalcip', loadChildren: './myapprovalcip/myapprovalcip.module#MyapprovalcipPageModule' },
-  { path: 'feedback', loadChildren: './feedback/feedback.module#FeedbackPageModule' }
+  { path: 'feedback', loadChildren: './feedback/feedback.module#FeedbackPageModule' },
+  { path: 'update', loadChildren: './update/update.module#UpdatePageModule' }
 ];
 
 @NgModule({

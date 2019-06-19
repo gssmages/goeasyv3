@@ -66,7 +66,8 @@ export class MytripsPage implements OnInit {
       this.mytrips=res.results.CancelTransportDetails;
       this.cancelledtrips=res.results.CancelMyTripDetails;
       this.requestfor=res.results.RequestForDetails;
-      if(this.mytrips==null)
+      this.tripdetails='Activetrips';
+      if(this.mytrips=='' || this.mytrips==null)
       {
         this.norecordmytrip=true;
         this.showallmytrip=false;
@@ -76,7 +77,7 @@ export class MytripsPage implements OnInit {
         this.norecordmytrip=false;
         this.showallmytrip=true;
       }
-      if(this.cancelledtrips==null)
+      if(this.cancelledtrips==null || this.cancelledtrips=='')
       {
         this.nocancelrecord=true;
         this.showallcancel=false;

@@ -13,13 +13,12 @@
     <ion-grid style="padding: 0;">
         <ion-row style="padding: 0;">
             <ion-col style="padding: 0;">
-                <ion-button expand="full" color="primary" (click)="selectall()" style="--margin-top:0;--margin-bottom:0;">
-                  
+                <ion-button expand="full" color="primary" (click)="selectall()" style="--margin-top:0;--margin-bottom:0; margin: 0;">                  
                   Select all
                 </ion-button>
             </ion-col>
             <ion-col style="padding: 0;">
-                <ion-button expand="full" color="primary" (click)="deselectall()" style="--margin-top:0;--margin-bottom:0;">
+                <ion-button expand="full" color="primary" (click)="deselectall()" style="--margin-top:0;--margin-bottom:0; margin: 0;">
                     Deselect all</ion-button>
             </ion-col>   
         </ion-row>
@@ -77,22 +76,20 @@
 
     </div>
 </ion-content>
-<ion-footer>
-    <ion-toolbar style="--padding-top:0;--padding-bottom:0;--padding-start:0;--padding-end:0;">
+<ion-footer>   
         <ion-grid style="padding: 0;">
             <ion-row style="padding: 0;">
                 <ion-col style="padding: 0;">
-                    <ion-button expand="full" color="primary" (click)="submitrequest('reject')" style="--margin-top:0;--margin-bottom:0;">
+                    <ion-button expand="full" color="primary" (click)="submitrequest('reject')" style="--margin-top:0;--margin-bottom:0; margin: 0;height: 48px">
                       <ion-icon name="close" style="font-size:32px;"></ion-icon>
                       Reject
                     </ion-button>
                 </ion-col>
                 <ion-col style="padding: 0;">
-                    <ion-button expand="full" color="primary" (click)="submitrequest('approve')" style="--margin-top:0;--margin-bottom:0;">
+                    <ion-button expand="full" color="primary" (click)="submitrequest('approve')" style="--margin-top:0;--margin-bottom:0;margin: 0;height: 48px">
                         <ion-icon name="checkmark" style="font-size:32px;"></ion-icon>
                         Approve</ion-button>
                 </ion-col>   
             </ion-row>
-        </ion-grid>
-    </ion-toolbar>
+        </ion-grid>    
 </ion-footer>

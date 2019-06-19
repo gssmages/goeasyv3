@@ -173,7 +173,7 @@ export class MyapprovalPage implements OnInit {
             else{
               if(data.comments=="")
               {
-                prompt.message="Enter Comments<br><span style='color:red'> Please enter comments</span>"; 
+                prompt.message='Enter Comments<br><span class="alertmsg"> Please enter comments</span>'; 
                 return false;
               }
               else{

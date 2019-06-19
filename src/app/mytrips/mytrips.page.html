@@ -11,10 +11,10 @@
 
 <ion-content>
   <ion-segment [(ngModel)]="tripdetails" color="primary" (ionChange)="segmentChanged($event)"> 
-    <ion-segment-button value="Activetrips" checked>
+    <ion-segment-button value="Activetrips" checked style="height: 36px;">
       Active Trips
     </ion-segment-button>
-    <ion-segment-button value="Cancelledtrips">
+    <ion-segment-button value="Cancelledtrips" style="height: 36px;">
       Cancelled Trips
     </ion-segment-button>
 </ion-segment>
@@ -51,22 +51,22 @@
     </ion-card>--> 
     <ion-card *ngIf="norecordmytrip">
         <ion-row style="padding:5px; margin: 5px;">
-            <ion-col>No Records to display</ion-col>
+            <ion-col>No Record to display</ion-col>
     </ion-row>        
       </ion-card>
       <div *ngIf="showallmytrip">
     <ion-card *ngFor="let item of mytrips; let i = index" >
       <ion-row>
-        <ion-col size="2" text-center style="color:#fff; background:#6A478D;" >
+        <ion-col size="2.5" text-center style="color:#fff; background:#6A478D;" >
           <ion-icon name="car" style="font-size:40px; "></ion-icon>
           <p style="margin:0;">{{item.RequestTypeName}}</p>
         </ion-col>
-        <ion-col style="padding-left:10px;">
+        <ion-col style="padding:0 10px;">
           <p *ngIf="item.FromDateString!=''">{{item.FromDateString}} to {{item.ToDateString}}</p>
           <p>{{item.RequestForName}} - {{item.shiftForGrid}}</p>
         </ion-col>   
-        <ion-col size="1" text-right style="padding:0;" >
-          <ion-icon name="close" style="font-size:24px; background:#6A478D; color: #fff;" (click)="canceltrip($event,item)"></ion-icon>
+        <ion-col size="2" text-center style="padding:0;background:#D3323A; color: #fff;" (click)="canceltrip($event,item)" >
+         <ion-icon name="close" style="font-size:32px;margin-top: 10px; "></ion-icon><label><span style="font-size: 10px;">Cancel</span></label>
         </ion-col>        
       </ion-row>        
   </ion-card>
@@ -75,13 +75,13 @@
     <div *ngSwitchCase="'Cancelledtrips'">
         <ion-card *ngIf="nocancelrecord">
             <ion-row style="padding:5px; margin: 5px;">
-                <ion-col>No Records to display</ion-col>
+                <ion-col>No Record to display</ion-col>
         </ion-row>        
         </ion-card>
         <div *ngIf="showallcancel">
         <ion-card *ngFor="let item of cancelledtrips; let i = index" >
             <ion-row>
-              <ion-col size="2" text-center style="color:#fff; background:#6A478D;" >
+              <ion-col size="2.5" text-center style="color:#fff; background:#6A478D;" >
                 <ion-icon name="car" style="font-size:40px; "></ion-icon>
                 <p style="margin:0;">{{item.ReqTypeName}}</p>
               </ion-col>

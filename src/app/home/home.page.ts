@@ -9,6 +9,7 @@ import { RestApiService } from '../rest-api.service';
 import { AlertController } from '@ionic/angular';
 import { Globals } from '../global';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { Platform } from '@ionic/angular';
 export interface Dropdetails
     {
         RequestTypeName: string;
@@ -60,7 +61,8 @@ export class HomePage{
    private loading: any;
    dailyroute:any;
     constructor(
-    private homeservice :RestApiService,
+      private platform: Platform,
+      private homeservice :RestApiService,
      public loadingController: LoadingController,
      public route: ActivatedRoute,
      public router: Router,
@@ -91,8 +93,8 @@ export class HomePage{
             localStorage.setItem("SupervisorMailID",this.employeedetails.SupervisoreMail);
             //for Google Analytics username need to be set 
             this.ga.setUserId(localStorage.getItem('displayname'))
-            console.log(localStorage.getItem('displayname'))           
-            
+            console.log(localStorage.getItem('displayname'))    
+            this.dailyroute='Pickup';
             if(this.pickupdetails==null)
             {
                 console.log(this.pickupdetails)
@@ -101,6 +103,7 @@ export class HomePage{
             else
             {
                 this.pickupshow=true;
+
             }
             if(this.dropdetails==null)
             {
@@ -113,6 +116,13 @@ export class HomePage{
             }
             console.log("results are : " + JSON.stringify(this.employeedetails))
         //this.presentAlert();
+        this.platform.backButton.subscribeWithPriority(9999, () => {
+          document.addEventListener('backbutton', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            console.log('hello');
+          }, false);
+        });
 
         });
 

@@ -25,15 +25,15 @@
     </ion-row>
     </ion-card> -->
     <ion-card style="color:#000;"> 
-    <ion-segment [(ngModel)]="dailyroute" color="primary" (ionChange)="segmentChanged($event)"> 
-        <ion-segment-button value="Pickup" checked>
+    <ion-segment [(ngModel)]="dailyroute" color="primary" (ionChange)="segmentChanged($event)">   
+        <ion-segment-button value="Pickup" style="height: 36px;">
            Pickup
         </ion-segment-button>
-        <ion-segment-button value="Drop">
+        <ion-segment-button value="Drop" style="height: 36px;">
            Drop
         </ion-segment-button>
     </ion-segment>
-    <div [ngSwitch]="dailyroute" >
+    <div [ngSwitch]="dailyroute"  >
         <div *ngSwitchCase="'Pickup'">
             <ion-grid *ngIf="pickupshow; else pickupnorecord" style="padding:0">
                
@@ -269,17 +269,15 @@
     </div>
 </ion-card>
 </ion-content>
-<ion-footer *ngIf="showfooter">
-    <ion-toolbar style="--padding-top:0;--padding-bottom:0;--padding-start:0;--padding-end:0;">
+<ion-footer *ngIf="showfooter">   
         <ion-grid style="padding: 0;">
             <ion-row style="padding: 0;">
                 <ion-col style="padding: 0;">
-                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" routerLink="/Adhocrequest">Adhoc Request</ion-button>
+                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0; margin: 0; height: 48px" routerLink="/Adhocrequest">Adhoc Request</ion-button>
                 </ion-col>
                 <ion-col style="padding: 0;">
-                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" routerLink="/Mytrips">My Trips</ion-button>
+                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0; margin: 0;height: 48px" routerLink="/Mytrips">My Trips</ion-button>
                 </ion-col>   
             </ion-row>
         </ion-grid>
-    </ion-toolbar>
 </ion-footer>

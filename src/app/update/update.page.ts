@@ -1,0 +1,18 @@
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-update',
+  templateUrl: './update.page.html',
+  styleUrls: ['./update.page.scss'],
+})
+export class UpdatePage implements OnInit {
+
+  public updatemsg: any;
+  constructor() { }
+
+  ngOnInit() {
+    this.updatemsg='Please wait...<br>App is updating';
+    setInterval(()=>{ this.updatemsg=localStorage.getItem("updatemsg")},100);
+  }
+
+}

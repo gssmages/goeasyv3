@@ -9,7 +9,7 @@ import 'hammerjs';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { CodePush, InstallMode, SyncStatus } from '@ionic-native/code-push/ngx';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -27,7 +27,8 @@ public appPages : Array<any> = [];
     public events: Events,
     private appVersion: AppVersion,
     private codePush: CodePush,
-    private ga: GoogleAnalytics
+    private ga: GoogleAnalytics,
+    private router: Router,
   ) {
     this.initializeApp();
   
@@ -85,7 +86,8 @@ public appPages : Array<any> = [];
   
    initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      //this.statusBar.styleDefault();
+      this.statusBar.styleLightContent();
       this.splashScreen.hide();
       this.checkCodePush(); //Use the plugin always after platform.ready()
       this.ga.startTrackerWithId('UA-51333248-11') //UA-51333248-11 is bala google id //UA-63736036-2 is magesh google id 
@@ -93,11 +95,12 @@ public appPages : Array<any> = [];
     });
   }
   checkCodePush() {
+    localStorage.setItem("updatemsg","");
         this.codePush.sync({
-    updateDialog: {
+   /*  updateDialog: {
      appendReleaseDescription: true,
       descriptionPrefix: "\n\nChange log:\n"   
-     },
+     }, */
      installMode: InstallMode.IMMEDIATE
   },(progress)=>{
 
@@ -105,17 +108,27 @@ public appPages : Array<any> = [];
     // if(status==SyncStatus.CHECKING_FOR_UPDATE)
     // alert("Checking for Update");
     if(status==SyncStatus.DOWNLOADING_PACKAGE)
-    alert("Downloading Package");
+    {
+      this.router.navigate(['/update']);
+      localStorage.setItem("updatemsg","Downloading Package");
+    }
+    //alert("Downloading Package");
     if(status==SyncStatus.IN_PROGRESS)
-    alert("In Progress");
+    {
+      localStorage.setItem("updatemsg","Please wait..<br>App is updating");
+    }
+    //alert("In Progress");
     if(status==SyncStatus.INSTALLING_UPDATE)
-    alert("Installing update");
+    localStorage.setItem("updatemsg","Installing update");
+    //alert("Installing update");
     // if(status==SyncStatus.UP_TO_DATE)
     // alert("Update Up-to-date");
     if(status==SyncStatus.UPDATE_INSTALLED)
-    alert("Update Installed");
+    localStorage.setItem("updatemsg","Update Installed");
+    //alert("Update Installed");
     if(status==SyncStatus.ERROR)
-    alert("Error While Updating");
+    localStorage.setItem("updatemsg","Error While Updating");
+    //alert("Error While Updating");
   }
     // (data) => {
     //  console.log('CODE PUSH SUCCESSFUL: ' + data);

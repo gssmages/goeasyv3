@@ -35,17 +35,15 @@
         <ion-textarea rows="6" [(ngModel)]="comments"></ion-textarea>
       </ion-item>
 </ion-content>
-<ion-footer>
-    <ion-toolbar style="--padding-top:0;--padding-bottom:0;--padding-start:0;--padding-end:0;">
+<ion-footer>  
         <ion-grid style="padding: 0;">
             <ion-row style="padding: 0;">
                 <ion-col style="padding: 0;">
-                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" (click)="reset()">Reset</ion-button>
+                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;margin: 0;height: 48px" (click)="reset()">Reset</ion-button>
                 </ion-col>
                 <ion-col style="padding: 0;">
-                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" (click)="validateRequest()">Submit Request</ion-button>
+                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;margin: 0;height: 48px" (click)="validateRequest()">Submit Request</ion-button>
                 </ion-col>   
             </ion-row>
-        </ion-grid>
-    </ion-toolbar>
+        </ion-grid>   
 </ion-footer>
