@@ -1,94 +1,93 @@
 <ion-header>
-    <ion-toolbar color="primary" >
-        <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>
-            Adhoc Request
-        </ion-title>
-    </ion-toolbar>
+  <ion-toolbar color="primary" >
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+          Adhoc Request
+      </ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-item>
+      <ion-label >Request Type <span style="color:red">*</span></ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]='requesttype'  (ionChange)="checkType($event)">
+        <ion-select-option [value]="item" *ngFor="let item of requesttypelist">{{item.RequestTypeName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  <!--  <ion-item *ngIf="showdate">
+      <ion-label>Date <span style="color:red">*</span></ion-label>
+      <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" [(ngModel)]="dbdate"  [min]="dbdate" [max]="maxformatDate"></ion-datetime>
+  </ion-item>-->
+  <ion-item >
+      <ion-label>From Date <span style="color:red">*</span></ion-label>
+     <!--  <input type="date" [min]="dbdate" [max]="maxformatDate" [value]="dbdate"  [(ngModel)]="fromdate" > -->
+      <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY"  [(ngModel)]="fromdate" [min]="dbdate" [max]="maxformatDate"> </ion-datetime>
+  </ion-item>
+  <ion-item>
+      <ion-label>To Date <span style="color:red">*</span></ion-label>
+      <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" [(ngModel)]="todate" [min]="dbdate" [max]="maxformatDate"></ion-datetime>
+  </ion-item>
     <ion-item>
-        <ion-label >Request Type <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]='requesttype'  (ionChange)="checkType($event)">
-          <ion-select-option [value]="item.RequestTypeID" *ngFor="let item of requesttypelist">{{item.RequestTypeName}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-    <!--  <ion-item *ngIf="showdate">
-        <ion-label>Date <span style="color:red">*</span></ion-label>
-        <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" [(ngModel)]="dbdate"  [min]="dbdate" [max]="maxformatDate"></ion-datetime>
-    </ion-item>-->
-    <ion-item >
-        <ion-label>From Date <span style="color:red">*</span></ion-label>
-        <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY"  [(ngModel)]="fromdate" [min]="dbdate" [max]="maxformatDate"> </ion-datetime>
+      <ion-label position="stacked">Request For <span style="color:red">*</span></ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="requestfor" (ionChange)="getrequestfor($event)">
+        <ion-select-option [value]="item" *ngFor="let item of requestforlist">{{item.RequestForName}}</ion-select-option>
+<!--       <ion-select-option value="2">Pickup</ion-select-option>
+        <ion-select-option value="3">Drop</ion-select-option>--> 
+      </ion-select>
     </ion-item>
     <ion-item>
-        <ion-label>To Date <span style="color:red">*</span></ion-label>
-        <ion-datetime display-format="DD-MMM-YYYY" picker-format="DD-MMM-YYYY" [(ngModel)]="todate" [min]="dbdate" [max]="maxformatDate"></ion-datetime>
+      <ion-label position="stacked">Timing <span style="color:red">*</span></ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="shifttime" (ionChange)="getshifttime($event.target.value)">
+          <ion-select-option [value]="item.TimeID" *ngFor="let item of shifttimelist">
+              <span *ngIf="(requestforname == 'Pickup and Drop') || (requestforname == 'Pickup') || (requestforname == '') || (requestforname == undefined)">{{item.railwayTimeStart}}</span>
+              <span *ngIf="(requestforname == 'Pickup and Drop')||  (requestforname == '') || (requestforname == undefined)"> - </span>
+              <span *ngIf="(requestforname == 'Pickup and Drop') || (requestforname == 'Drop') ||  (requestforname == '') || (requestforname == undefined)">{{item.railwayTimeEnd}}</span> 
+          </ion-select-option>
+      </ion-select>
     </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Request For <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="requestfor" (ionChange)="getrequestfor($event)">
-          <ion-select-option [value]="item.RequestForID" *ngFor="let item of requestforlist">{{item.RequestForName}}</ion-select-option>
-  <!--       <ion-select-option value="2">Pickup</ion-select-option>
-          <ion-select-option value="3">Drop</ion-select-option>--> 
+    <ion-item>
+      <ion-label position="stacked">Area <span style="color:red">*</span></ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="area_relarea" (ionChange)="changeArea($event)">
+          <ion-select-option [value]="item" *ngFor="let item of areadetailslist">{{item.AreaName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Boarding / Drop Point <span style="color:red">*</span></ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="boardingpoint" (ionChange)="getboardingname($event)" (click)="validatearea()">
+          <ion-select-option [value]="item" *ngFor="let item of boardinglisttemp">{{item.BoardingPointName}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Special Need  <span style="color:red">*</span></ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="specialneed" (ionChange)=checkNeed($event.target.value)>
+        <ion-select-option value="1">YES</ion-select-option>
+        <ion-select-option value="0" selected>No</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item *ngIf="showPleasespecify">
+      <ion-label  position="stacked">Please Specify<span style="color:red">*</span></ion-label>
+      <ion-select placeholder="Select One" [(ngModel)]="pleasespecify" >
+          <ion-select-option value="Pregnant">Pregnant</ion-select-option>
+          <ion-select-option value="Undergoing  Medical Treatment">Undergoing  Medical Treatment</ion-select-option>
+          <ion-select-option value="Physically Challenged">Physically Challenged </ion-select-option>
         </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Timing <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="shifttime" (ionChange)="getshifttime($event.target.value)">
-            <ion-select-option [value]="item.TimeID" *ngFor="let item of shifttimelist">
-                <span *ngIf="(requestforname == 'Pickup and Drop') || (requestforname == 'Pickup') || (requestforname == '')">{{item.railwayTimeStart}}</span>
-                <span *ngIf="(requestforname == 'Pickup and Drop')||  (requestforname == '')"> - </span>
-                <span *ngIf="(requestforname == 'Pickup and Drop') || (requestforname == 'Drop') ||  (requestforname == '')">{{item.railwayTimeEnd}}</span> 
-            </ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Area <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="area_relarea" (ionChange)="changeArea($event)">
-            <ion-select-option [value]="item.AreaID+'_'+item.RelAreaID" *ngFor="let item of areadetailslist">{{item.AreaName}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Boarding / Drop Point <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="boardingpoint" (ionChange)="getboardingname($event)" (click)="validatearea()">
-            <ion-select-option [value]="item.BoardingPoint" *ngFor="let item of boardinglisttemp">{{item.BoardingPointName}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label>Special Need  <span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="specialneed" (ionChange)=checkNeed($event.target.value)>
-          <ion-select-option value="1">YES</ion-select-option>
-          <ion-select-option value="0" selected>No</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <ion-item *ngIf="showPleasespecify">
-        <ion-label  position="stacked">Please Specify<span style="color:red">*</span></ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="pleasespecify" >
-            <ion-select-option value="Pregnant">Pregnant</ion-select-option>
-            <ion-select-option value="Undergoing  Medical Treatment">Undergoing  Medical Treatment</ion-select-option>
-            <ion-select-option value="Physically Challenged">Physically Challenged </ion-select-option>
-          </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Reason For Adhoc<span style="color:red">*</span></ion-label>
-             <ion-input [(ngModel)]="resonforadhoc"></ion-input>
-      </ion-item>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Reason For Adhoc<span style="color:red">*</span></ion-label>
+           <ion-input [(ngModel)]="resonforadhoc"></ion-input>
+    </ion-item>
 </ion-content>
-<ion-footer>
-    <ion-toolbar style="--padding-top:0;--padding-bottom:0;--padding-start:0;--padding-end:0;">
-        <ion-grid style="padding: 0;">
-            <ion-row style="padding: 0;">
-                <ion-col style="padding: 0;">
-                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" (click)="reset()">Reset</ion-button>
-                </ion-col>
-                <ion-col style="padding: 0;">
-                    <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;" (click)="validateRequest()">Submit Request</ion-button>
-                </ion-col>   
-            </ion-row>
-        </ion-grid>
-    </ion-toolbar>
+<ion-footer>   
+      <ion-grid style="padding: 0;">
+          <ion-row style="padding: 0;">
+              <ion-col style="padding: 0;">
+                  <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;margin: 0;height: 48px" (click)="reset()">Reset</ion-button>
+              </ion-col>
+              <ion-col style="padding: 0;">
+                  <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0;margin: 0;height: 48px" (click)="validateRequest()">Submit Request</ion-button>
+              </ion-col>   
+          </ion-row>
+      </ion-grid>  
 </ion-footer>

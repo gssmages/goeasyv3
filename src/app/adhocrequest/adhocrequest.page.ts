@@ -30,12 +30,16 @@ export class AdhocrequestPage implements OnInit {
   showPleasespecify:boolean=false;
 /*   showFromTodate:boolean=false;
   showdate:boolean=true; */
-  specialneed:any;
+  specialneed:any="0";
   requesttype:any; 
+  requesttypeID:any;
   requesttypename:any;  
   fromdate:any;
   todate:any;
+  fromdateonly:any;
+  todateonly:any;
   requestfor:any;
+  requestforID:any;
   requestforname:any='';
   shifttime:any;
   shifttimename:any;
@@ -43,11 +47,13 @@ export class AdhocrequestPage implements OnInit {
   areaid:any;
   areaname:any;
   boardingpoint:any;
+  boardingpointID:any;
   boardingpointname:any;
   pleasespecify:any='';
   resonforadhoc:any='';
   reason:any='';
   overwrite:any="null";
+  adhocyesno:any="null";
 
   constructor(
     private adhocservice :RestApiService,
@@ -103,18 +109,23 @@ export class AdhocrequestPage implements OnInit {
   }
   checkType(selectedval:any)
   {
-    this.requesttypename=selectedval.detail.text;
-    console.log(selectedval.detail.text +"-"+ this.requesttype)
+    this.requesttypename=this.requesttype.RequestTypeName;
+    this.requesttypeID=this.requesttype.RequestTypeID;
+    console.log(this.requesttypename+"-"+ this.requesttypeID  )
     /* if(this.requesttypename=="Month end")    {      this.showFromTodate=true;       this.showdate=false;    }
     else    {      this.showFromTodate=false;      this.showdate=true;    } */      
   }
   getrequestfor(selectedval:any)
   {
-    this.requestforname=selectedval.detail.text;
+    console.log(this.requestfor)
+    this.requestforname=this.requestfor.RequestForName;
+    this.requestforID=this.requestfor.RequestForID
     this.shifttime="";
+   console.log( "request for text : " +this.requestforname)
   }
   getshifttime(selectedval:any)
   {
+    console.log(this.requestforname)
     console.log(selectedval)
     for (let i = 0; i < this.shifttimelist.length; i++) {
       if(this.shifttimelist[i].TimeID == selectedval)
@@ -127,20 +138,19 @@ export class AdhocrequestPage implements OnInit {
   }
   getboardingname(selectedval:any)
   {
-    this.boardingpointname=selectedval.detail.text;
+    this.boardingpointname=this.boardingpoint.BoardingPointName;
     console.log(this.boardingpointname)
-    this.boardingpoint=selectedval.detail.value;
+    this.boardingpointID=this.boardingpoint.BoardingPoint;
   }
   changeArea(selectedval:any)
   {
-    this.areaname=selectedval.detail.text;
     this.boardinglisttemp=[];
     this.boardingpoint='';
     console.log(selectedval)
     console.log(this.area_relarea)
-    var areaarray=(this.area_relarea).split("_");
-    this.areaid=areaarray[0];
-    var relareaid=areaarray[1];
+    this.areaname=this.area_relarea.AreaName;
+    this.areaid=this.area_relarea.AreaID;
+    var relareaid=this.area_relarea.RelAreaID;
     for (let i = 0; i < this.boardingpointlist.length; i++) {
       if(this.boardingpointlist[i].Area == relareaid)
       {
@@ -163,8 +173,10 @@ export class AdhocrequestPage implements OnInit {
   {
     console.log("click the reset button")
     this.requesttype="";
+    this.requesttypeID="";
     this.requesttypename="";
     this.requestfor="";
+    this.requestforID="";
     this.requestforname="";
     this.specialneed="0";
     this.fromdate=formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
@@ -175,17 +187,21 @@ export class AdhocrequestPage implements OnInit {
     this.area_relarea="";
     this.areaname="";
     this.boardingpoint="";
+    this.boardingpointID="";
     this.boardinglisttemp=[];
     this.boardingpointname="";
     this.pleasespecify="";
     this.resonforadhoc="";
     this.dbdate=formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
     this.overwrite="null";
+    this.adhocyesno="null";
     this.reason="";
     console.log("Reset succesfully")
   }
   validateRequest()
   {
+    this.fromdate=formatDate( this.fromdate, 'yyyy-MM-dd', 'en-US', '+0530');
+    this.todate=formatDate(this.todate, 'yyyy-MM-dd', 'en-US', '+0530');
     console.log("click the Submit button")
     //console.log(this.requesttype +"--"+ this.requestfor+"--"+  this.shifttime +"--"+  this.area_relarea+"--"+  this.boardingpoint)
     if(this.requesttype && this.requestfor && this.shifttime && this.area_relarea && this.boardingpoint)
@@ -199,8 +215,12 @@ export class AdhocrequestPage implements OnInit {
             console.log(this.fromdate +" ---- " +this.todate)
             var fromdatearray=(this.fromdate).split('-');
             var todatearray=(this.todate).split('-');
-         var fromdatestring = new Date(fromdatearray[2],fromdatearray[0]-1,fromdatearray[1]);
-          var todatestring = new Date(todatearray[2],todatearray[0]-1,todatearray[1]);
+           // var fromdatestring = new Date(fromdatearray[2],fromdatearray[0]-1,fromdatearray[1]);
+         //   var todatestring = new Date(todatearray[2],todatearray[0]-1,todatearray[1]);
+         var fromdatestring = new Date(fromdatearray[0],fromdatearray[1]-1,fromdatearray[2]);         
+         var todatestring = new Date(todatearray[0],todatearray[1]-1,todatearray[2]);
+         console.log("From date :"+fromdatestring)
+          console.log("To date :"+todatestring)
             if(fromdatestring<=todatestring)
                 {
                   if(this.specialneed=="1")
@@ -266,11 +286,15 @@ export class AdhocrequestPage implements OnInit {
     //var fromDate=formatDate(new Date(this.fromdate), 'MM-dd-yyyy', 'en-US', '+0530');
    // var toDate=formatDate(new Date(this.todate), 'MM-dd-yyyy', 'en-US', '+0530');
    
-    console.log(this.overwrite+"--"+this.fromdate+"---"+this.todate)
+    console.log(this.requesttypeID+"--"+this.requesttypename+"---"+this.requestforID+"-----"+
+    this.requestforname+"---"+this.specialneed+"---"+this.fromdate+"-----"+this.todate+"---"+
+    this.shifttime+"---"+this.shifttimename+"-----"+this.areaid+"---"+this.areaname+"---"+
+    this.boardingpointID+"---"+this.boardingpointname+"-----"+this.pleasespecify+"---"+this.reason+"---"+
+    this.usertime+"---"+this.dbdate+"-----"+this.overwrite)
     this.presentLoading();
-        this.adhocservice.saveAdhocrequest(this.requesttype,this.requesttypename,this.requestfor,this.requestforname,
+        this.adhocservice.saveAdhocrequest(this.requesttypeID,this.requesttypename,this.requestforID,this.requestforname,
           this.specialneed,this.fromdate,this.todate,this.shifttime,this.shifttimename,this.areaid,this.areaname,
-          this.boardingpoint,this.boardingpointname,this.pleasespecify,this.reason,this.usertime,this.dbdate,this.overwrite).subscribe(res => { 
+          this.boardingpointID,this.boardingpointname,this.pleasespecify,this.reason,this.usertime,this.dbdate,this.overwrite).subscribe(res => { 
            console.log("results are : " + JSON.stringify(res.results))
             this.loading.dismiss();
             if(res.results.ErrorCode=='0')
@@ -323,7 +347,7 @@ export class AdhocrequestPage implements OnInit {
         handler: () => {
           console.log('No clicked');
           this.overwrite="null";
-          console.log(this.overwrite);
+          console.log(this.adhocyesno);
         }
       },
       {
@@ -332,7 +356,7 @@ export class AdhocrequestPage implements OnInit {
         handler: () => {
           console.log('yes clicked');
           this.overwrite="1";
-          console.log(this.overwrite);
+          console.log(this.adhocyesno);
           this.submitRequest();
         }
       }
