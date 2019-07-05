@@ -27,7 +27,8 @@ const CIPProdserver="https://mobileservice.flex.com/goeasyapi_cip";
 /* const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?";
 const DashboardUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/GetDashboardDetails/?";
 const MytripsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/GetMyTripsDetails?";
-const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/SaveCancelRequests?"; 
+//const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/SaveCancelRequests?"; 
+const SaveNoShowURL="http://hkdnte250.asia.ad.flextronics.com:1227/api/CancelTransportRequestApi/CabRequestCancel?";
 const MyApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CabApprovalApi/ReadPendingRequests/?";
 const SaveMyApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/cabapprovalapi/ApprovePendingRequests?";
 const AdhocRequestURL="http://gssnte811.asia.ad.flextronics.com:4042/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
@@ -41,7 +42,7 @@ const SaveMyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/Sp
 const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
 const DashboardUrl = prodserver+"/api/DashBoardApi/GetDashboardDetails/?";
 const MytripsURL=prodserver+"/api/MyTripsApi/GetMyTripsDetails?";
-const SaveNoShowURL=prodserver+"/api/CancelTransportRequestApi/SaveCancelRequests?"; 
+const SaveNoShowURL=prodserver+"/api/CancelTransportRequestApi/CabRequestCancel?"; 
 const MyApprovalURL=prodserver+"/api/CabApprovalApi/ReadPendingRequests/?";
 const SaveMyApprovalURL=prodserver+"/api/cabapprovalapi/ApprovePendingRequests?";
 const AdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
@@ -79,7 +80,7 @@ export class RestApiService {
       `body was: ${error.error}`);
   }
   // return an observable with a user-facing error message
-  return throwError('Something bad happened; please try again later.');
+  return throwError('Network/Response failed. Please try again.');
 }
  /* 
 private extractData(res: Response) {
@@ -108,7 +109,7 @@ return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleE
   return this.http.get<mydata>(MytripsURL,{params}).pipe(catchError(this.handleError));
   }
 
-  saveCancelTrips(RequestTypeName:string,RequestForName:string,ShiftTimeID:string,
+  /* saveCancelTrips(RequestTypeName:string,RequestForName:string,ShiftTimeID:string,
     CabRequestID:string,FromDateOpnNoShow:string,ToDateOpnNoShow:string,
     RequestTypeID:string,RequestForID:string,RequestedForName:string,ShiftTimeName:string,
     locationID:string,employeeID:string,UserTime:string): Observable<any>{
@@ -127,8 +128,19 @@ return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleE
      .set('employeeID', employeeID)
      .set('UserTime', UserTime);
   return this.http.get<mydata>(SaveNoShowURL,{params}).pipe(catchError(this.handleError));
-  }
+  } */
 
+  saveCancelTrips(RequestForName:string,CabRequestID:string,FromDateOpnNoShow:string,ToDateOpnNoShow:string,employeeID:string,UserTime:string): Observable<any>{
+    let params = new HttpParams()
+     .set('Location', localStorage.getItem('LocationName'))
+     .set('CabRequestID', CabRequestID)
+     .set('EmployeeID', employeeID)
+     .set('FromDate', FromDateOpnNoShow)
+     .set('ToDate', ToDateOpnNoShow)     
+     .set('RequestFor', RequestForName)     
+     .set('UserTime', UserTime);
+  return this.http.get<mydata>(SaveNoShowURL,{params}).pipe(catchError(this.handleError));
+  } 
   getMyApprovalData(): Observable<any>{
     let params = new HttpParams()
      .set('status', '1')
@@ -176,7 +188,7 @@ return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleE
   saveAdhocrequest(RequestTypeID:string,RequestTypeName:string,RequestForID:string,
     RequestForName:string,SpecialNeed:string,FromDate:string,ToDate:string,Shift:string,
     ShiftTimeName:string,AreaID:string,AreaName:string,BoardingPointID:string,BoardingPointName:string,
-    SpecialNeedReason:string,Reason:string,UserTime:string,CommonDate:string,OverWrite:string): Observable<any>{
+    SpecialNeedReason:string,Reason:string,UserTime:string,CommonDate:string,OverWrite:string,AdhocYesno:string): Observable<any>{
     let params = new HttpParams()
      .set('Location', localStorage.getItem('LocationName'))
      .set('EmployeeID',  localStorage.getItem('EmployeeID'))
@@ -194,6 +206,7 @@ return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleE
      .set('SpecialNeedReason', SpecialNeedReason)
      .set('AdhocRemarks', Reason)
      .set('OverWrite',OverWrite)
+     .set('AdhocYesNo',AdhocYesno)
      .set('LoggedInEmployeeName', localStorage.getItem('displayname'))     
      .set('UserTime', UserTime)
      .set('Grade', localStorage.getItem('Grade'))

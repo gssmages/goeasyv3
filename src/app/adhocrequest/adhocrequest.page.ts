@@ -294,7 +294,7 @@ export class AdhocrequestPage implements OnInit {
     this.presentLoading();
         this.adhocservice.saveAdhocrequest(this.requesttypeID,this.requesttypename,this.requestforID,this.requestforname,
           this.specialneed,this.fromdate,this.todate,this.shifttime,this.shifttimename,this.areaid,this.areaname,
-          this.boardingpointID,this.boardingpointname,this.pleasespecify,this.reason,this.usertime,this.dbdate,this.overwrite).subscribe(res => { 
+          this.boardingpointID,this.boardingpointname,this.pleasespecify,this.reason,this.usertime,this.dbdate,this.overwrite,this.adhocyesno).subscribe(res => { 
            console.log("results are : " + JSON.stringify(res.results))
             this.loading.dismiss();
             if(res.results.ErrorCode=='0')
@@ -355,7 +355,7 @@ export class AdhocrequestPage implements OnInit {
         cssClass: 'alertconfirmation',
         handler: () => {
           console.log('yes clicked');
-          this.overwrite="1";
+          this.adhocyesno="1";
           console.log(this.adhocyesno);
           this.submitRequest();
         }
