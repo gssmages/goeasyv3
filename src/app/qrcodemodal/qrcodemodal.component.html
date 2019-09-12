@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary" >
+      <ion-title>
+       GoEasy - QRCode 
+      </ion-title>
+      <ion-buttons slot="end" (click)="closeModal()">
+        <ion-icon name="close" slot="icon-only" ></ion-icon>
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content style="--background: url('assets/images/transportbg.jpg') top center/100% 100% no-repeat">
+  <ion-card>
+    <h3 text-center>Scan QRCode </h3>
+    <p text-center>for Checkin/Checkout while using GoEasy Transport</p>
+    <div style="width:212px; margin: auto;">
+        <ngx-qrcode [qrc-value] = "qrcodevalue" qrc-element-type="img"  qrc-version = "7" ></ngx-qrcode>
+    </div>
+    <p text-center>Take Screenshot for Offline usage.</p>
+  </ion-card>
+</ion-content>

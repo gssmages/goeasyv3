@@ -13,15 +13,17 @@ import { Globals } from './global';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { CodePush } from '@ionic-native/code-push/ngx';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
-
+import { QrcodemodalComponent } from './qrcodemodal/qrcodemodal.component';
+import { NgxQRCodeModule } from 'ngx-qrcode2'; 
 @NgModule({
-    declarations: [AppComponent],
-    entryComponents: [],
+    declarations: [AppComponent,QrcodemodalComponent],
+    entryComponents: [QrcodemodalComponent],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        HttpClientModule
+        HttpClientModule,
+        NgxQRCodeModule
     ],
     providers: [
         StatusBar,

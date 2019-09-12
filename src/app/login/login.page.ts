@@ -7,6 +7,7 @@ import { Events } from '@ionic/angular';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { MenuController } from '@ionic/angular';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { Globals } from '../global';
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
@@ -22,9 +23,7 @@ export class LoginPage implements OnInit {
     uservalid:any;
     private loading: any;
     protected app_version: any;
-    public appPages : Array<any> = []; 
-
-
+    public appPages : Array<any> = [];
     constructor( private loginservice :RestApiService,
         private router: Router,
         public alertController: AlertController,
@@ -32,7 +31,7 @@ export class LoginPage implements OnInit {
         public events: Events,
         private appVersion: AppVersion,
         public menu: MenuController,
-        private ga: GoogleAnalytics
+        private ga: GoogleAnalytics,public globals: Globals
         ){      
           this.appVersion.getVersionNumber().then(value => {
             this.app_version = value;      
@@ -41,10 +40,9 @@ export class LoginPage implements OnInit {
           });
     }
     ngOnInit(){ 
-        this.ga.trackView('Login Page').then(() => {}).catch(e => console.log(e));
-    
+        this.ga.trackView('Login Page').then(() => {}).catch(e => console.log(e));        
         this.reset(); 
-       
+        console.log(localStorage.getItem('empusername'))
         if(localStorage.getItem('empusername')!=null)
         {
            // console.log(localStorage.getItem('empusername')+"----from SSO----"+localStorage.getItem('empsecurecode'))   
@@ -76,8 +74,6 @@ export class LoginPage implements OnInit {
 
     loginuser(user:string, pass:string)
     {
-     
-       
         this.presentLoading();
         //console.log(user+"----from SSO----"+pass)
         this.loginservice.getLoginData(user, pass).subscribe(res => { 
@@ -149,10 +145,13 @@ export class LoginPage implements OnInit {
             }
             
             this.reset();
-        }, err => {            
+        }, err => {      
+           this.presentAlert(err);        
             console.log(err);
-            this.loading.dismiss();
-            this.presentAlert(err);           
+            setTimeout(() => {
+              this.loading.dismiss();
+          }, 2000);
+                    
         });
     }
     async presentAlert(alertmessage:string) {

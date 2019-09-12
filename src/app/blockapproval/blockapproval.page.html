@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Unblock Approval
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid style="padding: 0;">
+    <ion-row style="padding: 0;">
+      <ion-col style="padding: 0;">
+        <ion-button expand="full" color="primary" (click)="selectall()"
+          style="--margin-top:0;--margin-bottom:0; margin: 0;">
+          Select all
+        </ion-button>
+      </ion-col>
+      <ion-col style="padding: 0;">
+        <ion-button expand="full" color="primary" (click)="deselectall()"
+          style="--margin-top:0;--margin-bottom:0; margin: 0;">
+          Deselect all</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div>
+    <p text-center> Either tap or select all to approve</p>
+    <div *ngFor="let item of myapprovallist; let i = index">
+      <ion-card (click)="selectthis[i]=!selectthis[i]" [class.selected]=selectthis[i] title="{{item.ID}}"
+        (swiperight)="swiperightEvent(e,i)" (swipeleft)="swipeleftEvent(e,i)"
+        [ngStyle]="{'background':selectthis[i] === true ? '#6A478D' : '#f3f3f3','color':selectthis[i] === true ? '#fff' : '' }">
+        <ion-row style="padding: 0;">
+          <ion-col style="padding: 0;" size="2" text-center>
+            <ion-icon name="person" *ngIf="!selectthis[i]" style="font-size:32px;"></ion-icon>
+            <ion-icon name="checkbox" *ngIf="selectthis[i]" color="light" style="font-size:32px;"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <div style="font-size: 14px;  font-weight: bold;line-height: 25px;">{{item.DisplayName}}<span  style="font-size:12px;"> - {{item.Location}}</span>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+
+    <!--<ion-card (click)="cardappr2=!cardappr3" [ngClass]="{'selected': cardappr2 }" id="id2" title="102" >
+            <ion-row style="padding: 0;"> 
+                <ion-col style="padding: 0;" size="2" text-center >
+                      <ion-icon name="calendar" *ngIf="!cardappr2 && status_close" style="font-size:32px;"></ion-icon>
+                      <ion-icon name="checkbox" *ngIf="cardappr2 ||  status" color="primary" style="font-size:32px;"></ion-icon>
+              </ion-col>
+                <ion-col >
+              <div>102</div>
+              <div style="font-size: 14px; line-height: 28px; font-weight: normal;">DisplayName</div>
+                          <div style="font-size: 12px; line-height: 24px;">RequestTypeName for RequestForName</div>
+                          <div style="font-size: 12px;">FromDateString  - ToDateString  at  ShiftTime</div>
+                          <div style="font-size: 12px;">BoardingPointName</div>
+                              </ion-col>
+                              </ion-row>
+          </ion-card>
+          <ion-card (click)="cardappr3=!cardappr3" [ngClass]="{'selected': cardappr3 }" id="id3" title="103">
+              <ion-row style="padding: 0;"> 
+                  <ion-col style="padding: 0;" size="2" text-center>
+                          <ion-icon name="calendar" *ngIf="!cardappr3 && status_close" style="font-size:32px;"></ion-icon>
+                          <ion-icon name="checkbox" *ngIf="cardappr3  || status" color="primary" style="font-size:32px;"></ion-icon>
+                  </ion-col>
+                  <ion-col >
+                <div>103</div>
+                <div style="font-size: 14px; line-height: 28px; font-weight: normal;">DisplayName</div>
+                            <div style="font-size: 12px; line-height: 24px;">RequestTypeName for RequestForName</div>
+                            <div style="font-size: 12px;">FromDateString  - ToDateString  at  ShiftTime</div>
+                            <div style="font-size: 12px;">BoardingPointName</div>
+                                </ion-col>
+                                </ion-row>
+            </ion-card>-->
+
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-grid style="padding: 0;">
+    <ion-row style="padding: 0;">     
+      <ion-col style="padding: 0;">
+        <ion-button expand="full" color="primary" (click)="submitrequest()"
+          style="--margin-top:0;--margin-bottom:0;margin: 0;height: 48px">
+          <ion-icon name="checkmark" style="font-size:32px;"></ion-icon>
+          Approve
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

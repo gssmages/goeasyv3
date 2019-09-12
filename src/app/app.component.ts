@@ -10,6 +10,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { CodePush, InstallMode, SyncStatus } from '@ionic-native/code-push/ngx';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -29,6 +30,7 @@ public appPages : Array<any> = [];
     private codePush: CodePush,
     private ga: GoogleAnalytics,
     private router: Router,
+    public alertController: AlertController,
   ) {
     this.initializeApp();
   
@@ -38,6 +40,7 @@ public appPages : Array<any> = [];
       console.log(err)
     });
     this.events.subscribe('user:login', (user) => { this.appPages = user; });
+    this.globals.appversion="1.2.1"; //Manual app versioon changes 
     if(localStorage.getItem('LocationName') =="Chennai" || localStorage.getItem('LocationName')=="Pune"){
       this.appPages=[
         {
@@ -142,18 +145,42 @@ public appPages : Array<any> = [];
  }
   reset()
   {
-    localStorage.removeItem('empusername');
-    localStorage.removeItem('empsecurecode');
-    localStorage.removeItem('EmployeeID');
-    localStorage.removeItem('LocationID');
-    localStorage.removeItem('LocationName');
-    localStorage.removeItem('displayname');
-    localStorage.removeItem('EmployeeMailID');
-    localStorage.removeItem('Postalcode');
-    localStorage.removeItem('Grade');
-    localStorage.removeItem('Regular');
-    localStorage.removeItem('SupervisorID');
-    localStorage.removeItem('SupervisorName');
-    localStorage.removeItem('SupervisorMailID');
+    this.showLogoutconfirm();
+  }
+  async showLogoutconfirm() {
+    const confirm =  await this.alertController.create({
+      header: 'GoEasy Confirmation',
+      message: 'Are you sure want to logout?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('No clicked');           
+          }
+        },
+        {
+          text: 'Yes',
+          cssClass: 'alertconfirmation',
+          handler: () => {
+            console.log('yes clicked');
+            localStorage.removeItem('empusername');
+            localStorage.removeItem('empsecurecode');
+            localStorage.removeItem('EmployeeID');
+            localStorage.removeItem('LocationID');
+            localStorage.removeItem('LocationName');
+            localStorage.removeItem('displayname');
+            localStorage.removeItem('EmployeeMailID');
+            localStorage.removeItem('Postalcode');
+            localStorage.removeItem('Grade');
+            localStorage.removeItem('Regular');
+            localStorage.removeItem('SupervisorID');
+            localStorage.removeItem('SupervisorName');
+            localStorage.removeItem('SupervisorMailID');
+            this.router.navigate(['/Login']);
+          }
+        }
+      ]
+    });
+    await confirm.present();
   }
 }

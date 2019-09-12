@@ -27,8 +27,8 @@
                             </ion-label>
                         </ion-item>
                     </ion-menu-toggle>
-                    <ion-menu-toggle auto-hide="false">
-                        <ion-item [routerDirection]="'root'" [routerLink]="['/Login']" (click)=reset()> 
+                    <ion-menu-toggle auto-hide="false"><!-- [routerLink]="['/Login']" -->
+                        <ion-item [routerDirection]="'root'"  (click)=reset()> 
                             <ion-icon slot="start" name="power"></ion-icon>
                             <ion-label>
                                 Logout
@@ -42,7 +42,7 @@
                     <ion-grid style="padding: 0;">
                         <ion-row style="padding: 0;">
                             <ion-col   style="padding: 0;" text-center>
-                                Ver - 1.2.0
+                                Ver - {{globals.appversion}}
                             </ion-col>
                         </ion-row>
                     </ion-grid>

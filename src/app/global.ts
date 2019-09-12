@@ -4,4 +4,5 @@ import { Injectable } from '@angular/core';
 export class Globals {
   displayname: string;
   businesstitle: string;
+  appversion: string;
 }

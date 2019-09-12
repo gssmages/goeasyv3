@@ -1,5 +1,5 @@
 <ion-header>
-   <ion-toolbar color="primary" >
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
@@ -8,23 +8,44 @@
         </ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content  style="--background: url('assets/images/transportbg.jpg') top center/100% 100% no-repeat">
+<ion-content style="--background: url('assets/images/transportbg.jpg') top center/100% 100% no-repeat">
     <ion-grid style="padding: 0;">
-            <ion-row style="padding: 0;">
-                    <ion-col size="12" text-center style="background: #eee;" >
-                        Locations
-                        </ion-col>
-            </ion-row>
-        <ion-row>
-          <ion-col size="6">
-                <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0; height: 65px;" routerLink="/myapproval"> 
-                    <p><ion-icon name="business"  style="font-size:24px;"></ion-icon><br><label >Chennai/Pune</label></p></ion-button>               
+       <!--  <ion-row style="padding: 0;">
+            <ion-col size="12" text-center style="background: #eee;">
+                Locations
             </ion-col>
-            <ion-col>
-                    <ion-button expand="full" style="--margin-top:0;--margin-bottom:0; height: 65px;" routerLink="/myapprovalcip">
-                        <p><ion-icon name="cog" style="font-size:24px;"></ion-icon><br><label >CIP - 1</label></p>
-                    </ion-button>
-          </ion-col>
-        </ion-row>        
-      </ion-grid>
+        </ion-row> -->
+        <ion-row>
+            <ion-col size="6">
+                <ion-button expand="full" color="primary" style="--margin-top:0;--margin-bottom:0; height: 75px;"
+                    routerLink="/myapproval">
+                    <p>
+                        <ion-icon name="business" style="font-size:24px;"></ion-icon><br>
+                        <label style="text-transform: none; font-weight: bold;">Chennai/Pune</label><br>
+                        <label style="text-transform: none; color:#ffce00; font-size: 12px">(For Adhoc Request)</label>
+                    </p>
+                </ion-button>
+            </ion-col>
+            <ion-col size="6">
+                <ion-button expand="full" style="--margin-top:0;--margin-bottom:0; height:75px;"
+                    routerLink="/myapprovalcip">
+                    <p>
+                        <ion-icon name="cog" style="font-size:24px;"></ion-icon><br>
+                        <label style="text-transform: none; font-weight: bold;">CIP - 1</label><br>
+                        <label style="text-transform: none;color:#ffce00;font-size: 12px">(For Special Cab)</label>
+                    </p>
+                </ion-button>
+            </ion-col>
+            <ion-col size="12">
+                <ion-button expand="full" style="--margin-top:0;--margin-bottom:0; height: 75px;"
+                    routerLink="/blockapproval">
+                    <p>
+                        <ion-icon name="checkmark-circle-outline" style="font-size:24px;"></ion-icon><br>
+                        <label style="text-transform: none;font-weight: bold;">Unblock Approval</label><br>
+                        <label style="text-transform: none;color:#ffce00;font-size: 12px">(For Blocked employee)</label>
+                    </p>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

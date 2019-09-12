@@ -10,6 +10,9 @@ import { AlertController } from '@ionic/angular';
 import { Globals } from '../global';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { Platform } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { QrcodemodalComponent } from '../qrcodemodal/qrcodemodal.component';
+import {formatDate } from '@angular/common';
 export interface Dropdetails
     {
         RequestTypeName: string;
@@ -45,6 +48,7 @@ const apiUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/G
 
 
 export class HomePage{
+
    
     /*  async setData(key, value) {
     const res = await this.storage.set(key, value);
@@ -60,6 +64,14 @@ export class HomePage{
    data1: Observable<any>;
    private loading: any;
    dailyroute:any;
+   noshowcount:any='0';
+  
+   today= new Date();
+   startdate:Date = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
+   enddate:Date = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0);
+   
+   fromdate:any=formatDate(this.startdate, 'MM-dd-yyyy', 'en-US', '+0530');
+   todate:any=formatDate(this.enddate, 'MM-dd-yyyy', 'en-US', '+0530');
     constructor(
       private platform: Platform,
       private homeservice :RestApiService,
@@ -69,12 +81,21 @@ export class HomePage{
      private http: HttpClient,
      public alertController: AlertController,
      public globals: Globals,
-     private ga: GoogleAnalytics
+     private ga: GoogleAnalytics,
+     public modalController: ModalController
      ) { }
 
     ngOnInit(){     
+      console.log((this.fromdate)+"---"+(this.todate));
       this.ga.trackView('Home Page').then(() => {}).catch(e => console.log(e));
         this.presentLoading();
+        this.homeservice.getNoShows(this.fromdate, this.todate).subscribe(res => { 
+          console.log("results are : " + JSON.stringify(res.results))
+          this.noshowcount=res.results.length;
+          console.log(this.noshowcount)
+      }, err => {            
+          console.log(err);      
+      });
         this.homeservice.getDashboardData().subscribe(res => {
             console.log(res);
             this.loading.dismiss();
@@ -95,6 +116,7 @@ export class HomePage{
             this.ga.setUserId(localStorage.getItem('displayname'))
             console.log(localStorage.getItem('displayname'))    
             this.dailyroute='Pickup';
+           
             if(this.pickupdetails==null)
             {
                 console.log(this.pickupdetails)
@@ -151,7 +173,13 @@ export class HomePage{
     return await this.loading.present();
   }
  
-
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: QrcodemodalComponent
+    }); 
+  
+    return await modal.present();
+  }
   
 /*async getData() {
   const loading = await this.loadingController.create({
