@@ -1,9 +1,46 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>canceltrips</ion-title>
-  </ion-toolbar>
+  <ion-toolbar color="primary" >
+     <ion-buttons slot="start">
+         <ion-menu-button></ion-menu-button>
+     </ion-buttons>
+     <ion-title>
+       No show 
+     </ion-title>
+ </ion-toolbar>
 </ion-header>
-
-<ion-content padding>
+<ion-content>
+  <!-- <ion-card>
+    <ion-row>
+      <ion-col size="3" text-center style="color:#fff; background:#6A478D;" >
+        <ion-icon name="calendar" style="font-size:40px; "></ion-icon>
+        <p style="margin:0;">12-09-2019</p>
+      </ion-col>
+      <ion-col style="padding-left:10px;">
+        <p>Pickup and Drop - 11:00 - 20:00</p>
+      </ion-col> 
+    </ion-row>        
+</ion-card> -->
+<ion-item >
+  <ion-label>Choose Month<span style="color:red">*</span></ion-label>
+  <ion-datetime display-format="MMM-YYYY" picker-format="MMM-YYYY"  [(ngModel)]="date" [min]="mindateformat"  [max]="maxformatDate" (ionChange)="Changedate()"> </ion-datetime>
+  </ion-item>
+  <ion-card *ngIf="norecord">
+    <ion-row style="padding:5px; margin: 5px;">
+        <ion-col>No Record to display</ion-col>
+</ion-row>        
+  </ion-card>
+  <div *ngIf="showall">
+    <ion-card *ngFor="let item of noshowlist; let i = index">
+      <ion-row>
+        <ion-col size="3" text-center style="color:#fff; background:#6A478D;" >
+          <ion-icon name="calendar" style="font-size:40px; "></ion-icon>
+          <p style="margin:0;">{{item.TravelDate  | slice:0:10 }}</p>
+        </ion-col>
+        <ion-col style="padding-left:10px;">
+          <p>{{item.RequestForName}} - {{item.ShiftTimeStartName}} - {{item.ShiftTimeEndName}}</p>
+        </ion-col> 
+      </ion-row>        
+    </ion-card>
+  </div>
 
 </ion-content>

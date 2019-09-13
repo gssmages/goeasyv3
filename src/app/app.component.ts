@@ -58,6 +58,11 @@ public appPages : Array<any> = [];
           url: '/Mytrips',
           icon: 'pin'
         },
+        {
+          title: 'No show',
+          url: '/noshow',
+          icon: 'close-circle'
+        },
           {
           title: 'My Approvals',
           url: '/Myapprvaldashboard',
