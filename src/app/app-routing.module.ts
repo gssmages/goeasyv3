@@ -32,12 +32,12 @@ const routes: Routes = [
         loadChildren: './myapprvaldashboard/myapprvaldashboard.module#MyapprvaldashboardPageModule'
     },
   { path: 'activetrips', loadChildren: './activetrips/activetrips.module#ActivetripsPageModule' },
-  { path: 'noshow', loadChildren: './noshow/noshow.module#NoshowPageModule' },
   { path: 'myapproval', loadChildren: './myapproval/myapproval.module#MyapprovalPageModule' },
   { path: 'myapprovalcip', loadChildren: './myapprovalcip/myapprovalcip.module#MyapprovalcipPageModule' },
   { path: 'feedback', loadChildren: './feedback/feedback.module#FeedbackPageModule' },
   { path: 'update', loadChildren: './update/update.module#UpdatePageModule' },
-  { path: 'blockapproval', loadChildren: './blockapproval/blockapproval.module#BlockapprovalPageModule' }
+  { path: 'blockapproval', loadChildren: './blockapproval/blockapproval.module#BlockapprovalPageModule' },
+  { path: 'noshow', loadChildren: './noshow/noshow.module#NoshowPageModule' }
 ];
 
 @NgModule({

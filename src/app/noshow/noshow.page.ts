@@ -25,6 +25,7 @@ export class NoshowPage implements OnInit {
   date: any;
   norecord:boolean=false;
   showall:boolean=false;
+
   constructor(private noshowservice: RestApiService,
     public loadingController: LoadingController,
     public alertController: AlertController,
@@ -59,7 +60,6 @@ export class NoshowPage implements OnInit {
       this.presentAlert(err);
     });
   }
-
   Changedate() {
     console.log("date" + this.date)
     this.choosendate = new Date(this.date);
@@ -107,5 +107,4 @@ export class NoshowPage implements OnInit {
     });
     return await this.loading.present();
   }
-
 }
