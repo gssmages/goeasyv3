@@ -36,8 +36,11 @@ const SaveAdhocRequestURL="http://gssnte811.asia.ad.flextronics.com:4042/api/Adh
 const FeedbackURL="http://gssnte811.asia.ad.flextronics.com:4042/api/FeedbackApi/GetMobileQuestions?";
 const SaveFeedbackURL="http://gssnte811.asia.ad.flextronics.com:4042/api/FeedbackApi/SaveMobileFeedback?";
 const MyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
-const SaveMyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/SaveApproveRejectData/?"; */
-
+const SaveMyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/SaveApproveRejectData/?";
+const MyBlockApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CabApprovalApi/GetBlockUserDetails?"; 
+const UnblockEmployeesURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CabApprovalApi/UnblockEmployees/?"; 
+const GetNoShowsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/getNoShow/";
+const GetCancelledtripsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/getCancelledTrips?"; */
 /****   Goeasy Testing Server --f5 enabled URL https://testmobile.flextronics.com/goeasyapi/   ***/
 const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
 const DashboardUrl = prodserver+"/api/DashBoardApi/GetDashboardDetails/?";
@@ -50,7 +53,11 @@ const SaveAdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/SaveCabRequest?";
 const FeedbackURL=prodserver+"/api/FeedbackApi/GetMobileQuestions?";
 const SaveFeedbackURL=prodserver+"/api/FeedbackApi/SaveMobileFeedback?";
 const MyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
-const SaveMyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?"; 
+const SaveMyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";  
+const MyBlockApprovalURL=prodserver+"/api/CabApprovalApi/GetBlockUserDetails?"; 
+const UnblockEmployeesURL=prodserver+"/api/CabApprovalApi/UnblockEmployees/?"; 
+const GetNoShowsURL=prodserver+"/api/MyTripsApi/getNoShow/";
+const GetCancelledtripsURL=prodserver+"/api/MyTripsApi/getCancelledTrips?";
 
 interface mydata
     {
@@ -259,6 +266,36 @@ return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleE
      .set('date', date)
      .set('reqFor', reqFor);
   return this.http.get<mydata>(SaveFeedbackURL,{params}).pipe(catchError(this.handleError));
+  }
+  getMyBlockApprovalData(): Observable<any>{
+    let params = new HttpParams()
+    .set('LocationName',localStorage.getItem('LocationName'))
+     .set('employeeID', localStorage.getItem('EmployeeID'))
+     .set('pAction','1');
+  return this.http.get<mydata>(MyBlockApprovalURL,{params}).pipe(catchError(this.handleError));
+  }
+  saveUnblockEmployees(employeeIDlist:string,comments:string): Observable<any>{
+    let params = new HttpParams()
+     .set('employeeID', employeeIDlist)
+     .set('approverID', localStorage.getItem('EmployeeID'))
+     .set('comments', comments)
+     .set('locationName', localStorage.getItem('LocationName'))
+     .set('appversion', this.globals.appversion);
+  return this.http.get<mydata>(UnblockEmployeesURL,{params}).pipe(catchError(this.handleError));
+  }
+  getNoShows(fromdate:string,todate:string): Observable<any>{
+    let params = new HttpParams()
+     .set('startDate', fromdate)
+     .set('endDate', todate)
+     .set('employeeID', localStorage.getItem('EmployeeID'));
+  return this.http.get<mydata>(GetNoShowsURL,{params}).pipe(catchError(this.handleError));
+  }
+  getCancelledtrips(fromdate:string,todate:string): Observable<any>{
+    let params = new HttpParams()
+     .set('from', fromdate)
+     .set('to', todate)
+     .set('employeeID', localStorage.getItem('EmployeeID'));
+return this.http.get<mydata>(GetCancelledtripsURL,{params}).pipe(catchError(this.handleError));
   }
 /*.then(data => {
 

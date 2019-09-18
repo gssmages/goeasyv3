@@ -72,6 +72,8 @@ export class HomePage{
    
    fromdate:any=formatDate(this.startdate, 'MM-dd-yyyy', 'en-US', '+0530');
    todate:any=formatDate(this.enddate, 'MM-dd-yyyy', 'en-US', '+0530');
+
+   thismonth:any=formatDate(this.today, 'MMM-yyyy', 'en-US', '+0530');
     constructor(
       private platform: Platform,
       private homeservice :RestApiService,

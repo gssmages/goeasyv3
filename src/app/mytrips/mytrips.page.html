@@ -73,6 +73,10 @@
 </div>
     </div>
     <div *ngSwitchCase="'Cancelledtrips'">
+        <ion-item >
+            <ion-label>Choose Month<span style="color:red">*</span></ion-label>
+            <ion-datetime display-format="MMM-YYYY" picker-format="MMM-YYYY"  [(ngModel)]="date" [min]="mindateformat"  [max]="dbdate" (ionChange)="Changedate()"> </ion-datetime>
+            </ion-item>
         <ion-card *ngIf="nocancelrecord">
             <ion-row style="padding:5px; margin: 5px;">
                 <ion-col>No Record to display</ion-col>
@@ -86,8 +90,9 @@
                 <p style="margin:0;">{{item.ReqTypeName}}</p>
               </ion-col>
               <ion-col style="padding-left:10px;">
-                <p>{{item.StartDateString}} to {{item.EndDateString}}</p>
-                <p>{{item.ReqForName}} - {{item.shiftForGrid}}</p>
+                <p style="margin: 2px 0;">{{item.NullableStartDate | slice:0:10  | date:"dd-MMM-yyyy" }} to {{item.NullableEndDate | slice:0:10  | date:"dd-MMM-yyyy" }}</p>
+                <p style="margin: 2px 0;">{{item.ReqForName}} - {{item.longShiftStartTime | slice:11:16 }} - {{item.longShiftEndTime | slice:11:16}}</p>
+                <p style="margin: 2px 0;">Status : {{item.status}} <br>  Cancelled By : {{item.CreatedBy==employeeID ? displayname : item.CreatedBy}} <br> {{item.remarks!=null? 'Remarks :' + item.remarks: ''  }} </p>
               </ion-col>                  
             </ion-row>        
         </ion-card>

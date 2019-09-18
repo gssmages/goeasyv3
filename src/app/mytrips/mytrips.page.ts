@@ -24,7 +24,11 @@ export class MytripsPage implements OnInit {
   maxdate= new Date();
   maxDate=this.maxdate.setMonth(this.maxdate.getMonth()+2);
   dbdate='';
+  date:any;
+  choosendate: any;
   maxformatDate='';
+  minDate=new Date(this.today.getFullYear(), this.today.getMonth()-5, 0);
+  mindateformat:any;
   nocancelrecord:boolean=false;
   showallcancel:boolean=false;
   norecordmytrip:boolean=false;
@@ -32,6 +36,7 @@ export class MytripsPage implements OnInit {
   
   locationID:string=localStorage.getItem("LocationID");
   employeeID:string=localStorage.getItem("EmployeeID");
+  displayname:string=localStorage.getItem("displayname");
   RequestTypeName:any;
   RequestForName:any;
   ShiftTimeID:any;
@@ -44,6 +49,11 @@ export class MytripsPage implements OnInit {
   ShiftTimeName:any;
   UserTime:string=formatDate(this.today, 'MM-dd-yyyy HH:mm:ss', 'en-US', '+0530');
   tripdetails:any;
+  startdate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
+  enddate: Date = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0);
+  fromdate: any = formatDate(this.startdate, 'MM-dd-yyyy', 'en-US', '+0530');
+  todate: any = formatDate(this.enddate, 'MM-dd-yyyy', 'en-US', '+0530');
+
   constructor( 
     private mytripservice :RestApiService,
     public loadingController: LoadingController,
@@ -54,17 +64,35 @@ export class MytripsPage implements OnInit {
 
   ngOnInit() {
     this.ga.trackView('My Trips Page').then(() => {}).catch(e => console.log(e));
-
+    this.date = formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
     this.dbdate = formatDate(this.today, 'yyyy-MM-dd', 'en-US', '+0530');
     this.maxformatDate =formatDate(this.maxDate, 'yyyy-MM-dd', 'en-US', '+0530');
-
-    this.presentLoading();
+    this.mindateformat=formatDate(this.minDate, 'yyyy-MM-dd', 'en-US', '+0530');
+    this.mytripservice.getCancelledtrips(this.fromdate, this.todate).subscribe(res => {
+     // console.log("results are : " + JSON.stringify(res))
+      this.cancelledtrips=res.results;
+      if(this.cancelledtrips==null || this.cancelledtrips=='')
+      {
+        this.nocancelrecord=true;
+        this.showallcancel=false;
+      }
+      else
+      {
+        this.nocancelrecord=false;
+        this.showallcancel=true;
+      }
+    }, err => {            
+      console.log(err);
+      this.loading.dismiss();
+      this.presentAlert(err);           
+  });
+     this.presentLoading();
     this.mytripservice.getMyTripsData().subscribe(res => {
       this.loading.dismiss();
       console.log(res);
      // console.log("results are : " + JSON.stringify(res))
       this.mytrips=res.results.CancelTransportDetails;
-      this.cancelledtrips=res.results.CancelMyTripDetails;
+    
       this.requestfor=res.results.RequestForDetails;
       this.tripdetails='Activetrips';
       if(this.mytrips=='' || this.mytrips==null)
@@ -77,16 +105,7 @@ export class MytripsPage implements OnInit {
         this.norecordmytrip=false;
         this.showallmytrip=true;
       }
-      if(this.cancelledtrips==null || this.cancelledtrips=='')
-      {
-        this.nocancelrecord=true;
-        this.showallcancel=false;
-      }
-      else
-      {
-        this.nocancelrecord=false;
-        this.showallcancel=true;
-      }
+    
     }, err => {            
       console.log(err);
       this.loading.dismiss();
@@ -329,6 +348,38 @@ saveTripcancellation(requestforname:string, requestforid:string)
             this.presentAlert(err);           
         });
 
+  }
+  Changedate() {
+    console.log("date" + this.date)
+    this.choosendate = new Date(this.date);
+    this.startdate = new Date(this.choosendate.getFullYear(), this.choosendate.getMonth(), 1);
+    this.enddate = new Date(this.choosendate.getFullYear(), this.choosendate.getMonth() + 1, 0);
+
+    console.log(this.startdate + "------" + this.enddate)
+    this.fromdate = formatDate(this.startdate, 'MM-dd-yyyy', 'en-US', '+0530');
+    this.todate = formatDate(this.enddate, 'MM-dd-yyyy', 'en-US', '+0530');
+    this.presentLoading();
+    this.mytripservice.getCancelledtrips(this.fromdate, this.todate).subscribe(res => {
+      console.log("results are : " + JSON.stringify(res.results))
+      this.loading.dismiss();
+      this.cancelledtrips=res.results;
+      if(this.cancelledtrips==null || this.cancelledtrips=='')
+      {
+        this.nocancelrecord=true;
+        this.showallcancel=false;
+      }
+      else
+      {
+        this.nocancelrecord=false;
+        this.showallcancel=true;
+      }
+    }, err => {
+      console.log(err);
+      setTimeout(() => {
+        this.loading.dismiss();
+      }, 2000);
+      this.presentAlert(err);
+    });
   }
   /* saveTripcancellation(requestforname:string, requestforid:string)
   {

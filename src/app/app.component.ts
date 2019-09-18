@@ -41,6 +41,7 @@ public appPages : Array<any> = [];
     });
     this.events.subscribe('user:login', (user) => { this.appPages = user; });
     this.globals.appversion="1.2.1"; //Manual app versioon changes 
+    /* apppages menu using event publish abd subscribe, login will publish and here subscribe that and usethat variable */
     if(localStorage.getItem('LocationName') =="Chennai" || localStorage.getItem('LocationName')=="Pune"){
       this.appPages=[
         {
@@ -63,7 +64,7 @@ public appPages : Array<any> = [];
           url: '/noshow',
           icon: 'close-circle'
         },
-          {
+        {
           title: 'My Approvals',
           url: '/Myapprvaldashboard',
           icon: 'checkbox-outline'
@@ -88,7 +89,7 @@ public appPages : Array<any> = [];
       icon: 'checkbox-outline'
     }
   ];
-}
+} 
 
   }
   
