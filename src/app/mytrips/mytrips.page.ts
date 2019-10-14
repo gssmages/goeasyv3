@@ -341,7 +341,14 @@ saveTripcancellation(requestforname:string, requestforid:string)
         this.mytripservice.saveCancelTrips(requestforname,this.CabRequestID,this.FromDateOpnNoShow,this.ToDateOpnNoShow,this.employeeID,this.UserTime).subscribe(res => { 
             console.log("results are : " + JSON.stringify(res.results))
             this.loading.dismiss();
-            this.presentAlert(res.results.ErrorDesc);    
+            if(res.results.ErrorCode==-1)
+            {
+              this.presentAlert("Request has been cancelled successfully ");
+            }
+            else
+            {
+              this.presentAlert(res.results.ErrorDesc);  
+            }            
         }, err => {            
             console.log(err);
             this.loading.dismiss();
