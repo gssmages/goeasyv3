@@ -15,20 +15,21 @@ const httpOptions = {
 /*"assets/myjson.json"; todaysdate=11-23-2018&location=Chennai&employeeID=941364
 "https://jsonplaceholder.typicode.com/todos/1";*/
 
-const SITserver="http://gssnte811.asia.ad.flextronics.com:4042/";
+const SITserver="http://gssnte811.asia.ad.flextronics.com:4042/"; //http://hkdnte250.asia.ad.flextronics.com:1227/
 const testserver="https://testmobile.flextronics.com/goeasyapi";
 //const prodserver="http://sacnt2315.americas.ad.flextronics.com/goeasyapi";
-const prodserver="https://mobileservice.flex.com/goeasyapi";
+const prodserver="https://mobileservice.flex.com/goeasyapi"; 
 //const CIPProdserver="http://hkdnt955.asia.ad.flextronics.com:94"; 
 const CIPProdserver="https://mobileservice.flex.com/goeasyapi_cip";
-
+//const prodserver="http://localhost:57855";
 
 /****   Goeasy SIT Server ***********/
 /* const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?";
+const SSOLoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailDecryption?";
 const DashboardUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/GetDashboardDetails/?";
 const MytripsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/GetMyTripsDetails?";
 //const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/SaveCancelRequests?"; 
-const SaveNoShowURL="http://hkdnte250.asia.ad.flextronics.com:1227/api/CancelTransportRequestApi/CabRequestCancel?";
+const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/CabRequestCancel?";
 const MyApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CabApprovalApi/ReadPendingRequests/?";
 const SaveMyApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/cabapprovalapi/ApprovePendingRequests?";
 const AdhocRequestURL="http://gssnte811.asia.ad.flextronics.com:4042/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
@@ -43,6 +44,7 @@ const GetNoShowsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsAp
 const GetCancelledtripsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/getCancelledTrips?"; */
 /****   Goeasy Testing Server --f5 enabled URL https://testmobile.flextronics.com/goeasyapi/   ***/
 const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
+const SSOLoginURL=prodserver+"/api/login/CheckLoginDetailDecryption?";
 const DashboardUrl = prodserver+"/api/DashBoardApi/GetDashboardDetails/?";
 const MytripsURL=prodserver+"/api/MyTripsApi/GetMyTripsDetails?";
 const SaveNoShowURL=prodserver+"/api/CancelTransportRequestApi/CabRequestCancel?"; 
@@ -101,7 +103,12 @@ getLoginData(username: string, password: string): Observable<any>{
    .set('password', password);
 return this.http.get<mydata>(LoginURL,{params}).pipe(catchError(this.handleError));
 }
-
+getSSOLoginData(username: string, password: string): Observable<any>{
+  let params = new HttpParams()
+   .set('enuserName', username)
+   .set('enpassword', password);
+return this.http.get<mydata>(SSOLoginURL,{params}).pipe(catchError(this.handleError));
+}
     getDashboardData(): Observable<any>{
      let params = new HttpParams()
       .set('todaysdate', this.dbdate)
@@ -137,7 +144,8 @@ return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleE
   return this.http.get<mydata>(SaveNoShowURL,{params}).pipe(catchError(this.handleError));
   } */
 
-  saveCancelTrips(RequestForName:string,CabRequestID:string,FromDateOpnNoShow:string,ToDateOpnNoShow:string,employeeID:string,UserTime:string): Observable<any>{
+  saveCancelTrips(RequestForName:string,CabRequestID:string,FromDateOpnNoShow:string,
+    ToDateOpnNoShow:string,employeeID:string,UserTime:string,RequestTypeName:string,ShiftStartTime:string,ShiftEndTime:string): Observable<any>{
     let params = new HttpParams()
      .set('Location', localStorage.getItem('LocationName'))
      .set('CabRequestID', CabRequestID)
@@ -145,7 +153,11 @@ return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleE
      .set('FromDate', FromDateOpnNoShow)
      .set('ToDate', ToDateOpnNoShow)     
      .set('RequestFor', RequestForName)     
-     .set('UserTime', UserTime);
+     .set('UserTime', UserTime)
+     .set('RequestTypeName', RequestTypeName)
+     .set('EmployeeName', localStorage.getItem('displayname'))
+     .set('ShiftStartTime', ShiftStartTime)     
+     .set('ShiftEndTime', ShiftEndTime);
   return this.http.get<mydata>(SaveNoShowURL,{params}).pipe(catchError(this.handleError));
   } 
   getMyApprovalData(): Observable<any>{

@@ -46,9 +46,9 @@ export class LoginPage implements OnInit {
         if(localStorage.getItem('empusername')!=null)
         {
            // console.log(localStorage.getItem('empusername')+"----from SSO----"+localStorage.getItem('empsecurecode'))   
-            this.sso_username=localStorage.getItem('empusername')
-            this.sss_password=localStorage.getItem('empsecurecode')
-            this.loginuser(this.sso_username,this.sss_password);
+            this.sso_username=localStorage.getItem('empusername');
+            this.sss_password=localStorage.getItem('empsecurecode');
+            this.ssologinuser(this.sso_username,this.sss_password);
         }
         
     }
@@ -83,14 +83,97 @@ export class LoginPage implements OnInit {
             if(this.uservalid)
             {
                 this.loading.dismiss();
-                localStorage.setItem('empusername', user);
-                localStorage.setItem('empsecurecode', pass);
+                localStorage.setItem('empusername', res.results.enuserName);
+                localStorage.setItem('empsecurecode',  res.results.enpassword);
                 localStorage.setItem('EmployeeID', res.results.EmployeeID);
                 localStorage.setItem('LocationID', res.results.LocationID);
                 localStorage.setItem('LocationName',res.results.LocationName);
+                this.globals.displayname=res.results.DisplayName;               
                 this.router.navigate(['/home']);
-
-
+                /*******menu update ************************** */
+                if(localStorage.getItem('LocationName') =="Chennai" || localStorage.getItem('LocationName')=="Pune"){
+                    this.appPages=[
+                      {
+                        title: 'Home',
+                        url: '/home',
+                        icon: 'home'
+                      },
+                      {
+                        title: 'Adhoc Request',
+                        url: '/Adhocrequest',
+                        icon: 'time'
+                      },
+                        {
+                        title: 'My Trips',
+                        url: '/Mytrips',
+                        icon: 'pin'
+                      },
+                      {
+                        title: 'No show',
+                        url: '/noshow',
+                        icon: 'close-circle'
+                      },
+                        {
+                        title: 'My Approvals',
+                        url: '/Myapprvaldashboard',
+                        icon: 'checkbox-outline'
+                      },
+                      {
+                        title: 'Feedback',
+                        url: '/feedback',
+                        icon: 'chatbubbles'
+                      }
+                    ];
+                  }
+                  else{
+                    this.appPages=[
+                  {
+                    title: 'Home',
+                    url: '/home',
+                    icon: 'home'
+                  },    
+                    {
+                    title: 'My Approvals',
+                    url: '/Myapprvaldashboard',
+                    icon: 'checkbox-outline'
+                  }
+                ];
+              }
+              this.events.publish('user:login', this.appPages);
+            }
+            else
+            {
+                this.loading.dismiss();
+                this.presentAlert(res.results);
+                this.router.navigate(['/Login']);
+            }
+            
+            this.reset();
+        }, err => {      
+           this.presentAlert(err);        
+            console.log(err);
+            setTimeout(() => {
+              this.loading.dismiss();
+          }, 2000);
+                    
+        });
+    }
+    ssologinuser(user:string, pass:string)
+    {
+        this.presentLoading();
+        //console.log(user+"----from SSO----"+pass)
+        this.loginservice.getSSOLoginData(user, pass).subscribe(res => { 
+            
+            console.log("results are : " + JSON.stringify(res))
+            this.uservalid=res.results[0].IsValid;
+            if(this.uservalid)
+            {
+                this.loading.dismiss();
+                localStorage.setItem('displayname', res.results[0].DisplayName);
+                localStorage.setItem('EmployeeID', res.results[0].EmployeeID);
+                localStorage.setItem('LocationName',res.results[0].LocationName);     
+                this.globals.displayname=res.results[0].DisplayName;
+                this.router.navigate(['/home']);
                 /*******menu update ************************** */
                 if(localStorage.getItem('LocationName') =="Chennai" || localStorage.getItem('LocationName')=="Pune"){
                     this.appPages=[

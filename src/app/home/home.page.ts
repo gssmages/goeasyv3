@@ -87,7 +87,16 @@ export class HomePage{
      public modalController: ModalController
      ) { }
 
-    ngOnInit(){     
+    ngOnInit(){ 
+      this.platform.backButton.subscribeWithPriority(9999, () => {
+        document.addEventListener('backbutton', function (event) {
+          event.preventDefault();
+          event.stopPropagation();
+          console.log('hello');
+        }, false);
+      });
+    }
+      ionViewWillEnter() {  
       console.log((this.fromdate)+"---"+(this.todate));
       this.ga.trackView('Home Page').then(() => {}).catch(e => console.log(e));
         this.presentLoading();
@@ -96,7 +105,8 @@ export class HomePage{
           this.noshowcount=res.results.length;
           console.log(this.noshowcount)
       }, err => {            
-          console.log(err);      
+          console.log(err);
+          this.presentAlert(err);          
       });
         this.homeservice.getDashboardData().subscribe(res => {
             console.log(res);
@@ -140,15 +150,16 @@ export class HomePage{
             }
             console.log("results are : " + JSON.stringify(this.employeedetails))
         //this.presentAlert();
-        this.platform.backButton.subscribeWithPriority(9999, () => {
-          document.addEventListener('backbutton', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-            console.log('hello');
-          }, false);
-        });
+       
 
-        });
+        }, err => {      
+          this.presentAlert(err);        
+           console.log(err);
+           setTimeout(() => {
+             this.loading.dismiss();
+         }, 2000);
+                   
+       });
 
         if(localStorage.getItem('LocationName') =="Chennai" || localStorage.getItem('LocationName')=="Pune"){
             this.showfooter=true;
@@ -159,10 +170,10 @@ export class HomePage{
         }
       
     }
-    async presentAlert() {
+    async presentAlert(alertmessage:string) {
     const alert = await this.alertController.create({
       header: 'GoEasy Alert',
-      message: JSON.stringify(this.dropdetails),
+      message: alertmessage,
       buttons: ['OK']
     });
 

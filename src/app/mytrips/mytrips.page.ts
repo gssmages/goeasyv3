@@ -47,6 +47,8 @@ export class MytripsPage implements OnInit {
   RequestForID:any;  
   RequestedForName:any;
   ShiftTimeName:any;
+  ShiftStartTime:any;
+  ShiftEndTime:any;
   UserTime:string=formatDate(this.today, 'MM-dd-yyyy HH:mm:ss', 'en-US', '+0530');
   tripdetails:any;
   startdate: Date = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
@@ -125,6 +127,8 @@ export class MytripsPage implements OnInit {
     this.RequestForID=item.RequestForID;  
     this.RequestedForName=item.RequestForName;
     this.ShiftTimeName=item.ShiftStartTime+"-"+item.ShiftEndTime;
+    this.ShiftStartTime=item.ShiftStartTime;
+    this.ShiftEndTime=item.ShiftEndTime;
     if(this.RequestTypeName!="Regular")
     {
         if(this.RequestForName=="Pickup and Drop")
@@ -338,17 +342,11 @@ saveTripcancellation(requestforname:string, requestforid:string)
   {
     console.log(this.FromDateOpnNoShow+"------"+this.ToDateOpnNoShow)
      this.presentLoading();
-        this.mytripservice.saveCancelTrips(requestforname,this.CabRequestID,this.FromDateOpnNoShow,this.ToDateOpnNoShow,this.employeeID,this.UserTime).subscribe(res => { 
+        this.mytripservice.saveCancelTrips(requestforname,this.CabRequestID,this.FromDateOpnNoShow,
+          this.ToDateOpnNoShow,this.employeeID,this.UserTime,this.RequestTypeName,this.ShiftStartTime,this.ShiftEndTime).subscribe(res => { 
             console.log("results are : " + JSON.stringify(res.results))
-            this.loading.dismiss();
-            if(res.results.ErrorCode==-1)
-            {
-              this.presentAlert("Request has been cancelled successfully ");
-            }
-            else
-            {
-              this.presentAlert(res.results.ErrorDesc);  
-            }            
+            this.loading.dismiss();            
+              this.presentAlert(res.results.ErrorDesc);                
         }, err => {            
             console.log(err);
             this.loading.dismiss();
