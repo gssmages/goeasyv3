@@ -73,6 +73,11 @@ public appPages : Array<any> = [];
           title: 'Feedback',
           url: '/feedback',
           icon: 'chatbubbles'
+        },
+        {
+          title: 'Trip Attendance',
+          url: '/activetrips',
+          icon: 'car'
         }
       ];
     }

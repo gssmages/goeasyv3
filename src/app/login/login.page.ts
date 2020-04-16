@@ -122,6 +122,11 @@ export class LoginPage implements OnInit {
                         title: 'Feedback',
                         url: '/feedback',
                         icon: 'chatbubbles'
+                      },
+                      {
+                        title: 'Trip Attendance',
+                        url: '/activetrips',
+                        icon: 'car'
                       }
                     ];
                   }
@@ -206,6 +211,11 @@ export class LoginPage implements OnInit {
                         title: 'Feedback',
                         url: '/feedback',
                         icon: 'chatbubbles'
+                      },
+                      {
+                        title: 'Trip Attendance',
+                        url: '/activetrips',
+                        icon: 'car'
                       }
                     ];
                   }

@@ -1,0 +1,32 @@
+form{
+    margin-top: 0px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    div{
+        margin-top: 0px;
+        margin-right: 5px;
+        h2{
+            margin: 0;
+            font-size: 18px;
+            color: #b6b6be;
+        }
+        ion-input{
+            text-align: center;
+            border: 1px solid #e1e5e8;
+            border-radius: 5px;
+            margin-top: 8px;
+            font-size: 20px;
+            padding: 3px !important;
+            padding-left: 0px !important;
+            color: #383838;
+            font-weight: 600;
+            --padding-start: 0;
+        }
+        &:last-child{
+            margin-top: 0px;
+            margin-right: 0px;
+        }
+    }
+}

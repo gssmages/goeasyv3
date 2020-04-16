@@ -27,6 +27,15 @@
            </ion-col>
     </ion-row>
     </ion-card>
+    <ion-card class="cardbg" style="color:#fff;" [routerLink]="['/activetrips']"> 
+        <ion-row>
+            <ion-col size="12">
+                 <div text-center style="font-weight: bold; line-height: 30px;"  >
+                   Trip Attendance 
+                </div>                      
+            </ion-col>           
+        </ion-row>
+        </ion-card>
     <ion-card style="color:#000;"> 
     <ion-segment [(ngModel)]="dailyroute" color="primary" (ionChange)="segmentChanged($event)">   
         <ion-segment-button value="Pickup" style="height: 36px;">

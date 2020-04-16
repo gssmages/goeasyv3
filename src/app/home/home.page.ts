@@ -13,6 +13,7 @@ import { Platform } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { QrcodemodalComponent } from '../qrcodemodal/qrcodemodal.component';
 import {formatDate } from '@angular/common';
+import { CodePush, InstallMode, SyncStatus } from '@ionic-native/code-push/ngx';
 export interface Dropdetails
     {
         RequestTypeName: string;
@@ -84,7 +85,8 @@ export class HomePage{
      public alertController: AlertController,
      public globals: Globals,
      private ga: GoogleAnalytics,
-     public modalController: ModalController
+     public modalController: ModalController,
+     private codePush: CodePush,
      ) { }
 
     ngOnInit(){ 
@@ -97,6 +99,7 @@ export class HomePage{
       });
     }
       ionViewWillEnter() {  
+        this.checkCodePush(); 
       console.log((this.fromdate)+"---"+(this.todate));
       this.ga.trackView('Home Page').then(() => {}).catch(e => console.log(e));
         this.presentLoading();
@@ -149,9 +152,14 @@ export class HomePage{
                 this.dropshow=true;
             }
             console.log("results are : " + JSON.stringify(this.employeedetails))
-        //this.presentAlert();
-       
-
+            if(this.pickupdetails!=null || this.dropdetails!=null)
+            {
+              var routenumber = this.pickupdetails.RouteNumber + this.dropdetails.RouteNumber 
+              localStorage.setItem("routeassignedtoday",routenumber);
+            }
+            else{
+              localStorage.setItem("routeassignedtoday",null);
+            }
         }, err => {      
           this.presentAlert(err);        
            console.log(err);
@@ -193,7 +201,37 @@ export class HomePage{
   
     return await modal.present();
   }
-  
+  checkCodePush() {
+    localStorage.setItem("updatemsg","");
+        this.codePush.sync().subscribe((status)=>{
+    // if(status==SyncStatus.CHECKING_FOR_UPDATE)
+    // alert("Checking for Update");
+    if(status==SyncStatus.DOWNLOADING_PACKAGE)
+    {
+      this.router.navigate(['/update']);
+      localStorage.setItem("updatemsg","Downloading Package");
+    }
+    //alert("Downloading Package");
+    if(status==SyncStatus.IN_PROGRESS)
+    {
+      localStorage.setItem("updatemsg","Please wait..<br>App is updating");
+    }
+    //alert("In Progress");
+    if(status==SyncStatus.INSTALLING_UPDATE)
+    localStorage.setItem("updatemsg","Installing update");
+    //alert("Installing update");
+    // if(status==SyncStatus.UP_TO_DATE)
+    // alert("Update Up-to-date");
+    if(status==SyncStatus.UPDATE_INSTALLED)
+    localStorage.setItem("updatemsg","Update Installed");
+    //alert("Update Installed");
+    if(status==SyncStatus.ERROR)
+    localStorage.setItem("updatemsg","Error While Updating");
+    //alert("Error While Updating");
+  }
+   
+  );
+ }
 /*async getData() {
   const loading = await this.loadingController.create({
     message: 'Loading'

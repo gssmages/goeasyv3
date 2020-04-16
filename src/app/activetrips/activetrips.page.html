@@ -1,9 +1,62 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>activetrips</ion-title>
+  <ion-toolbar color="primary" >
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Trip Attendance
+      </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content padding>
-
-</ion-content>
+<ion-content style="--background: url('assets/images/transportbg.jpg') top center/100% 100% no-repeat">
+  <ion-card >
+    <h3 class="ion-text-center">Enter Trip Code </h3>
+    <p class="ion-text-center">Please check with driver for the trip code</p>
+    <ion-card-content style="max-width: 320px; margin: auto;">
+    <form class="form-container">
+    <div>
+        <ion-input name="a" #a (keyup)="moveFocus($event,b,'')" type="tel" placeholder="0"
+          maxlength="1">
+        </ion-input>
+      </div>
+  
+      <div>
+        <ion-input name="b" #b (keyup)="moveFocus($event,c,a)" type="tel" placeholder="0"
+          maxlength="1">
+        </ion-input>
+      </div>
+  
+      <div>
+        <ion-input name="c"  #c (keyup)="moveFocus($event,d,b)" type="tel" placeholder="0"
+          maxlength="1">
+        </ion-input>
+      </div>
+  
+      <div>
+        <ion-input name="d"  #d (keyup)="moveFocus($event,e,c)" type="tel" placeholder="0"
+          maxlength="1">
+        </ion-input>
+      </div>  
+      <!-- <div>
+        <ion-input name="e"  #e (keyup)="moveFocus($event,f,d)" type="tel" placeholder="0"
+          maxlength="1">
+        </ion-input>
+      </div>  
+      <div>
+        <ion-input name="f"  #f (keyup)="moveFocus($event,'',e)" type="tel" placeholder="0"
+          maxlength="1"></ion-input>
+      </div> -->
+      </form>      
+      </ion-card-content>
+  </ion-card>
+  </ion-content>
+  <ion-footer>   
+    <ion-grid style="padding: 0;">
+        <ion-row style="padding: 0;">
+            <ion-col style="padding: 0;">
+              <ion-button expand="full" color="primary" 
+              style="--margin-top:0;--margin-bottom:0; margin:0;height: 48px"  (click)="SubmitOTP()">Submit</ion-button>
+            </ion-col>            
+        </ion-row>
+    </ion-grid>
+</ion-footer>

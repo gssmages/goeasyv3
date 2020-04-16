@@ -15,33 +15,34 @@ const httpOptions = {
 /*"assets/myjson.json"; todaysdate=11-23-2018&location=Chennai&employeeID=941364
 "https://jsonplaceholder.typicode.com/todos/1";*/
 
-const SITserver="http://gssnte811.asia.ad.flextronics.com:4042/"; //http://hkdnte250.asia.ad.flextronics.com:1227/
+//const SITserver="http://gssnte811.asia.ad.flextronics.com:4042"; //http://hkdnte250.asia.ad.flextronics.com:1227/
 const testserver="https://testmobile.flextronics.com/goeasyapi";
 //const prodserver="http://sacnt2315.americas.ad.flextronics.com/goeasyapi";
 const prodserver="https://mobileservice.flex.com/goeasyapi"; 
 //const CIPProdserver="http://hkdnt955.asia.ad.flextronics.com:94"; 
 const CIPProdserver="https://mobileservice.flex.com/goeasyapi_cip";
-//const prodserver="http://localhost:57855";
+//const SITserver="http://localhost:57855";
 
 /****   Goeasy SIT Server ***********/
-/* const LoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailEncryption?";
-const SSOLoginURL="http://gssnte811.asia.ad.flextronics.com:4042/api/login/CheckLoginDetailDecryption?";
-const DashboardUrl = "http://gssnte811.asia.ad.flextronics.com:4042/api/DashBoardApi/GetDashboardDetails/?";
-const MytripsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/GetMyTripsDetails?";
+/* const LoginURL=testserver+"/api/login/CheckLoginDetailEncryption?";
+const SSOLoginURL=testserver+"/api/login/CheckLoginDetailDecryption?";
+const DashboardUrl = testserver+"/api/DashBoardApi/GetDashboardDetails/?";
+const MytripsURL=testserver+"/api/MyTripsApi/GetMyTripsDetails?";
 //const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/SaveCancelRequests?"; 
-const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/CabRequestCancel?";
-const MyApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CabApprovalApi/ReadPendingRequests/?";
-const SaveMyApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/cabapprovalapi/ApprovePendingRequests?";
-const AdhocRequestURL="http://gssnte811.asia.ad.flextronics.com:4042/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
-const SaveAdhocRequestURL="http://gssnte811.asia.ad.flextronics.com:4042/api/AdhocCabRequestApi/SaveCabRequest?"; 
-const FeedbackURL="http://gssnte811.asia.ad.flextronics.com:4042/api/FeedbackApi/GetMobileQuestions?";
-const SaveFeedbackURL="http://gssnte811.asia.ad.flextronics.com:4042/api/FeedbackApi/SaveMobileFeedback?";
-const MyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
-const SaveMyApprovalCIPURL="http://gssnte811.asia.ad.flextronics.com:4042/api/SpecialCabRequestApi/SaveApproveRejectData/?";
-const MyBlockApprovalURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CabApprovalApi/GetBlockUserDetails?"; 
-const UnblockEmployeesURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CabApprovalApi/UnblockEmployees/?"; 
-const GetNoShowsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/getNoShow/";
-const GetCancelledtripsURL="http://gssnte811.asia.ad.flextronics.com:4042/api/MyTripsApi/getCancelledTrips?"; */
+const SaveNoShowURL=testserver+"/api/CancelTransportRequestApi/CabRequestCancel?";
+const MyApprovalURL=testserver+"/api/CabApprovalApi/ReadPendingRequests/?";
+const SaveMyApprovalURL=testserver+"/api/cabapprovalapi/ApprovePendingRequests?";
+const AdhocRequestURL=testserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
+const SaveAdhocRequestURL=testserver+"/api/AdhocCabRequestApi/SaveCabRequest?"; 
+const FeedbackURL=testserver+"/api/FeedbackApi/GetMobileQuestions?";
+const SaveFeedbackURL=testserver+"/api/FeedbackApi/SaveMobileFeedback?";
+const MyApprovalCIPURL=testserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
+const SaveMyApprovalCIPURL=testserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";
+const MyBlockApprovalURL=testserver+"/api/CabApprovalApi/GetBlockUserDetails?"; 
+const UnblockEmployeesURL=testserver+"/api/CabApprovalApi/UnblockEmployees/?"; 
+const GetNoShowsURL=testserver+"/api/MyTripsApi/getNoShow/";
+const GetCancelledtripsURL=testserver+"/api/MyTripsApi/getCancelledTrips?";
+const SaveTripAttendanceUrl = testserver+"/api/DashBoardApi/SaveTripAttendance/?"; */
 /****   Goeasy Testing Server --f5 enabled URL https://testmobile.flextronics.com/goeasyapi/   ***/
 const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
 const SSOLoginURL=prodserver+"/api/login/CheckLoginDetailDecryption?";
@@ -60,6 +61,7 @@ const MyBlockApprovalURL=prodserver+"/api/CabApprovalApi/GetBlockUserDetails?";
 const UnblockEmployeesURL=prodserver+"/api/CabApprovalApi/UnblockEmployees/?"; 
 const GetNoShowsURL=prodserver+"/api/MyTripsApi/getNoShow/";
 const GetCancelledtripsURL=prodserver+"/api/MyTripsApi/getCancelledTrips?";
+const SaveTripAttendanceUrl = prodserver+"/api/DashBoardApi/SaveTripAttendance/?";
 
 interface mydata
     {
@@ -72,25 +74,31 @@ interface mydata
 export class RestApiService {
   dbdate='';
   today= new Date();
-  
+  errormsg ='';
   constructor(private http: HttpClient,public globals: Globals) {
     this.dbdate = formatDate(this.today, 'MM-dd-yyyy', 'en-US', '+0530')
    }
     
-  private handleError(error: HttpErrorResponse) {
-  if (error.error instanceof ErrorEvent) {
-    // A client-side or network error occurred. Handle it accordingly.
-    console.error('An error occurred:', error.error.message);
-  } else {
-    // The backend returned an unsuccessful response code.
-    // The response body may contain clues as to what went wrong,
-    console.error(
-      `Backend returned code ${error.status}, ` +
-      `body was: ${error.error}`);
+   private handleError(error: HttpErrorResponse) {
+  
+    if (!navigator.onLine) {
+      console.error('No Internet Connection')
+      this.errormsg = 'No Internet Connection';
   }
-  // return an observable with a user-facing error message
-  return throwError('Network/Response failed. Please try again.');
-}
+    else if (error.error instanceof ErrorEvent) {
+      // A client-side or network error occurred. Handle it accordingly.
+      console.error('An error occurred:', error.error.message);
+    } else {
+      // The backend returned an unsuccessful response code. 'Network failed. Please try again.'
+      // The response body may contain clues as to what went wrong,
+      this.errormsg = `Server Error Status: ${error.status} Text: ${error.statusText}`
+      console.error(
+        `Backend returned code ${error.status}, ` +
+        `body was: ${error.error}`);
+    }
+    // return an observable with a user-facing error message
+    return throwError(this.errormsg);
+  }
  /* 
 private extractData(res: Response) {
   let body = res;
@@ -100,7 +108,7 @@ private extractData(res: Response) {
 getLoginData(username: string, password: string): Observable<any>{
   let params = new HttpParams()
    .set('username', username)
-   .set('password', password);
+   .set('keyword', password);
 return this.http.get<mydata>(LoginURL,{params}).pipe(catchError(this.handleError));
 }
 getSSOLoginData(username: string, password: string): Observable<any>{
@@ -308,6 +316,14 @@ return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleE
      .set('to', todate)
      .set('employeeID', localStorage.getItem('EmployeeID'));
 return this.http.get<mydata>(GetCancelledtripsURL,{params}).pipe(catchError(this.handleError));
+  }
+  SaveTripAttendance(tripcode:string): Observable<any>{
+    let params = new HttpParams()
+     .set('todaysdate', this.dbdate)
+     .set('employeeID', localStorage.getItem('EmployeeID'))
+     .set('locationID',localStorage.getItem('LocationID'))
+     .set('Tripcode', tripcode);
+  return this.http.get<mydata>(SaveTripAttendanceUrl,{params}).pipe(catchError(this.handleError));
   }
 /*.then(data => {
 
