@@ -15,15 +15,20 @@ import { CodePush } from '@ionic-native/code-push/ngx';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { QrcodemodalComponent } from './qrcodemodal/qrcodemodal.component';
 import { NgxQRCodeModule } from 'ngx-qrcode2'; 
+import { IonicSelectableModule } from 'ionic-selectable';
+import { AreamodalComponent } from './areamodal/areamodal.component';
+import { FormsModule } from '@angular/forms';
 @NgModule({
-    declarations: [AppComponent,QrcodemodalComponent],
-    entryComponents: [QrcodemodalComponent],
+    declarations: [AppComponent,QrcodemodalComponent,AreamodalComponent],
+    entryComponents: [QrcodemodalComponent,AreamodalComponent],
     imports: [
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
         HttpClientModule,
-        NgxQRCodeModule
+        NgxQRCodeModule,
+        IonicSelectableModule,
+        FormsModule
     ],
     providers: [
         StatusBar,

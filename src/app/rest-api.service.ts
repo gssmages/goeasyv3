@@ -21,7 +21,7 @@ const testserver="https://testmobile.flextronics.com/goeasyapi";
 const prodserver="https://mobileservice.flex.com/goeasyapi"; 
 //const CIPProdserver="http://hkdnt955.asia.ad.flextronics.com:94"; 
 const CIPProdserver="https://mobileservice.flex.com/goeasyapi_cip";
-//const SITserver="http://localhost:57855";
+const SITserver="http://localhost:57855";
 
 /****   Goeasy SIT Server ***********/
 /* const LoginURL=testserver+"/api/login/CheckLoginDetailEncryption?";
@@ -42,7 +42,8 @@ const MyBlockApprovalURL=testserver+"/api/CabApprovalApi/GetBlockUserDetails?";
 const UnblockEmployeesURL=testserver+"/api/CabApprovalApi/UnblockEmployees/?"; 
 const GetNoShowsURL=testserver+"/api/MyTripsApi/getNoShow/";
 const GetCancelledtripsURL=testserver+"/api/MyTripsApi/getCancelledTrips?";
-const SaveTripAttendanceUrl = testserver+"/api/DashBoardApi/SaveTripAttendance/?"; */
+const SaveTripAttendanceUrl = testserver+"/api/DashBoardApi/SaveTripAttendance/?";
+const AreaURL=testserver+"/api/DriverMobileApi/AreaNodalPoint?"; */
 /****   Goeasy Testing Server --f5 enabled URL https://testmobile.flextronics.com/goeasyapi/   ***/
 const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
 const SSOLoginURL=prodserver+"/api/login/CheckLoginDetailDecryption?";
@@ -62,7 +63,7 @@ const UnblockEmployeesURL=prodserver+"/api/CabApprovalApi/UnblockEmployees/?";
 const GetNoShowsURL=prodserver+"/api/MyTripsApi/getNoShow/";
 const GetCancelledtripsURL=prodserver+"/api/MyTripsApi/getCancelledTrips?";
 const SaveTripAttendanceUrl = prodserver+"/api/DashBoardApi/SaveTripAttendance/?";
-
+const AreaURL=prodserver+"/api/DriverMobileApi/AreaNodalPoint?";
 interface mydata
     {
         obj: Object;
@@ -317,13 +318,20 @@ return this.http.get<mydata>(DashboardUrl,{params}).pipe(catchError(this.handleE
      .set('employeeID', localStorage.getItem('EmployeeID'));
 return this.http.get<mydata>(GetCancelledtripsURL,{params}).pipe(catchError(this.handleError));
   }
-  SaveTripAttendance(tripcode:string): Observable<any>{
+  SaveTripAttendance(tripcode:string, routechange:string,nodalpoint:string ): Observable<any>{
     let params = new HttpParams()
      .set('todaysdate', this.dbdate)
      .set('employeeID', localStorage.getItem('EmployeeID'))
      .set('locationID',localStorage.getItem('LocationID'))
-     .set('Tripcode', tripcode);
+     .set('Tripcode', tripcode)
+     .set('NodalPointID',nodalpoint)
+     .set('RouteChange', routechange);
   return this.http.get<mydata>(SaveTripAttendanceUrl,{params}).pipe(catchError(this.handleError));
+  }
+  getArea(locationname: string): Observable<any>{
+    let params = new HttpParams()
+    .set('LocationName', locationname)
+  return this.http.get(AreaURL,{params}).pipe(catchError(this.handleError));
   }
 /*.then(data => {
 

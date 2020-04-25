@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController,ModalController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
+import { AreamodalComponent } from '../areamodal/areamodal.component';
 @Component({
   selector: 'app-activetrips',
   templateUrl: './activetrips.page.html',
@@ -18,11 +19,14 @@ export class ActivetripsPage implements OnInit {
   tripcode:string="";
   private loading: any;
 
+  nodalpointid= "";
+  routechange = "false";
   constructor(private tripservice :RestApiService,
     private router: Router,
     public alertController: AlertController,
     public loadingController: LoadingController,
-    private ga: GoogleAnalytics) { }
+    private ga: GoogleAnalytics,    
+    public modalController: ModalController) { }
 
   ngOnInit() {
     this.ga.trackView('Trip Code Page').then(() => {}).catch(e => console.log(e));    
@@ -41,8 +45,8 @@ export class ActivetripsPage implements OnInit {
   }
   SubmitOTP()
   {
-    if(localStorage.getItem('routeassignedtoday') != null && localStorage.getItem('routeassignedtoday').length > 2 )
-    {    
+   // if(localStorage.getItem('routeassignedtoday') != null && localStorage.getItem('routeassignedtoday').length > 2 )
+   // {    
     if(this.ainput.value && this.binput.value && this.cinput.value 
       && this.dinput.value)
     {
@@ -50,11 +54,22 @@ export class ActivetripsPage implements OnInit {
      this.tripcode = this.ainput.value + this.binput.value + this.cinput.value + this.dinput.value; 
       console.log(this.tripcode)
       this.presentLoading();
-        this.tripservice.SaveTripAttendance(this.tripcode).subscribe(res => { 
-          this.reset()
+        this.tripservice.SaveTripAttendance(this.tripcode,this.routechange,this.nodalpointid).subscribe(res => { 
+         
             console.log("results are : " + JSON.stringify(res.results))
-            this.loading.dismiss();            
-              this.presentAlert(res.results.ErrorDesc);                
+            this.loading.dismiss();  
+            if (res.results.ErrorCode == "0" || res.results.ErrorCode == "3") {          
+              this.presentAlert(res.results.ErrorDesc);  
+              this.reset()
+            }
+            else if(res.results.ErrorCode == "1"){
+              console.log(res.results.ErrorDesc)
+              this.Confirmroutechange(res.results.ErrorDesc)
+            }
+            else if(res.results.ErrorCode == "2"){
+              this.presentModal()
+              console.log("Employee ID not in this Roaster ")
+            }
         }, err => {            
           this.reset()
             console.log(err);
@@ -67,11 +82,11 @@ export class ActivetripsPage implements OnInit {
       console.log("Incorrect Trip Code")
       this.presentAlert("Incorrect Trip Code");  
     }
-  }
+  /* }
   else
   {
     this.presentAlert("No Trips Today");  
-  }
+  } */
   }
   reset()
   {
@@ -79,6 +94,8 @@ export class ActivetripsPage implements OnInit {
       this.binput.value='';
       this.cinput.value ='';
       this.dinput.value='';
+      this.nodalpointid= "";
+      this.routechange = "false";
   }
   async presentAlert(alertmessage:string) {
     const alert = await this.alertController.create({
@@ -94,6 +111,47 @@ export class ActivetripsPage implements OnInit {
       message: 'Loading....',
     });
     return await this.loading.present();
+  }
+  async Confirmroutechange(message: string) {
+    const confirm =  await this.alertController.create({
+      header: 'GoEasy Confirm Route Change',
+      message: message,
+      buttons: [
+       /*  {
+          text: 'NO',
+          handler: () => {
+            console.log('No clicked');
+          }
+        }, */
+        {
+          text: 'OK',
+          handler: () => {
+            this.routechange="true";
+            console.log('yes clicked');
+            this.SubmitOTP();
+          }
+        }
+      ]
+    });
+    await confirm.present();
+  }
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: AreamodalComponent
+    }); 
+    modal.onDidDismiss()
+        .then((data) => {
+          console.log('MODAL DATA', data.data);
+          if(data.data!="0")
+          {
+            this.nodalpointid=data.data;
+            console.log('MODAL DATA', data.data);
+            this.SubmitOTP();
+          }
+          
+      });
+  
+    return await modal.present();
   }
 
 }
