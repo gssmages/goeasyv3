@@ -32,15 +32,31 @@ export class ActivetripsPage implements OnInit {
     this.ga.trackView('Trip Code Page').then(() => {}).catch(e => console.log(e));    
   }
   moveFocus(event, nextElement, previousElement) {
-    if (event.keyCode == 8 && previousElement) {
+     console.log(event.which + "event.which")
+    console.log(event.keyCode + "event.keyCode")
+    if(event.target.value.length < 1 && previousElement){
+      previousElement.setFocus()
+    }
+    else if(nextElement && event.target.value.length>0){
+      nextElement.setFocus();
+    }
+    else {
+     return 0;
+    } 
+   /*  var charCode = (event.which) ? event.which : event.keyCode
+    if (charCode == 8 && previousElement) {
       previousElement.setFocus();
-    } else if (event.keyCode >= 48 && event.keyCode <= 57) {
+    } else if (charCode >= 48 && charCode <= 57) {
       if (nextElement) {
         nextElement.setFocus();
       }
     } else {
       event.path[0].value = '';
-    }
+    }  
+    if(event.path[0].value.length > 1)
+    {
+      event.path[0].value = '';
+    } */
     //console.log(this.ainput.value)
   }
   SubmitOTP()
