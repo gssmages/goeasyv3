@@ -37,7 +37,8 @@ const routes: Routes = [
   { path: 'feedback', loadChildren: './feedback/feedback.module#FeedbackPageModule' },
   { path: 'update', loadChildren: './update/update.module#UpdatePageModule' },
   { path: 'blockapproval', loadChildren: './blockapproval/blockapproval.module#BlockapprovalPageModule' },
-  { path: 'noshow', loadChildren: './noshow/noshow.module#NoshowPageModule' }
+  { path: 'noshow', loadChildren: './noshow/noshow.module#NoshowPageModule' },
+  { path: 'vehicletracking', loadChildren: './vehicletracking/vehicletracking.module#VehicletrackingPageModule' }
 ];
 
 @NgModule({

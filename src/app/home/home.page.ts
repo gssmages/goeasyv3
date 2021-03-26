@@ -75,6 +75,7 @@ export class HomePage{
    todate:any=formatDate(this.enddate, 'MM-dd-yyyy', 'en-US', '+0530');
 
    thismonth:any=formatDate(this.today, 'MMM-yyyy', 'en-US', '+0530');
+   currenttime:any = formatDate(this.today, 'HH:mm', 'en-US', '+0530');
     constructor(
       private platform: Platform,
       private homeservice :RestApiService,
@@ -100,6 +101,7 @@ export class HomePage{
     }
       ionViewWillEnter() {  
         this.checkCodePush(); 
+        console.log(this.currenttime)
       console.log((this.fromdate)+"---"+(this.todate));
       this.ga.trackView('Home Page').then(() => {}).catch(e => console.log(e));
         this.presentLoading();
@@ -126,7 +128,7 @@ export class HomePage{
             localStorage.setItem("Regular",this.employeedetails.Regular);
             localStorage.setItem("SupervisorID",this.employeedetails.SupervisorEmployeeID);
             localStorage.setItem("SupervisorName",this.employeedetails.SupervisorDisplayName);
-            localStorage.setItem("SupervisorMailID",this.employeedetails.SupervisoreMail);
+            localStorage.setItem("SupervisorMailID",this.employeedetails.SupervisoreMail);           
             //for Google Analytics username need to be set 
             this.ga.setUserId(localStorage.getItem('displayname'))
             console.log(localStorage.getItem('displayname'))    
@@ -140,7 +142,8 @@ export class HomePage{
             else
             {
                 this.pickupshow=true;
-
+                localStorage.setItem("pickuprouteno",this.pickupdetails.RouteNumber);
+                localStorage.setItem("pickupshift",(this.pickupdetails.Shift).replace(':', ''));
             }
             if(this.dropdetails==null)
             {
@@ -150,6 +153,8 @@ export class HomePage{
             else
             {
                 this.dropshow=true;
+                localStorage.setItem("droprouteno",this.dropdetails.RouteNumber);
+                localStorage.setItem("dropshift",(this.dropdetails.Shift).replace(':', ''));
             }
             console.log("results are : " + JSON.stringify(this.employeedetails))
             if(this.pickupdetails!=null || this.dropdetails!=null)

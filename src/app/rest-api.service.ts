@@ -16,7 +16,7 @@ const httpOptions = {
 "https://jsonplaceholder.typicode.com/todos/1";*/
 
 //const SITserver="http://gssnte811.asia.ad.flextronics.com:4042"; //http://hkdnte250.asia.ad.flextronics.com:1227/
-const testserver="https://testmobile.flextronics.com/goeasyapi";
+//const testserver="https://testmobile.flextronics.com/goeasyapi";
 //const prodserver="http://sacnt2315.americas.ad.flextronics.com/goeasyapi";
 const prodserver="https://mobileservice.flex.com/goeasyapi"; 
 //const CIPProdserver="http://hkdnt955.asia.ad.flextronics.com:94"; 
@@ -24,46 +24,48 @@ const CIPProdserver="https://mobileservice.flex.com/goeasyapi_cip";
 const SITserver="http://localhost:57855";
 
 /****   Goeasy SIT Server ***********/
-/* const LoginURL=testserver+"/api/login/CheckLoginDetailEncryption?";
-const SSOLoginURL=testserver+"/api/login/CheckLoginDetailDecryption?";
-const DashboardUrl = testserver+"/api/DashBoardApi/GetDashboardDetails/?";
-const MytripsURL=testserver+"/api/MyTripsApi/GetMyTripsDetails?";
+const LoginURL=SITserver+"/api/login/CheckLoginDetailEncryption?";
+const SSOLoginURL=SITserver+"/api/login/CheckLoginDetailDecryption?";
+const DashboardUrl = SITserver+"/api/DashBoardApi/GetDashboardDetails/?";
+const MytripsURL=SITserver+"/api/MyTripsApi/GetMyTripsDetails?";
 //const SaveNoShowURL="http://gssnte811.asia.ad.flextronics.com:4042/api/CancelTransportRequestApi/SaveCancelRequests?"; 
-const SaveNoShowURL=testserver+"/api/CancelTransportRequestApi/CabRequestCancel?";
-const MyApprovalURL=testserver+"/api/CabApprovalApi/ReadPendingRequests/?";
-const SaveMyApprovalURL=testserver+"/api/cabapprovalapi/ApprovePendingRequests?";
-const AdhocRequestURL=testserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
-const SaveAdhocRequestURL=testserver+"/api/AdhocCabRequestApi/SaveCabRequest?"; 
-const FeedbackURL=testserver+"/api/FeedbackApi/GetMobileQuestions?";
-const SaveFeedbackURL=testserver+"/api/FeedbackApi/SaveMobileFeedback?";
-const MyApprovalCIPURL=testserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
-const SaveMyApprovalCIPURL=testserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";
-const MyBlockApprovalURL=testserver+"/api/CabApprovalApi/GetBlockUserDetails?"; 
-const UnblockEmployeesURL=testserver+"/api/CabApprovalApi/UnblockEmployees/?"; 
-const GetNoShowsURL=testserver+"/api/MyTripsApi/getNoShow/";
-const GetCancelledtripsURL=testserver+"/api/MyTripsApi/getCancelledTrips?";
-const SaveTripAttendanceUrl = testserver+"/api/DashBoardApi/SaveTripAttendance/?";
-const AreaURL=testserver+"/api/DriverMobileApi/AreaNodalPoint?"; */
+const SaveNoShowURL=SITserver+"/api/CancelTransportRequestApi/CabRequestCancel?";
+const MyApprovalURL=SITserver+"/api/CabApprovalApi/ReadPendingRequests/?";
+const SaveMyApprovalURL=SITserver+"/api/cabapprovalapi/ApprovePendingRequests?";
+const AdhocRequestURL=SITserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
+const SaveAdhocRequestURL=SITserver+"/api/AdhocCabRequestApi/SaveCabRequest?"; 
+const FeedbackURL=SITserver+"/api/FeedbackApi/GetMobileQuestions?";
+const SaveFeedbackURL=SITserver+"/api/FeedbackApi/SaveMobileFeedback?";
+const MyApprovalCIPURL=SITserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
+const SaveMyApprovalCIPURL=SITserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";
+const MyBlockApprovalURL=SITserver+"/api/CabApprovalApi/GetBlockUserDetails?"; 
+const UnblockEmployeesURL=SITserver+"/api/CabApprovalApi/UnblockEmployees/?"; 
+const GetNoShowsURL=SITserver+"/api/MyTripsApi/getNoShow/";
+const GetCancelledtripsURL=SITserver+"/api/MyTripsApi/getCancelledTrips?";
+const SaveTripAttendanceUrl = SITserver+"/api/DashBoardApi/SaveTripAttendance/?";
+const AreaURL=SITserver+"/api/DriverMobileApi/AreaNodalPoint?";
+const GeolocationURL=SITserver+"/api/DashBoardApi/VehicleTrackingUserMobile/?";
+//const GeolocationURL="https://my-json-server.typicode.com/gssmages/jsonserver/goeasylocation"; 
 /****   Goeasy Testing Server --f5 enabled URL https://testmobile.flextronics.com/goeasyapi/   ***/
-const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
-const SSOLoginURL=prodserver+"/api/login/CheckLoginDetailDecryption?";
-const DashboardUrl = prodserver+"/api/DashBoardApi/GetDashboardDetails/?";
-const MytripsURL=prodserver+"/api/MyTripsApi/GetMyTripsDetails?";
-const SaveNoShowURL=prodserver+"/api/CancelTransportRequestApi/CabRequestCancel?"; 
-const MyApprovalURL=prodserver+"/api/CabApprovalApi/ReadPendingRequests/?";
-const SaveMyApprovalURL=prodserver+"/api/cabapprovalapi/ApprovePendingRequests?";
-const AdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
-const SaveAdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/SaveCabRequest?"; 
-const FeedbackURL=prodserver+"/api/FeedbackApi/GetMobileQuestions?";
-const SaveFeedbackURL=prodserver+"/api/FeedbackApi/SaveMobileFeedback?";
-const MyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
-const SaveMyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";  
-const MyBlockApprovalURL=prodserver+"/api/CabApprovalApi/GetBlockUserDetails?"; 
-const UnblockEmployeesURL=prodserver+"/api/CabApprovalApi/UnblockEmployees/?"; 
-const GetNoShowsURL=prodserver+"/api/MyTripsApi/getNoShow/";
-const GetCancelledtripsURL=prodserver+"/api/MyTripsApi/getCancelledTrips?";
-const SaveTripAttendanceUrl = prodserver+"/api/DashBoardApi/SaveTripAttendance/?";
-const AreaURL=prodserver+"/api/DriverMobileApi/AreaNodalPoint?";
+// const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
+// const SSOLoginURL=prodserver+"/api/login/CheckLoginDetailDecryption?";
+// const DashboardUrl = prodserver+"/api/DashBoardApi/GetDashboardDetails/?";
+// const MytripsURL=prodserver+"/api/MyTripsApi/GetMyTripsDetails?";
+// const SaveNoShowURL=prodserver+"/api/CancelTransportRequestApi/CabRequestCancel?"; 
+// const MyApprovalURL=prodserver+"/api/CabApprovalApi/ReadPendingRequests/?";
+// const SaveMyApprovalURL=prodserver+"/api/cabapprovalapi/ApprovePendingRequests?";
+// const AdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
+// const SaveAdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/SaveCabRequest?"; 
+// const FeedbackURL=prodserver+"/api/FeedbackApi/GetMobileQuestions?";
+// const SaveFeedbackURL=prodserver+"/api/FeedbackApi/SaveMobileFeedback?";
+// const MyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
+// const SaveMyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";  
+// const MyBlockApprovalURL=prodserver+"/api/CabApprovalApi/GetBlockUserDetails?"; 
+// const UnblockEmployeesURL=prodserver+"/api/CabApprovalApi/UnblockEmployees/?"; 
+// const GetNoShowsURL=prodserver+"/api/MyTripsApi/getNoShow/";
+// const GetCancelledtripsURL=prodserver+"/api/MyTripsApi/getCancelledTrips?";
+// const SaveTripAttendanceUrl = prodserver+"/api/DashBoardApi/SaveTripAttendance/?";
+// const AreaURL=prodserver+"/api/DriverMobileApi/AreaNodalPoint?"; 
 interface mydata
     {
         obj: Object;
@@ -73,11 +75,12 @@ interface mydata
   providedIn: 'root'
 })
 export class RestApiService {
-  dbdate='';
+  dbdate='';currentdate='';
   today= new Date();
   errormsg ='';
   constructor(private http: HttpClient,public globals: Globals) {
     this.dbdate = formatDate(this.today, 'MM-dd-yyyy', 'en-US', '+0530')
+    this.currentdate = formatDate(this.today, 'ddMMMyyyy', 'en-US', '+0530')
    }
     
    private handleError(error: HttpErrorResponse) {
@@ -333,6 +336,14 @@ return this.http.get<mydata>(GetCancelledtripsURL,{params}).pipe(catchError(this
     .set('LocationName', locationname)
   return this.http.get(AreaURL,{params}).pipe(catchError(this.handleError));
   }
+  /*getVehicleLocation(routeNo:string, shiftTime:string): Observable<any>{
+    let params = new HttpParams()
+    .set('location', localStorage.getItem('LocationName'))
+    .set('routeNo', routeNo)
+    .set('travelDate', this.currentdate)
+    .set('shiftTime', shiftTime);
+  return this.http.get<mydata>(GeolocationURL,{params}).pipe(catchError(this.handleError));
+  }*/
 /*.then(data => {
 
     console.log(data.status);

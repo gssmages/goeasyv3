@@ -14,10 +14,11 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { CodePush } from '@ionic-native/code-push/ngx';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
 import { QrcodemodalComponent } from './qrcodemodal/qrcodemodal.component';
-import { NgxQRCodeModule } from 'ngx-qrcode2'; 
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode'; 
 import { IonicSelectableModule } from 'ionic-selectable';
 import { AreamodalComponent } from './areamodal/areamodal.component';
 import { FormsModule } from '@angular/forms';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 @NgModule({
     declarations: [AppComponent,QrcodemodalComponent,AreamodalComponent],
     entryComponents: [QrcodemodalComponent,AreamodalComponent],
@@ -37,7 +38,8 @@ import { FormsModule } from '@angular/forms';
         Globals,
         AppVersion,      
         CodePush,
-        GoogleAnalytics
+        GoogleAnalytics,
+        Geolocation
     ],
     bootstrap: [AppComponent]
 })
