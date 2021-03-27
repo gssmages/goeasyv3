@@ -47,25 +47,25 @@ const AreaURL=SITserver+"/api/DriverMobileApi/AreaNodalPoint?";
 const GeolocationURL=SITserver+"/api/DashBoardApi/VehicleTrackingUserMobile/?";
 //const GeolocationURL="https://my-json-server.typicode.com/gssmages/jsonserver/goeasylocation"; 
 /****   Goeasy Testing Server --f5 enabled URL https://testmobile.flextronics.com/goeasyapi/   ***/
-// const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
-// const SSOLoginURL=prodserver+"/api/login/CheckLoginDetailDecryption?";
-// const DashboardUrl = prodserver+"/api/DashBoardApi/GetDashboardDetails/?";
-// const MytripsURL=prodserver+"/api/MyTripsApi/GetMyTripsDetails?";
-// const SaveNoShowURL=prodserver+"/api/CancelTransportRequestApi/CabRequestCancel?"; 
-// const MyApprovalURL=prodserver+"/api/CabApprovalApi/ReadPendingRequests/?";
-// const SaveMyApprovalURL=prodserver+"/api/cabapprovalapi/ApprovePendingRequests?";
-// const AdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
-// const SaveAdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/SaveCabRequest?"; 
-// const FeedbackURL=prodserver+"/api/FeedbackApi/GetMobileQuestions?";
-// const SaveFeedbackURL=prodserver+"/api/FeedbackApi/SaveMobileFeedback?";
-// const MyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
-// const SaveMyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";  
-// const MyBlockApprovalURL=prodserver+"/api/CabApprovalApi/GetBlockUserDetails?"; 
-// const UnblockEmployeesURL=prodserver+"/api/CabApprovalApi/UnblockEmployees/?"; 
-// const GetNoShowsURL=prodserver+"/api/MyTripsApi/getNoShow/";
-// const GetCancelledtripsURL=prodserver+"/api/MyTripsApi/getCancelledTrips?";
-// const SaveTripAttendanceUrl = prodserver+"/api/DashBoardApi/SaveTripAttendance/?";
-// const AreaURL=prodserver+"/api/DriverMobileApi/AreaNodalPoint?"; 
+/* const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
+const SSOLoginURL=prodserver+"/api/login/CheckLoginDetailDecryption?";
+const DashboardUrl = prodserver+"/api/DashBoardApi/GetDashboardDetails/?";
+const MytripsURL=prodserver+"/api/MyTripsApi/GetMyTripsDetails?";
+const SaveNoShowURL=prodserver+"/api/CancelTransportRequestApi/CabRequestCancel?"; 
+const MyApprovalURL=prodserver+"/api/CabApprovalApi/ReadPendingRequests/?";
+const SaveMyApprovalURL=prodserver+"/api/cabapprovalapi/ApprovePendingRequests?";
+const AdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/ReadAdhocCabRequestValues/?";
+const SaveAdhocRequestURL=prodserver+"/api/AdhocCabRequestApi/SaveCabRequest?"; 
+const FeedbackURL=prodserver+"/api/FeedbackApi/GetMobileQuestions?";
+const SaveFeedbackURL=prodserver+"/api/FeedbackApi/SaveMobileFeedback?";
+const MyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/GetSpecialCabDetails/?";
+const SaveMyApprovalCIPURL=CIPProdserver+"/api/SpecialCabRequestApi/SaveApproveRejectData/?";  
+const MyBlockApprovalURL=prodserver+"/api/CabApprovalApi/GetBlockUserDetails?"; 
+const UnblockEmployeesURL=prodserver+"/api/CabApprovalApi/UnblockEmployees/?"; 
+const GetNoShowsURL=prodserver+"/api/MyTripsApi/getNoShow/";
+const GetCancelledtripsURL=prodserver+"/api/MyTripsApi/getCancelledTrips?";
+const SaveTripAttendanceUrl = prodserver+"/api/DashBoardApi/SaveTripAttendance/?";
+const AreaURL=prodserver+"/api/DriverMobileApi/AreaNodalPoint?";  */
 interface mydata
     {
         obj: Object;
@@ -336,14 +336,14 @@ return this.http.get<mydata>(GetCancelledtripsURL,{params}).pipe(catchError(this
     .set('LocationName', locationname)
   return this.http.get(AreaURL,{params}).pipe(catchError(this.handleError));
   }
-  /*getVehicleLocation(routeNo:string, shiftTime:string): Observable<any>{
+  getVehicleLocation(routeNo:string, shiftTime:string): Observable<any>{
     let params = new HttpParams()
     .set('location', localStorage.getItem('LocationName'))
     .set('routeNo', routeNo)
     .set('travelDate', this.currentdate)
     .set('shiftTime', shiftTime);
   return this.http.get<mydata>(GeolocationURL,{params}).pipe(catchError(this.handleError));
-  }*/
+  }
 /*.then(data => {
 
     console.log(data.status);

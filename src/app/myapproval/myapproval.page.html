@@ -24,12 +24,12 @@
         </ion-row>
     </ion-grid>
     <div>
-        <p text-center> Either tap or select all to approve and reject</p>
+        <p class="ion-text-center"> Either tap or select all to approve and reject</p>
         <div *ngFor="let item of myapprovallist; let i = index">
             <ion-card (click)="selectthis[i]=!selectthis[i]" [class.selected]=selectthis[i]
              title="{{item.ID}}" (swiperight)="swiperightEvent(e,i)"  (swipeleft)="swipeleftEvent(e,i)" >
                <ion-row style="padding: 0;">
-                   <ion-col style="padding: 0;" size="2" text-center>
+                   <ion-col style="padding: 0;" size="2" class="ion-text-center">
                        <ion-icon name="calendar" *ngIf="!selectthis[i]" style="font-size:32px;"></ion-icon>
                        <ion-icon name="checkbox" *ngIf="selectthis[i]" color="primary" style="font-size:32px;"></ion-icon>
                    </ion-col>

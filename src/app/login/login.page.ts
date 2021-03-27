@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { RestApiService } from '../rest-api.service';
-import { Events } from '@ionic/angular';
+//import { Events } from '@ionic/angular';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { MenuController } from '@ionic/angular';
 import { GoogleAnalytics } from '@ionic-native/google-analytics/ngx';
@@ -28,7 +28,7 @@ export class LoginPage implements OnInit {
         private router: Router,
         public alertController: AlertController,
         public loadingController: LoadingController,
-        public events: Events,
+        //public events: Events,
         private appVersion: AppVersion,
         public menu: MenuController,
         private ga: GoogleAnalytics,public globals: Globals
@@ -106,7 +106,7 @@ export class LoginPage implements OnInit {
                         {
                         title: 'My Trips',
                         url: '/Mytrips',
-                        icon: 'pin'
+                        icon: 'map'
                       },
                       {
                         title: 'No show',
@@ -144,7 +144,7 @@ export class LoginPage implements OnInit {
                   }
                 ];
               }
-              this.events.publish('user:login', this.appPages);
+              this.globals.publishAppPages(this.appPages);
             }
             else
             {
@@ -195,7 +195,7 @@ export class LoginPage implements OnInit {
                         {
                         title: 'My Trips',
                         url: '/Mytrips',
-                        icon: 'pin'
+                        icon: 'map'
                       },
                       {
                         title: 'No show',
@@ -233,7 +233,7 @@ export class LoginPage implements OnInit {
                   }
                 ];
               }
-              this.events.publish('user:login', this.appPages);
+              this.globals.publishAppPages(this.appPages);
             }
             else
             {

@@ -57,7 +57,7 @@
       <div *ngIf="showallmytrip">
     <ion-card *ngFor="let item of mytrips; let i = index" >
       <ion-row>
-        <ion-col size="2.5" text-center style="color:#fff; background:#6A478D;" >
+        <ion-col size="2.5" class="ion-text-center" style="color:#fff; background:#6A478D;" >
           <ion-icon name="car" style="font-size:40px; "></ion-icon>
           <p style="margin:0;">{{item.RequestTypeName}}</p>
         </ion-col>
@@ -65,7 +65,7 @@
           <p *ngIf="item.FromDateString!=''">{{item.FromDateString}} to {{item.ToDateString}}</p>
           <p>{{item.RequestForName}} - {{item.shiftForGrid}}</p>
         </ion-col>   
-        <ion-col size="2" text-center style="padding:0;background:#D3323A; color: #fff;" (click)="canceltrip($event,item)" >
+        <ion-col size="2" class="ion-text-center" style="padding:0;background:#D3323A; color: #fff;" (click)="canceltrip($event,item)" >
          <ion-icon name="close" style="font-size:32px;margin-top: 10px; "></ion-icon><label><span style="font-size: 10px;">Cancel</span></label>
         </ion-col>        
       </ion-row>        
@@ -85,7 +85,7 @@
         <div *ngIf="showallcancel">
         <ion-card *ngFor="let item of cancelledtrips; let i = index" >
             <ion-row>
-              <ion-col size="2.5" text-center style="color:#fff; background:#6A478D;" >
+              <ion-col size="2.5" class="ion-text-center" style="color:#fff; background:#6A478D;" >
                 <ion-icon name="car" style="font-size:40px; "></ion-icon>
                 <p style="margin:0;">{{item.ReqTypeName}}</p>
               </ion-col>

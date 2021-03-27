@@ -45,47 +45,48 @@ export class VehicletrackingPage implements OnInit {
        console.log('Error getting location', error);
      });
     await this.platform.ready();
-  //  if(localStorage.getItem('routeassignedtoday') != null && localStorage.getItem('routeassignedtoday').length > 2 )
-  //  {
-  //   this.presentLoading();
-  //   this.locationservice.getVehicleLocation(this.routeNo,this.shiftTime).subscribe(res => {
-  //    /*  console.log("results are : " + JSON.stringify(res.results))
-  //     console.log("results are : " + JSON.stringify(res.results.LatLngs)) */
-  //     this.loading.dismiss();
-  //     if( res.results.LatLngs != undefined)
-  //     {
-  //       this.latlang = res.results.LatLngs;
-  //       this.loadMap();
-  //     }
-  //     else{
-  //       this.presentAlert(res.results);
-  //       this.loadMap();
-  //     }
+   if(localStorage.getItem('routeassignedtoday') != null && localStorage.getItem('routeassignedtoday').length > 2 )
+   {
+    this.presentLoading();
+    this.locationservice.getVehicleLocation(this.routeNo,this.shiftTime).subscribe(res => {
+     /*  console.log("results are : " + JSON.stringify(res.results))
+      console.log("results are : " + JSON.stringify(res.results.LatLngs)) */
+      this.loading.dismiss();
+      if( res.results.LatLngs != undefined)
+      {
+        this.latlang = res.results.LatLngs;
+        this.loadMap();
+      }
+      else{
+        this.presentAlert(res.results);
+        this.loadMap();
+      }
        
-  //   }, err => {
-  //     console.log(err);
-  //     setTimeout(() => {
-  //       this.loading.dismiss();
-  //     }, 2000);
-  //     this.presentAlert(err);
-  //   });
-  // }
-  // else{
-  //   this.presentAlert("No Trips Today");
-  // }
+    }, err => {
+      console.log(err);
+      setTimeout(() => {
+        this.loading.dismiss();
+      }, 2000);
+      this.presentAlert(err);
+    });
+  }
+  else{
+    this.loadMap();
+    this.presentAlert("No Trips Today");
+  }
     
   }
   ionViewWillEnter() {
-    this.menu.swipeEnable(false);
+    this.menu.swipeGesture(false);
  }
   loadMap() {
  
 
     // This code is necessary for browser
-  /*   Environment.setEnv({
-      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyAA10J3cyEkNYFYkLcV0h8v84w0Kyaxoxo',
-      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyAA10J3cyEkNYFYkLcV0h8v84w0Kyaxoxo'
-    }); */  
+   Environment.setEnv({
+      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyAEp4aSq9MKWM4YZVGkKiYf1fB__oVCRlk',
+      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyAEp4aSq9MKWM4YZVGkKiYf1fB__oVCRlk'
+    }); 
 
     /* let AIR_PORTS = [
       {lat:13.119511, lng:80.095418},
@@ -120,7 +121,7 @@ export class VehicletrackingPage implements OnInit {
     
     console.log("Path defined as : " + path)
     this.map = GoogleMaps.create('map_canvas',{
-   /*    camera: {
+    /*   camera: {
         target: path
       } */
       

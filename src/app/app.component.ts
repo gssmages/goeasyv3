@@ -4,7 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Globals } from './global';
-import { Events } from '@ionic/angular';
+//import { Events } from '@ionic/angular';
 import 'hammerjs';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { CodePush, InstallMode, SyncStatus } from '@ionic-native/code-push/ngx';
@@ -25,7 +25,7 @@ public appPages : Array<any> = [];
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     public globals: Globals,
-    public events: Events,
+   // public events: Events,
     private appVersion: AppVersion,
     private codePush: CodePush,
     private ga: GoogleAnalytics,
@@ -39,7 +39,7 @@ public appPages : Array<any> = [];
     }).catch(err => {
       console.log(err)
     });
-    this.events.subscribe('user:login', (user) => { this.appPages = user; });
+    this.globals.getObservable().subscribe((user) => { this.appPages = user; });
     this.globals.appversion="1.2.3"; //Manual app versioon changes 
     /* apppages menu using event publish abd subscribe, login will publish and here subscribe that and usethat variable */
     if(localStorage.getItem('LocationName') =="Chennai" || localStorage.getItem('LocationName')=="Pune"){
@@ -57,7 +57,7 @@ public appPages : Array<any> = [];
           {
           title: 'My Trips',
           url: '/Mytrips',
-          icon: 'pin'
+          icon: 'map'
         },
         {
           title: 'No show',

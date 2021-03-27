@@ -10,11 +10,11 @@
 </ion-header>
 <ion-content style="--background: url('assets/images/transportbg.jpg') top center/100% 100% no-repeat">
   <ion-card>
-    <h3 text-center>Scan QR Code </h3>
-    <p text-center>To Check-in/Check-out while using GoEasy Transport</p>
+    <h3 class="ion-text-center">Scan QR Code </h3>
+    <p class="ion-text-center">To Check-in/Check-out while using GoEasy Transport</p>
     <div style="width:212px; margin: auto;">
-        <ngx-qrcode [qrc-value] = "qrcodevalue" qrc-element-type="img"  qrc-version = "7" ></ngx-qrcode>
+        <ngx-qrcode [value] = "qrcodevalue" [elementType]="img"  version = "7" ></ngx-qrcode>
     </div>
-    <p text-center>Take Screenshot for Offline usage.</p>
+    <p class="ion-text-center">Take Screenshot for Offline usage.</p>
   </ion-card>
 </ion-content>
