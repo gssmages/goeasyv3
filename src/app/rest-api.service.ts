@@ -15,14 +15,14 @@ const httpOptions = {
 /*"assets/myjson.json"; todaysdate=11-23-2018&location=Chennai&employeeID=941364
 "https://jsonplaceholder.typicode.com/todos/1";*/
 
-//const SITserver="http://gssnte811.asia.ad.flextronics.com:4042"; //http://hkdnte250.asia.ad.flextronics.com:1227/
+//const SITserver="http://gssnte811.asia.ad.flextronics.com:4042"; //
 //const testserver="https://testmobile.flextronics.com/goeasyapi";
 //const prodserver="http://sacnt2315.americas.ad.flextronics.com/goeasyapi";
 const prodserver="https://mobileservice.flex.com/goeasyapi"; 
 //const CIPProdserver="http://hkdnt955.asia.ad.flextronics.com:94"; 
 const CIPProdserver="https://mobileservice.flex.com/goeasyapi_cip";
-const SITserver="http://localhost:57855";
-
+//const SITserver="http://localhost:57855";
+const SITserver="http://sgdnte250.asia.ad.flextronics.com:1227";
 /****   Goeasy SIT Server ***********/
 const LoginURL=SITserver+"/api/login/CheckLoginDetailEncryption?";
 const SSOLoginURL=SITserver+"/api/login/CheckLoginDetailDecryption?";
@@ -47,6 +47,7 @@ const AreaURL=SITserver+"/api/DriverMobileApi/AreaNodalPoint?";
 const GeolocationURL=SITserver+"/api/DashBoardApi/VehicleTrackingUserMobile/?";
 //const GeolocationURL="https://my-json-server.typicode.com/gssmages/jsonserver/goeasylocation"; 
 /****   Goeasy Testing Server --f5 enabled URL https://testmobile.flextronics.com/goeasyapi/   ***/
+/*********Goeasy Prod Server ************* */
 /* const LoginURL=prodserver+"/api/login/CheckLoginDetailEncryption?";
 const SSOLoginURL=prodserver+"/api/login/CheckLoginDetailDecryption?";
 const DashboardUrl = prodserver+"/api/DashBoardApi/GetDashboardDetails/?";
@@ -344,34 +345,5 @@ return this.http.get<mydata>(GetCancelledtripsURL,{params}).pipe(catchError(this
     .set('shiftTime', shiftTime);
   return this.http.get<mydata>(GeolocationURL,{params}).pipe(catchError(this.handleError));
   }
-/*.then(data => {
 
-    console.log(data.status);
-    console.log(data.data); // data received by server
-    console.log(data.headers);
-
-  })
-  .catch(error => {
-
-    console.log(error.status);
-    console.log(error.error); // error message as string
-    console.log(error.headers);
-
-  });
-   /*return response1;*/
-/* getData(): Observable<any> {
-let response1 = this.http.get(apiUrl+"todaysdate=11-23-2018&location=Chennai&employeeID=941364");
-        return response1;*/
-  /*let response2= this.http.get(apiUrl+'IN/110001');
-  let response3 = this.http.get(apiUrl+'BR/01000-000');
-  let response4 = this.http.get(apiUrl+'FR/01000');*/
-  //return forkJoin([response1, response2, response3, response4]);  
-/*     
-}*/
-    /*getClassroomById(id: string): Observable<any> {
-  const url = `${apiUrl}/${id}`;
-  return this.http.get(url, httpOptions).pipe(
-    map(this.extractData),
-    catchError(this.handleError));
-}*/
 }
